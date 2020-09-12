@@ -1,32 +1,81 @@
 using System;
 using Names;
 using Races;
+using CharacterClasses;
+using Genders;
 
 namespace Character
 {
     public class CharacterTemplate
     {
-        public string Race;
-        public string FirstName;
-        public string LastName;
-        public string CharacterClass;
-        public int Level = 1;
+        private string _race;
+        public string Race
+        {
+            get
+            {
+                return _race;
+            }
+            set
+            {
+                _race = value;
+            }
+        }
+        private string _firstName;
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+            set
+            {
+                _firstName = value;
+            }
+        }
+        private string _lastName;
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+            set
+            {
+                _lastName = value;
+            }
+        }
+        private string _characterClass;
+        public string CharacterClass
+        {
+            get
+            {
+                return _characterClass;
+            }
+            set
+            {
+                _characterClass = value;
+            }
+        }
+
+        private string _gender;
+        public string Gender
+        {
+            get
+            {
+                return _gender;
+            }
+            set
+            {
+                _gender = value;
+            }
+        }
+        private int Level = 1;
+
     }
 
     public class ManualCharacter : CharacterTemplate
     {
         
-        public void SetRace(string race)
-        {
-            this.Race = race;
-        }
-
-        public void SetName(string firstName, string lastName)
-        {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-
-        }
 
     }
 
@@ -35,27 +84,39 @@ namespace Character
         public void SetRandomRace()
         {
             var Race = new RaceLists();
-            string race = Race.GetRandomRace();
-            this.Race = race;
+            this.Race = Race.GetRandomRace();
         }
 
         public void SetRandomName()
         {
             NameLists name = new NameLists();
-            string[] FullName = name.GetRandomName();
-            this.FirstName = FullName[0];
-            this.LastName = FullName[1];
+            this.FirstName = name.GetRandomFirstName();
+            this.LastName = name.GetRandomLastName();
         }
 
         public void SetRandomClass()
         {
-            
+            CharacterClassList classList = new CharacterClassList();
+            this.CharacterClass = classList.GetRandomClass();
+        }
+
+        public void SetRandomGender()
+        {
+            GenderList genderList = new GenderList();
+            this.Gender = genderList.GetRandomGender();
         }
 
         public void Randomise()
         {
-            this.SetRandomRace();
-            this.SetRandomName();
+            SetRandomRace();
+            SetRandomName();
+            SetRandomClass();
+            SetRandomGender();
+        }
+
+        public void PrintCharacterInfoToConsole()
+        {
+            Console.WriteLine($"Name:{FirstName} {LastName}. Race:{Race} Class:{CharacterClass}" );
         }
 
 

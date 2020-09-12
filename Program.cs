@@ -1,6 +1,8 @@
-﻿using System;
-using Character;
-using Names;
+﻿using Character;
+using System.Collections.Generic;
+using Spells;
+using System.Linq;
+using System;
 
 namespace dnd
 {
@@ -8,11 +10,10 @@ namespace dnd
     {
         static void Main(string[] args)
         {
+
             RandomCharacter newCharacter = new RandomCharacter();
-            // newCharacter.SetRandomName();
-            // newCharacter.SetRandomRace();
             newCharacter.Randomise();
-            Console.WriteLine($"Name:{newCharacter.FirstName} {newCharacter.LastName}. Race:{newCharacter.Race}" );
+            newCharacter.PrintCharacterInfoToConsole();
         }
     }
 }

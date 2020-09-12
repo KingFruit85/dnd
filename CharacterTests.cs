@@ -33,7 +33,7 @@ namespace dnd
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            // testCharacter.SetRandomRace();
+            testCharacter.SetRandomRace();
             // Assert
             Assert.NotNull(testCharacter.Race);
 

@@ -11,16 +11,23 @@ namespace Names
     public string[] GetRandomName()
     {
         string[] FullName = new string[2];
-        Random rand = new Random();
-
-        int FIndex = rand.Next(0 , FirstNames.Length);
-        int LIndex = rand.Next(0 , LastNames.Length);
-
-        FullName[0] = FirstNames[FIndex];
-        FullName[1] = LastNames[LIndex];
-
+        FullName[0] = GetRandomFirstName();
+        FullName[1] = GetRandomLastName();
         return FullName;
+    }
 
+    public string GetRandomFirstName()
+    {
+        Random r = new Random();
+        int i = r.Next(0,FirstNames.Length);
+        return FirstNames[i];
+    }
+
+        public string GetRandomLastName()
+    {
+        Random r = new Random();
+        int i = r.Next(0,LastNames.Length);
+        return LastNames[i];
     }
 
 
