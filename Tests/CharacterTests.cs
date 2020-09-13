@@ -1,7 +1,7 @@
 using Xunit;
 using Character;
 
-namespace dnd
+namespace CharacterTests
 {
     public class CharacterTest
     {
@@ -11,7 +11,7 @@ namespace dnd
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            testCharacter.SetRandomName();
+            testCharacter.SetRandomName(testCharacter.Gender);
             // Assert
             Assert.NotNull(testCharacter.FirstName);
         }
@@ -22,7 +22,7 @@ namespace dnd
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            testCharacter.SetRandomName();
+            testCharacter.SetRandomName(testCharacter.Gender);
             // Assert
             Assert.NotNull(testCharacter.LastName);
         }

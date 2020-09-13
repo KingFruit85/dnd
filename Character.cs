@@ -3,6 +3,7 @@ using Names;
 using Races;
 using CharacterClasses;
 using Genders;
+using Dice;
 
 namespace Character
 {
@@ -69,7 +70,20 @@ namespace Character
                 _gender = value;
             }
         }
-        private int Level = 1;
+
+        private int[] _abilityScores;
+
+        public int[] AbilityScores
+        {
+            get
+            {
+                return _abilityScores;
+            }
+            set
+            {
+                _abilityScores = value;
+            }
+        }
 
     }
 
@@ -87,10 +101,10 @@ namespace Character
             this.Race = Race.GetRandomRace();
         }
 
-        public void SetRandomName()
+        public void SetRandomName(string gender)
         {
             NameLists name = new NameLists();
-            this.FirstName = name.GetRandomFirstName();
+            this.FirstName = name.GetRandomFirstName(gender);
             this.LastName = name.GetRandomLastName();
         }
 
@@ -106,17 +120,25 @@ namespace Character
             this.Gender = genderList.GetRandomGender();
         }
 
+        public void SetAbilityScores()
+        {
+            DiceTypes DT = new DiceTypes();
+            this.AbilityScores = DT.ReturnAbilityScores();
+            
+        }
+
         public void Randomise()
         {
             SetRandomRace();
-            SetRandomName();
-            SetRandomClass();
             SetRandomGender();
+            SetRandomName(this.Gender);
+            SetRandomClass();
+            SetAbilityScores();
         }
 
         public void PrintCharacterInfoToConsole()
         {
-            Console.WriteLine($"Name:{FirstName} {LastName}. Race:{Race} Class:{CharacterClass}" );
+            Console.WriteLine($"Name:{FirstName} {LastName}. Race:{Race} Class:{CharacterClass} Gender:{Gender}" );
         }
 
 
