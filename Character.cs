@@ -108,7 +108,7 @@ namespace Character
         {
             SetRandomRace();
             SetRandomGender();
-            SetRandomName(this.Gender);
+            SetRandomName(this.Gender, this.Race);
             SetRandomClass();
             SetAbilityScores();
         }
@@ -118,11 +118,12 @@ namespace Character
             this.Race = new RaceLists().GetRandomRace();
         }
 
-        public void SetRandomName(string gender)
+        public void SetRandomName(string gender, string race)
         {
             NameLists name = new NameLists();
-            this.FirstName = name.GetRandomFirstName(gender);
-            this.LastName = name.GetRandomLastName();
+            var FullName = name.SetRandomName(gender, race);
+            this.FirstName = FullName[0];
+            this.LastName = FullName[1];
         }
 
         public void SetRandomClass()
