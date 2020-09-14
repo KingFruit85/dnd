@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l+qs9SkDrbqBoxnv5ynKuHSQdE+BLuXfw6mddblQ5xhdrHgRiHtw9mAoZ9BOb8EbEyUXcYULgdXfMba9jgMrdw==",
+  "dgSpecHash": "2R2/F21dr0pGdujudkBBRUM9lvRfwdNKCf/ri3bRNkQ1Q2YuVfFqbGVAWLF2Ovf208H2wuHxQ/tjqgEHyZEOKQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj",
+  "projectFilePath": "C:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Christopher\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\Christopher\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

@@ -101,12 +101,21 @@ namespace Character
 
     }
 
+    // -- Returns a character object where all character customisation steps have been randomised
     public class RandomCharacter : CharacterTemplate
     {
+        public RandomCharacter()
+        {
+            SetRandomRace();
+            SetRandomGender();
+            SetRandomName(this.Gender);
+            SetRandomClass();
+            SetAbilityScores();
+        }
+
         public void SetRandomRace()
         {
-            var Race = new RaceLists();
-            this.Race = Race.GetRandomRace();
+            this.Race = new RaceLists().GetRandomRace();
         }
 
         public void SetRandomName(string gender)
@@ -118,30 +127,17 @@ namespace Character
 
         public void SetRandomClass()
         {
-            CharacterClassList classList = new CharacterClassList();
-            this.CharacterClass = classList.GetRandomClass();
+            this.CharacterClass = new CharacterClassList().GetRandomClass();
         }
 
         public void SetRandomGender()
         {
-            GenderList genderList = new GenderList();
-            this.Gender = genderList.GetRandomGender();
+            this.Gender = new GenderList().GetRandomGender();
         }
 
         public void SetAbilityScores()
         {
-            DiceTypes DT = new DiceTypes();
-            this.AbilityScores = DT.ReturnAbilityScores();
-            
-        }
-
-        public void Randomise()
-        {
-            SetRandomRace();
-            SetRandomGender();
-            SetRandomName(this.Gender);
-            SetRandomClass();
-            SetAbilityScores();
+            this.AbilityScores = new DiceTypes().ReturnAbilityScores(); 
         }
 
         public void PrintCharacterInfoToConsole()
@@ -152,7 +148,5 @@ namespace Character
             Console.WriteLine($"Gender:{Gender}");
             Console.WriteLine($"Raw Scores: {AbilityScores[0]} {AbilityScores[1]} {AbilityScores[2]} {AbilityScores[3]} {AbilityScores[4]} {AbilityScores[5]}");
         }
-
-
     }
 }
