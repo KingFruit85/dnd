@@ -4,8 +4,8 @@ namespace CharacterClasses
 {
     public class CharacterClassList
     {
-        private string[] CharacterClasses = {"bard", "barbarian", "cleric", "fighter", "monk", "paladin", "ranger",
-                                             "rogue", "sorcerer", "warlock", "wizard", "druid"};
+        private string[] CharacterClasses = {"Bard", "Barbarian", "Cleric", "Fighter", "Monk", "Paladin", "Ranger",
+                                             "Rogue", "Sorcerer", "Warlock", "Wizard", "Druid"};
 
         public string GetRandomClass()
         {

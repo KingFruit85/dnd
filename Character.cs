@@ -81,7 +81,15 @@ namespace Character
             }
             set
             {
-                _abilityScores = value;
+                if (value.Length == 6)
+                {
+                    _abilityScores = value;
+                }
+                else
+                {
+                    throw new Exception("Provided ability score array does not contain the correct number of values");
+                }
+                
             }
         }
 
@@ -138,7 +146,11 @@ namespace Character
 
         public void PrintCharacterInfoToConsole()
         {
-            Console.WriteLine($"Name:{FirstName} {LastName}. Race:{Race} Class:{CharacterClass} Gender:{Gender}" );
+            Console.WriteLine($"Name:{FirstName} {LastName}");
+            Console.WriteLine($"Race:{Race}");
+            Console.WriteLine($"Class:{CharacterClass}");
+            Console.WriteLine($"Gender:{Gender}");
+            Console.WriteLine($"Raw Scores: {AbilityScores[0]} {AbilityScores[1]} {AbilityScores[2]} {AbilityScores[3]} {AbilityScores[4]} {AbilityScores[5]}");
         }
 
 

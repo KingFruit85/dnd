@@ -170,7 +170,13 @@ namespace Dice
 
                 // -- Sums the remaining values and adds the result to the results
                 Results[i] = Rolls.Sum();
+                
             }
+
+            // -- Sorts and returns the results in a decending order
+            Array.Sort(Results);
+            Array.Reverse(Results);
+
             return Results;
         }
     }

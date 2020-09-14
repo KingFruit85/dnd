@@ -4,7 +4,7 @@ namespace Races
 {
     public class RaceLists 
     {
-        private string[] Races = {"dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling"};
+        private string[] Races = {"Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"};
 
         public string GetRandomRace()
         {

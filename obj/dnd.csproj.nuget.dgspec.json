@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj": {}
+    "c:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj": {
+    "c:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj",
+        "projectUniqueName": "c:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj",
         "projectName": "dnd",
-        "projectPath": "C:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj",
+        "projectPath": "c:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\dnd.csproj",
         "packagesPath": "C:\\Users\\Christopher\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\obj\\",
+        "outputPath": "c:\\Users\\Christopher\\Desktop\\c# Projects\\dnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
