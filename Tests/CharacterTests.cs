@@ -38,5 +38,16 @@ namespace CharacterTests
             Assert.NotNull(testCharacter.Race);
 
         }
+    
+        [Fact]
+        public void GenderIsNotNull()
+        {
+            // Arrange
+            RandomCharacter testCharacter = new RandomCharacter();
+            // Act
+            testCharacter.SetRandomGender();
+            // Assert
+            Assert.NotNull(testCharacter.Gender);
+        }
     }
 }

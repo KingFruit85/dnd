@@ -18,36 +18,33 @@ namespace Names
     private string[] MaleDragonbornNames = {"Narvull", "Urobroth", "Qelziros"};
     private string[] DragonbornSurnames = {"Clenxec", "Aldexish", "Criracnellas"};
 
-    // Ideally this would include non-gendered first names,
-    // however I have no idea what a non-gendered fantasy name
-    // might be, so I have made up my own logic as a placeholder
-    public string[] GetRandomDragonbornName(string gender)
+    public string GetRandomDragonbornFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleDragonbornNames.Length);
-            FullName[0] = MaleDragonbornNames[m];
+            return MaleDragonbornNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleDragonbornNames.Length);
-            FullName[0] = FemaleDragonbornNames[f]; 
+            return FemaleDragonbornNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleDragonbornNames.Concat(FemaleDragonbornNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, DragonbornSurnames.Length);
-        FullName[1] = DragonbornSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomDragonbornSurnameName()
+    {
+        int i = new Random().Next(0, DragonbornSurnames.Length);
+        return DragonbornSurnames[i];
     }
 
     // -- Human
@@ -55,33 +52,33 @@ namespace Names
     private string[] FemaleHumanNames = {"Kelly", "Magda", "Sophia", "Persephone"};
     private string[] HumanSurnames = {"Long", "Araniseli", "Smith", "Jones", "Peters"};
 
-    public string[] GetRandomHumanName(string gender)
+    public string GetRandomHumanFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleHumanNames.Length);
-            FullName[0] = MaleHumanNames[m];
+            return MaleHumanNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleHumanNames.Length);
-            FullName[0] = FemaleHumanNames[f]; 
+            return FemaleHumanNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleHumanNames.Concat(FemaleHumanNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, HumanSurnames.Length);
-        FullName[1] = HumanSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomHumanSurnameName()
+    {
+        int i = new Random().Next(0, HumanSurnames.Length);
+        return HumanSurnames[i];
     }
 
     // -- Dwarf
@@ -89,33 +86,33 @@ namespace Names
     private string[] FemaleDwarfNames = {"Amber", "Artin", "Audhild"};
     private string[] DwarfSurnames = {"Balderk", "Battlehammer", "Brawnanvil"};
 
-    public string[] GetRandomDwarfName(string gender)
+    public string GetRandomDwarfFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleDwarfNames.Length);
-            FullName[0] = MaleDwarfNames[m];
+            return MaleDwarfNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleDwarfNames.Length);
-            FullName[0] = FemaleDwarfNames[f]; 
+            return FemaleDwarfNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleDwarfNames.Concat(FemaleDwarfNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, DwarfSurnames.Length);
-        FullName[1] = DwarfSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomDwarfSurnameName()
+    {
+        int i = new Random().Next(0, DwarfSurnames.Length);
+        return DwarfSurnames[i];
     }
 
     // -- Elf
@@ -123,33 +120,33 @@ namespace Names
     private string[] FemaleElfNames = {"Arara", "Amastrianna", "Antinua"};
     private string[] ElfSurnames = {"Amakiir", "Caerdnel", "Casilltenirra"};
 
-    public string[] GetRandomElfName(string gender)
+    public string GetRandomElfFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleElfNames.Length);
-            FullName[0] = MaleElfNames[m];
+            return MaleElfNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleElfNames.Length);
-            FullName[0] = FemaleElfNames[f]; 
+            return FemaleElfNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleElfNames.Concat(FemaleElfNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, ElfSurnames.Length);
-        FullName[1] = ElfSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomElfSurnameName()
+    {
+        int i = new Random().Next(0, ElfSurnames.Length);
+        return ElfSurnames[i];
     }
 
     // -- Gnome
@@ -157,33 +154,33 @@ namespace Names
     private string[] FemaleGnomeNames = {"Vock", "Huck", "Zuth"};
     private string[] GnomeSurnames = {"Dodlawams", "Hasp", "Epswodnith"};
 
-    public string[] GetRandomGnomeName(string gender)
+    public string GetRandomGnomeFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleGnomeNames.Length);
-            FullName[0] = MaleGnomeNames[m];
+            return MaleGnomeNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleGnomeNames.Length);
-            FullName[0] = FemaleGnomeNames[f]; 
+            return FemaleGnomeNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleGnomeNames.Concat(FemaleGnomeNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, GnomeSurnames.Length);
-        FullName[1] = GnomeSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomGnomeSurnameName()
+    {
+        int i = new Random().Next(0, GnomeSurnames.Length);
+        return GnomeSurnames[i];
     }
 
     // -- HalfElf
@@ -191,33 +188,33 @@ namespace Names
     private string[] FemaleHalfElfNames = {"Edecharis", "Narue", "Emfine"};
     private string[] HalfElfSurnames = {"Caiqirelle", "Wynleth", "Elafiel"};
 
-    public string[] GetRandomHalfElfName(string gender)
+    public string GetRandomHalfElfFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleHalfElfNames.Length);
-            FullName[0] = MaleHalfElfNames[m];
+            return MaleHalfElfNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleHalfElfNames.Length);
-            FullName[0] = FemaleHalfElfNames[f]; 
+            return FemaleHalfElfNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleHalfElfNames.Concat(FemaleHalfElfNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, HalfElfSurnames.Length);
-        FullName[1] = HalfElfSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomHalfElfSurnameName()
+    {
+        int i = new Random().Next(0, HalfElfSurnames.Length);
+        return HalfElfSurnames[i];
     }
 
     // -- HalfOrc
@@ -225,33 +222,33 @@ namespace Names
     private string[] FemaleHalfOrcNames = {"Ruogra", "Zoca", "Geltah"};
     private string[] HalfOrcSurnames = {"Gud", "Orkuv", "Bon"};
 
-        public string[] GetRandomHalfOrcName(string gender)
+    public string GetRandomHalfOrcFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleHalfOrcNames.Length);
-            FullName[0] = MaleHalfOrcNames[m];
+            return MaleHalfOrcNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleHalfOrcNames.Length);
-            FullName[0] = FemaleHalfOrcNames[f]; 
+            return FemaleHalfOrcNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleHalfOrcNames.Concat(FemaleHalfOrcNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, HalfOrcSurnames.Length);
-        FullName[1] = HalfOrcSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomHalfOrcSurnameName()
+    {
+        int i = new Random().Next(0, HalfOrcSurnames.Length);
+        return HalfOrcSurnames[i];
     }
 
     // -- Halfling
@@ -259,33 +256,33 @@ namespace Names
     private string[] FemaleHalflingNames = {"Suseh", "Tavot", "Sira"};
     private string[] HalflingSurnames = {"Featherheart", "Hogrirg", "Darkhelm"};
 
-    public string[] GetRandomHalflingName(string gender)
+    public string GetRandomHalflingFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleHalflingNames.Length);
-            FullName[0] = MaleHalflingNames[m];
+            return MaleHalflingNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleHalflingNames.Length);
-            FullName[0] = FemaleHalflingNames[f]; 
+            return FemaleHalflingNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleHalflingNames.Concat(FemaleHalflingNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, HalflingSurnames.Length);
-        FullName[1] = HalflingSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomHalflingSurnameName()
+    {
+        int i = new Random().Next(0, HalflingSurnames.Length);
+        return HalflingSurnames[i];
     }
 
     // -- Tiefling
@@ -293,51 +290,80 @@ namespace Names
     private string[] FemaleTieflingNames = {"Zecria", "Seiricyra", "Fririssa"};
     private string[] TieflingSurnames = {"Vervend", "Brotaebae", "Tovos"};
 
-    public string[] GetRandomTieflingName(string gender)
+    public string GetRandomTieflingFirstName(string gender)
     {
-        string[] FullName = new string[2];
+
         Random R = new Random();
 
         if (gender == "Male")
         {
             int m = R.Next(0, MaleTieflingNames.Length);
-            FullName[0] = MaleTieflingNames[m];
+            return MaleTieflingNames[m];
         }
         else if (gender == "Female")
         {
             int f = R.Next(0, FemaleTieflingNames.Length);
-            FullName[0] = FemaleTieflingNames[f]; 
+            return FemaleTieflingNames[f]; 
         }
-        else
+        else // Non-Binary. Poor implimentation, I need a better soloution
         {
             var combined = MaleTieflingNames.Concat(FemaleTieflingNames).ToArray();
             int q = R.Next(0,combined.Length);
-            FullName[0] = RemoveAllVowels(combined[q]); 
+            return RemoveAllVowels(combined[q]); 
         }
 
-        // Surname isn't gendered...right?
-        int s = R.Next(0, TieflingSurnames.Length);
-        FullName[1] = TieflingSurnames[s];
-
-        return FullName;
+    }
+    public string GetRandomTieflingSurnameName()
+    {
+        int i = new Random().Next(0, TieflingSurnames.Length);
+        return TieflingSurnames[i];
     }
 
     public string[] SetRandomName(string gender, string race)
     {
-
+        string[] FullName = new string[2];
+        
         switch (race)
         {   
-            case "Human": return GetRandomHumanName(gender);
-            case "Dragonborn": return GetRandomHumanName(gender);
-            case "Dwarf": return GetRandomHumanName(gender);
-            case "Elf": return GetRandomHumanName(gender);
-            case "Gnome": return GetRandomHumanName(gender);
-            case "HalfElf": return GetRandomHumanName(gender);
-            case "HalfOrc": return GetRandomHumanName(gender);
-            case "Halfling": return GetRandomHumanName(gender);
-            case "Tiefling": return GetRandomHumanName(gender);
+            case "Human":
+                FullName[0] = GetRandomHumanFirstName(gender);
+                FullName[1] = GetRandomHumanSurnameName();
+                break;
+            case "Dragonborn":
+                FullName[0] = GetRandomDragonbornFirstName(gender);
+                FullName[1] = GetRandomDragonbornSurnameName();
+                break;
+            case "Dwarf":
+                FullName[0] = GetRandomDwarfFirstName(gender);
+                FullName[1] = GetRandomDwarfSurnameName();
+                break;
+            case "Elf":
+                FullName[0] = GetRandomElfFirstName(gender);
+                FullName[1] = GetRandomElfSurnameName();
+                break;
+            case "Gnome":
+                FullName[0] = GetRandomGnomeFirstName(gender);
+                FullName[1] = GetRandomGnomeSurnameName();
+                break;
+            case "Half-Elf":
+                FullName[0] = GetRandomHalfElfFirstName(gender);
+                FullName[1] = GetRandomHalfElfSurnameName();
+                break;
+            case "Half-Orc":
+                FullName[0] = GetRandomHalfOrcFirstName(gender);
+                FullName[1] = GetRandomHalfOrcSurnameName(); 
+                break;
+            case "Halfling":
+                FullName[0] = GetRandomHalflingFirstName(gender);
+                FullName[1] = GetRandomHalflingSurnameName();
+                break;
+            case "Tiefling":
+                FullName[0] = GetRandomTieflingFirstName(gender);
+                FullName[1] = GetRandomTieflingSurnameName();
+                break;
             default: throw new Exception("Invalid arguements passed to GetRandomName method");
         }
+        return FullName;
     }
     }
 

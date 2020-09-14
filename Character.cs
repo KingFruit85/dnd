@@ -2,7 +2,6 @@ using System;
 using Names;
 using Races;
 using CharacterClasses;
-using Genders;
 using Dice;
 
 namespace Character
@@ -133,7 +132,21 @@ namespace Character
 
         public void SetRandomGender()
         {
-            this.Gender = new GenderList().GetRandomGender();
+            Random r = new Random();
+            int i = r.Next(1,100);
+            
+            if (i >= 1 && i <=39)
+            {
+                this.Gender = "Male";   
+            }
+            else if (i >= 40 && i <=79)
+            {
+                this.Gender = "Female";
+            }
+            else
+            {
+                this.Gender = "Non-Binary";
+            }
         }
 
         public void SetAbilityScores()
@@ -147,7 +160,9 @@ namespace Character
             Console.WriteLine($"Race:{Race}");
             Console.WriteLine($"Class:{CharacterClass}");
             Console.WriteLine($"Gender:{Gender}");
-            Console.WriteLine($"Raw Scores: {AbilityScores[0]} {AbilityScores[1]} {AbilityScores[2]} {AbilityScores[3]} {AbilityScores[4]} {AbilityScores[5]}");
+            Console.WriteLine($"Raw Scores: [{AbilityScores[0]}] [{AbilityScores[1]}] [{AbilityScores[2]}] [{AbilityScores[3]}] [{AbilityScores[4]}] [{AbilityScores[5]}]");
         }
+
     }
+
 }
