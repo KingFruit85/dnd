@@ -8,6 +8,7 @@ namespace Character
 {
     public class CharacterTemplate
     {
+        public Human racetest = new Human();
         private string _race;
         public string Race
         {
