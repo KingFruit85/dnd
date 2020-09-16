@@ -49,5 +49,7 @@ namespace CharacterTests
             // Assert
             Assert.NotNull(testCharacter.Gender);
         }
+
+
     }
 }

@@ -10,7 +10,7 @@ namespace Races
         public string Alignment {get; private set;}
         private string Size {get; set;}
         private int Speed {get; set;}
-        private string[] Languages {get; set;}
+        private List<string> Languages = new List<string>();
         private string SubRace {get; set;}
 
         public void SetAbilityScoreIncrease(string attribute, int modifier)
@@ -56,6 +56,37 @@ namespace Races
             Speed = speed;
         }
 
+        public List<string> GetLanguages()
+        {
+            return Languages;
+        }
+
+        public void SetLanguages(string language, int additional = 0)
+        {
+            var StandardLanguages = new string[]{"Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc"};
+            //Adds the first param to the list
+            Languages.Add(language);
+            //If the second param is't default then add a random standard language to the list
+            
+            if (additional != 0)
+            {
+                for (var i = 0; i < additional; i++)
+                {
+                    var pick = Tools.GetRandomStringArrayElement(StandardLanguages);
+
+                    // Checks to see if picked language is already in the list,
+                    // will loop until no match is found
+                    while (Languages.Contains(pick)){
+                        pick = Tools.GetRandomStringArrayElement(StandardLanguages);
+                    }
+
+                    Languages.Add(pick);    
+                }
+            }
+
+
+        }
+
     }
 
     public class Human : GenericRace
@@ -78,6 +109,7 @@ namespace Races
         SetSize("Medium");
         // Human base walking speed is 30 feet.
         SetSpeed(30);
+        SetLanguages("Common", 1);
 
         }
 
