@@ -5,6 +5,7 @@ namespace Races
 {
     public class GenericRace
     {
+        public string Name;
         private Dictionary<string,int> AbilityScoreIncrease = new Dictionary<string, int>();
         private int Age {get; set;}
         public string Alignment {get; private set;}
@@ -61,31 +62,45 @@ namespace Races
             return Languages;
         }
 
-        public void SetLanguages(string language, int additional = 0)
+        public void AddLangugage(string lang)
         {
-            var StandardLanguages = new string[]{"Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc"};
-            //Adds the first param to the list
-            Languages.Add(language);
-            //If the second param is't default then add a random standard language to the list
-            
-            if (additional != 0)
+            if (this.Languages.Contains(lang))
             {
-                for (var i = 0; i < additional; i++)
-                {
-                    var pick = Tools.GetRandomStringArrayElement(StandardLanguages);
-
-                    // Checks to see if picked language is already in the list,
-                    // will loop until no match is found
-                    while (Languages.Contains(pick)){
-                        pick = Tools.GetRandomStringArrayElement(StandardLanguages);
-                    }
-
-                    Languages.Add(pick);    
-                }
+                throw new Exception($"Character already knows {lang}");
             }
+            else
+            {
+                this.Languages.Add(lang);
+            }
+        }
 
+        public void AddLangugage(int count = 1)
+        {
+            // Initialise standard languages
+            var StandardLanguages = new List<string>{"Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc"};
+            // Select a random language    
+            var Pick = Tools.GetRandomStringListElement(StandardLanguages);
+                // Loop through arguement count
+                for(var i = 0; i< count; i++)
+                {
+                // Check if character already knows random pick
+                var AlreadyPresent = this.Languages.Contains(Pick);
+
+                if(AlreadyPresent == true) 
+                {
+                    Pick = Tools.GetRandomStringListElement(StandardLanguages);
+                    i--;
+                }
+                else
+                {
+                    this.Languages.Add(Pick);
+                }
+
+                }
+  
 
         }
+
 
     }
 
@@ -93,6 +108,7 @@ namespace Races
     {
         public Human()
         {
+        Name = "Human";
         // Humans reach adulthood in their late teens and live less than a century.
         SetAge(Tools.GetRandomNumberInRange(18,65));
         // Human ability scores each increase by 1.
@@ -109,10 +125,11 @@ namespace Races
         SetSize("Medium");
         // Human base walking speed is 30 feet.
         SetSpeed(30);
-        SetLanguages("Common", 1);
-
+        // Humans know Common by default
+        AddLangugage("Common");
+        // Humans also know one additional language other than common
+        AddLangugage(1);
         }
-
     }
 
     public class Dragonborn : GenericRace
@@ -174,9 +191,9 @@ namespace Races
     {
         private string[] Races = {"Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"};
 
-        public string GetRandomRace()
+        public GenericRace GetRandomRace()
         {
-            return Tools.GetRandomStringArrayElement(Races);
+            return new Human();
         }
 
     }

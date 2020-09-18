@@ -11,7 +11,7 @@ namespace CharacterTests
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            testCharacter.SetRandomName(testCharacter.Gender, testCharacter.Race);
+            testCharacter.SetRandomName(testCharacter.Gender, testCharacter.Race.Name);
             // Assert
             Assert.NotNull(testCharacter.FirstName);
         }
@@ -22,7 +22,7 @@ namespace CharacterTests
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            testCharacter.SetRandomName(testCharacter.Gender, testCharacter.Race);
+            testCharacter.SetRandomName(testCharacter.Gender, testCharacter.Race.Name);
             // Assert
             Assert.NotNull(testCharacter.LastName);
         }

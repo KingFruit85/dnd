@@ -1,5 +1,7 @@
-﻿using Character;
+﻿using System.Linq;
+using Character;
 using Dice;
+using Races;
 
 namespace dnd
 {
@@ -9,7 +11,12 @@ namespace dnd
         {
 
             RandomCharacter newCharacter = new RandomCharacter();
+            
+
             newCharacter.PrintCharacterInfoToConsole();
         }
+
+
+
     }
 }

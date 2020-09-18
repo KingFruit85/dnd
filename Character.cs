@@ -8,9 +8,8 @@ namespace Character
 {
     public class CharacterTemplate
     {
-        public Human racetest = new Human();
-        private string _race;
-        public string Race
+        private GenericRace _race;
+        public GenericRace Race
         {
             get
             {
@@ -108,7 +107,7 @@ namespace Character
         {
             SetRandomRace();
             SetRandomGender();
-            SetRandomName(this.Gender, this.Race);
+            SetRandomName(this.Gender, this.Race.Name);
             SetRandomClass();
             SetAbilityScores();
         }
@@ -158,10 +157,14 @@ namespace Character
         public void PrintCharacterInfoToConsole()
         {
             Console.WriteLine($"Name:{FirstName} {LastName}");
-            Console.WriteLine($"Race:{Race}");
+            Console.WriteLine($"Race:{Race.Name}");
             Console.WriteLine($"Class:{CharacterClass}");
             Console.WriteLine($"Gender:{Gender}");
             Console.WriteLine($"Raw Scores: [{AbilityScores[0]}] [{AbilityScores[1]}] [{AbilityScores[2]}] [{AbilityScores[3]}] [{AbilityScores[4]}] [{AbilityScores[5]}]");
+            Console.WriteLine("--Known Languages");
+            Race.GetLanguages().ForEach(i => Console.WriteLine("{0}\t", i));
+            Console.WriteLine("--");
+
         }
 
     }
