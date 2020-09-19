@@ -3,6 +3,7 @@ using Names;
 using Races;
 using CharacterClasses;
 using Dice;
+using System.Linq;
 
 namespace Character
 {
@@ -107,7 +108,7 @@ namespace Character
         {
             SetRandomRace();
             SetRandomGender();
-            SetRandomName(this.Gender, this.Race.Name);
+            SetRandomName(this.Gender, this.Race.GetName());
             SetRandomClass();
             SetAbilityScores();
         }
@@ -156,15 +157,24 @@ namespace Character
 
         public void PrintCharacterInfoToConsole()
         {
+            Console.WriteLine("*-Character Attributes-*");
             Console.WriteLine($"Name:{FirstName} {LastName}");
-            Console.WriteLine($"Race:{Race.Name}");
             Console.WriteLine($"Class:{CharacterClass}");
             Console.WriteLine($"Gender:{Gender}");
             Console.WriteLine($"Raw Scores: [{AbilityScores[0]}] [{AbilityScores[1]}] [{AbilityScores[2]}] [{AbilityScores[3]}] [{AbilityScores[4]}] [{AbilityScores[5]}]");
-            Console.WriteLine("--Known Languages");
-            Race.GetLanguages().ForEach(i => Console.WriteLine("{0}\t", i));
-            Console.WriteLine("--");
+            Console.WriteLine();
 
+            Console.WriteLine("*-Race Attributes-*");
+            Console.WriteLine($"Race:{Race.GetName()}");
+            Console.WriteLine("-Known Languages-");
+            Race.GetLanguages().ForEach(i => Console.WriteLine("{0}\t", i));
+            Console.WriteLine("-");
+            Console.WriteLine($"Speed:{Race.GetSpeed()}");
+            Console.WriteLine($"Age:{Race.GetAge()}");
+            Console.WriteLine($"Alignment:{Race.GetAlignment()}");
+            Console.WriteLine($"Size:{Race.GetSize()}");
+            Console.WriteLine("-Ability Score Increases-");
+            Race.GetAbilityScoreIncrease().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
         }
 
     }

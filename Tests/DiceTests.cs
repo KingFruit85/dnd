@@ -36,7 +36,7 @@ namespace DiceTests
         public void D12ReturnsWithinRange()
         {
             // Arrange
-            var D12 = new DiceTypes().RollD12();;
+            var D12 = new DiceTypes().RollD12();
             // Assert
             Assert.InRange(D12[0][0],1,12);
         }

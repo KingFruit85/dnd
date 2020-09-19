@@ -5,7 +5,7 @@ namespace Races
 {
     public class GenericRace
     {
-        public string Name;
+        private string Name;
         private Dictionary<string,int> AbilityScoreIncrease = new Dictionary<string, int>();
         private int Age {get; set;}
         private string Alignment {get; set;}
@@ -13,7 +13,16 @@ namespace Races
         private int Speed {get; set;}
         private List<string> Languages = new List<string>();
         private string SubRace {get; set;}
+        private Dictionary<string,string> RacePerks = new Dictionary<string, string>();
 
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+        public string GetName()
+        {
+            return Name;
+        }
         public Dictionary<string,int> GetAbilityScoreIncrease()
         {
             return AbilityScoreIncrease;
@@ -22,7 +31,6 @@ namespace Races
         {
             this.AbilityScoreIncrease.Add(attribute, modifier);
         }
-
         public int GetAge()
         {
             return Age;
@@ -96,6 +104,15 @@ namespace Races
             }
         }
 
+        public Dictionary<string,string> GetRacePerks()
+        {
+            return RacePerks;
+        }
+        public void AddRacePerk(string name, string description)
+        {
+            this.RacePerks.Add(name, description);
+        }
+
         public void AddLangugage(int count = 1)
         {
             // Initialise standard languages
@@ -119,13 +136,23 @@ namespace Races
                 }
                 }
         }
+
+        public string getSubRace()
+        {
+            return SubRace;
+        }
+
+        public void SetSubRace(string subRace)
+        {
+            SubRace = subRace;
+        }
     }
 
     public class Human : GenericRace
     {
         public Human()
         {
-        Name = "Human";
+        SetName("Human");
         // Humans reach adulthood in their late teens and live less than a century.
         SetAge(Tools.GetRandomNumberInRange(18,65));
         // Human ability scores each increase by 1.
@@ -159,12 +186,35 @@ namespace Races
     {
         public Dwarf()
         {
-            // Dwarves considered young until they reach the age of 50. On average, they live about 350 years.
-            SetAge(Tools.GetRandomNumberInRange(50,330));
-            // Dwarves Constitution score increases by 2.
+
+            SetName("Dwarf");
+            AddRacePerk("Ability Score Increase", "Your Constitution score increases by 2.");
             SetAbilityScoreIncrease("CON", 2);
+
+            AddRacePerk("Age", "Dwarves mature at the same rate as humans, but they’re considered young until they reach the age of 50. On average, they live about 350 years.");
+            SetAge(Tools.GetRandomNumberInRange(50,330));
+
+            AddRacePerk("Alignment","Most dwarves are lawful, believing firmly in the benefits of a well-­‐‑ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.");
             SetAlignment();
+
+            AddRacePerk("Size", "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.");
             SetSize("Medium");
+
+            AddRacePerk("Speed", "Your base walking speed is 25 feet. Your speed is not reduced by wearing heavy armor.");
+            SetSpeed(25);
+
+            AddRacePerk("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            AddRacePerk("Dwarven Resilience","You have advantage on saving throws against poison, and you have resistance against poison damage.");
+            AddRacePerk("Dwarven Combat Training","You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.");
+            AddRacePerk("Tool Proficiency", "You gain proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.");
+            AddRacePerk("Stonecunning","Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.");
+            AddRacePerk("Languages","You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.");
+            AddLangugage("Common");
+            AddLangugage("Dwarvish");
+            SetSubRace("Hill Dwarf");
+            AddRacePerk("Ability Score Increase(Hill Dwarf)", "Your Wisdom score increases by 1.");
+            SetAbilityScoreIncrease("WIS", 1);
+            AddRacePerk("Dwarven Toughness", "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.");
         }
     }
 
@@ -210,7 +260,7 @@ namespace Races
 
         public GenericRace GetRandomRace()
         {
-            return new Human();
+            return new Dwarf();
         }
 
     }
