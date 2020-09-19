@@ -8,17 +8,25 @@ namespace Races
         public string Name;
         private Dictionary<string,int> AbilityScoreIncrease = new Dictionary<string, int>();
         private int Age {get; set;}
-        public string Alignment {get; private set;}
+        private string Alignment {get; set;}
         private string Size {get; set;}
         private int Speed {get; set;}
         private List<string> Languages = new List<string>();
         private string SubRace {get; set;}
 
+        public Dictionary<string,int> GetAbilityScoreIncrease()
+        {
+            return AbilityScoreIncrease;
+        }
         public void SetAbilityScoreIncrease(string attribute, int modifier)
         {
             this.AbilityScoreIncrease.Add(attribute, modifier);
         }
 
+        public int GetAge()
+        {
+            return Age;
+        }
         public void SetAge(int age)
         {
             if (age == 0)
@@ -30,6 +38,11 @@ namespace Races
                 Age = age;
             }
             
+        }
+
+        public string GetAlignment()
+        {
+            return Alignment;
         }
 
         public void SetAlignment()
@@ -47,9 +60,18 @@ namespace Races
             Alignment = Tools.GetRandomStringArrayElement(Alignments);
         }
 
+        public string GetSize()
+        {
+            return Size;
+        }
         public void SetSize(string size)
         {
             Size = size;
+        }
+
+        public int GetSpeed()
+        {
+            return Speed;
         }
 
         public void SetSpeed(int speed)
@@ -95,13 +117,8 @@ namespace Races
                 {
                     this.Languages.Add(Pick);
                 }
-
                 }
-  
-
         }
-
-
     }
 
     public class Human : GenericRace

@@ -11,8 +11,6 @@ namespace dnd
         {
 
             RandomCharacter newCharacter = new RandomCharacter();
-            
-
             newCharacter.PrintCharacterInfoToConsole();
         }
 
