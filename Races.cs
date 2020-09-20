@@ -178,6 +178,55 @@ namespace Races
 
     public class Dragonborn : GenericRace
     {
+        public struct DraconicAncestryDetails
+        {
+            public string DamageType;
+            public string BreathWeapon;
+
+        }
+
+        public Dragonborn()
+        {
+            SetName("Dragonborn");
+
+            AddRacePerk("Ability Score Increase", "Your Strength score increases by 2, and your Charisma score increases by 1.");
+            SetAbilityScoreIncrease("STR", 2);
+            SetAbilityScoreIncrease("CHA", 1);
+
+            AddRacePerk("Age"," Young dragonborn grow quickly. They walk hours after hatching, attain the size and development of a 10-year-old human child by the age of 3, and reach adulthood by 15. They live to be around 80.");
+            SetAge(Tools.GetRandomNumberInRange(15,80));
+
+            AddRacePerk("Alignment","Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.");
+            SetAlignment();
+
+            AddRacePerk("Size","Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.");
+            SetSize("Medium");
+
+            AddRacePerk("Speed","Your base walking speed is 30 feet.");
+            SetSpeed(30);
+
+            AddRacePerk("Draconic Ancestry","You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type.");
+            
+            var DraconicAncestry = new Dictionary<string, DraconicAncestryDetails>()
+            {
+                {"Black", new DraconicAncestryDetails(){DamageType = "Acid", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {"Blue", new DraconicAncestryDetails(){DamageType = "Lightning", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {"Brass", new DraconicAncestryDetails(){DamageType = "Fire", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {"Bronze", new DraconicAncestryDetails(){DamageType = "Lightning", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {"Copper", new DraconicAncestryDetails(){DamageType = "Acid", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {"Gold", new DraconicAncestryDetails(){DamageType = "Fire", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {"Green", new DraconicAncestryDetails(){DamageType = "Poison", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {"Red", new DraconicAncestryDetails(){DamageType = "Fire", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {"Silver", new DraconicAncestryDetails(){DamageType = "Cold", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {"White", new DraconicAncestryDetails(){DamageType = "Cold", BreathWeapon = "15 ft. cone (Dex. save)"}}  
+            };
+            
+            AddRacePerk("Breath Weapon","You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can’t use it again until you complete a short or long rest.");
+            AddRacePerk("Damage Resistance","You have resistance to the damage type associated with your draconic ancestry.");
+            AddRacePerk("Languages","You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.");
+            AddLangugage("Common");
+            AddLangugage("Draconic");
+        }
         
 
     }
@@ -188,11 +237,12 @@ namespace Races
         {
 
             SetName("Dwarf");
+
             AddRacePerk("Ability Score Increase", "Your Constitution score increases by 2.");
             SetAbilityScoreIncrease("CON", 2);
 
             AddRacePerk("Age", "Dwarves mature at the same rate as humans, but they’re considered young until they reach the age of 50. On average, they live about 350 years.");
-            SetAge(Tools.GetRandomNumberInRange(50,330));
+            SetAge(Tools.GetRandomNumberInRange(50,350));
 
             AddRacePerk("Alignment","Most dwarves are lawful, believing firmly in the benefits of a well-­‐‑ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.");
             SetAlignment();
@@ -211,6 +261,7 @@ namespace Races
             AddRacePerk("Languages","You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.");
             AddLangugage("Common");
             AddLangugage("Dwarvish");
+
             SetSubRace("Hill Dwarf");
             AddRacePerk("Ability Score Increase(Hill Dwarf)", "Your Wisdom score increases by 1.");
             SetAbilityScoreIncrease("WIS", 1);
@@ -244,6 +295,41 @@ namespace Races
 
     public class Halfling : GenericRace
     {
+        public Halfling()
+        {
+            SetName("Halfling");
+
+            AddRacePerk("Ability Score Increase", "Your Dexterity score increases by 2.");
+            SetAbilityScoreIncrease("DEX",2);
+
+            AddRacePerk("Age", "A halfling reaches adulthood at the age of 20 and generally lives into the middle of his or her second century.");
+            SetAge(Tools.GetRandomNumberInRange(20,250));
+
+            AddRacePerk("Alignment", "Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.");
+            SetAlignment();
+
+            AddRacePerk("Size", "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.");
+            SetSize("Small");
+
+            AddRacePerk("Speed", "Your base walking speed is 25 feet.");
+            SetSpeed(25);
+
+            AddRacePerk("Lucky", "When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.");
+
+            AddRacePerk("Brave", "You have advantage on saving throws against being frightened.");
+
+            AddRacePerk("Halfling Nimbleness", "You can move through the space of any creature that is of a size larger than yours.");
+
+            AddRacePerk("Languages","You can speak, read, and write Common and Halfling. The Halfling language isn’t secret, but halflings are loath to share it with others. They write very little, so they don’t have a rich body of literature. Their oral tradition, however, is very strong. Almost all halflings speak Common to converse with the people in whose lands they dwell or through which they are traveling.");
+            AddLangugage("Common");
+            AddLangugage("Halfling");
+
+            SetSubRace("Lightfoot");
+            AddRacePerk("Ability Score Increase (Lightfoot)", "Your Charisma score increases by 1.");
+            SetAbilityScoreIncrease("CHA", 1);
+
+            AddRacePerk("Naturally Stealthy", "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.");
+        }
         
 
     }
@@ -256,11 +342,11 @@ namespace Races
 
         public class RaceLists 
     {
-        private string[] Races = {"Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"};
-
+        // private string[] Races = {"Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"};
+        private GenericRace[] Races = {new Dwarf(), new Human(), new Halfling(), new Dragonborn()};
         public GenericRace GetRandomRace()
         {
-            return new Dwarf();
+            return Tools.GetRandomRaceArrayElement(Races);
         }
 
     }
