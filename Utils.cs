@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Races;
+using static Races.GenericRace;
 
 public class Tools
     {
@@ -18,7 +19,14 @@ public class Tools
         return array[i];
     }
 
-    public static string GetRandomStringListElement(List<string> list)
+    public static string GetRandomListElement(List<string> list)
+    {
+        var R = new Random();
+        var i = R.Next(0,list.Count);
+        return list[i];
+    }
+
+    public static DraconicAncestryDetails GetRandomListElement(List<DraconicAncestryDetails> list)
     {
         var R = new Random();
         var i = R.Next(0,list.Count);

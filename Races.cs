@@ -14,6 +14,13 @@ namespace Races
         private List<string> Languages = new List<string>();
         private string SubRace {get; set;}
         private Dictionary<string,string> RacePerks = new Dictionary<string, string>();
+        public struct DraconicAncestryDetails
+        {
+            public string Name;
+            public string DamageType;
+            public string BreathWeapon;
+        }
+        private DraconicAncestryDetails DraconicAncestry;
 
         public void SetName(string name)
         {
@@ -118,7 +125,7 @@ namespace Races
             // Initialise standard languages
             var StandardLanguages = new List<string>{"Common","Dwarvish","Elvish","Giant","Gnomish","Goblin","Halfling","Orc"};
             // Select a random language    
-            var Pick = Tools.GetRandomStringListElement(StandardLanguages);
+            var Pick = Tools.GetRandomListElement(StandardLanguages);
                 // Loop through arguement count
                 for(var i = 0; i< count; i++)
                 {
@@ -127,7 +134,7 @@ namespace Races
 
                 if(AlreadyPresent == true) 
                 {
-                    Pick = Tools.GetRandomStringListElement(StandardLanguages);
+                    Pick = Tools.GetRandomListElement(StandardLanguages);
                     i--;
                 }
                 else
@@ -145,6 +152,16 @@ namespace Races
         public void SetSubRace(string subRace)
         {
             SubRace = subRace;
+        }
+
+        public DraconicAncestryDetails GetDraconicAncestry()
+        {
+            return DraconicAncestry;
+        }
+
+        public void SetDraconicAncestryDetails(DraconicAncestryDetails x)
+        {
+            DraconicAncestry = x;
         }
     }
 
@@ -178,13 +195,6 @@ namespace Races
 
     public class Dragonborn : GenericRace
     {
-        public struct DraconicAncestryDetails
-        {
-            public string DamageType;
-            public string BreathWeapon;
-
-        }
-
         public Dragonborn()
         {
             SetName("Dragonborn");
@@ -207,22 +217,25 @@ namespace Races
 
             AddRacePerk("Draconic Ancestry","You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type.");
             
-            var DraconicAncestry = new Dictionary<string, DraconicAncestryDetails>()
+            var DraconicAncestry = new List<DraconicAncestryDetails>()
             {
-                {"Black", new DraconicAncestryDetails(){DamageType = "Acid", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
-                {"Blue", new DraconicAncestryDetails(){DamageType = "Lightning", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
-                {"Brass", new DraconicAncestryDetails(){DamageType = "Fire", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
-                {"Bronze", new DraconicAncestryDetails(){DamageType = "Lightning", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
-                {"Copper", new DraconicAncestryDetails(){DamageType = "Acid", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
-                {"Gold", new DraconicAncestryDetails(){DamageType = "Fire", BreathWeapon = "15 ft. cone (Dex. save)"}},
-                {"Green", new DraconicAncestryDetails(){DamageType = "Poison", BreathWeapon = "15 ft. cone (Dex. save)"}},
-                {"Red", new DraconicAncestryDetails(){DamageType = "Fire", BreathWeapon = "15 ft. cone (Dex. save)"}},
-                {"Silver", new DraconicAncestryDetails(){DamageType = "Cold", BreathWeapon = "15 ft. cone (Dex. save)"}},
-                {"White", new DraconicAncestryDetails(){DamageType = "Cold", BreathWeapon = "15 ft. cone (Dex. save)"}}  
+                {new DraconicAncestryDetails(){Name = "Black", DamageType = "Acid", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Blue", DamageType = "Lightning", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Brass", DamageType = "Fire", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Bronze", DamageType = "Lightning", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Copper", DamageType = "Acid", BreathWeapon = "5 by 30 ft. line (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Gold", DamageType = "Fire", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Green", DamageType = "Poison", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Red", DamageType = "Fire", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "Silver", DamageType = "Cold", BreathWeapon = "15 ft. cone (Dex. save)"}},
+                {new DraconicAncestryDetails(){Name = "White", DamageType = "Cold", BreathWeapon = "15 ft. cone (Dex. save)"}}  
             };
-            
+
+            SetDraconicAncestryDetails(Tools.GetRandomListElement(DraconicAncestry));
+
             AddRacePerk("Breath Weapon","You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can’t use it again until you complete a short or long rest.");
             AddRacePerk("Damage Resistance","You have resistance to the damage type associated with your draconic ancestry.");
+            
             AddRacePerk("Languages","You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.");
             AddLangugage("Common");
             AddLangugage("Draconic");
@@ -330,8 +343,6 @@ namespace Races
 
             AddRacePerk("Naturally Stealthy", "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.");
         }
-        
-
     }
 
     public class Tiefling : GenericRace
@@ -343,7 +354,8 @@ namespace Races
         public class RaceLists 
     {
         // private string[] Races = {"Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"};
-        private GenericRace[] Races = {new Dwarf(), new Human(), new Halfling(), new Dragonborn()};
+        // private GenericRace[] Races = {new Dwarf(), new Human(), new Halfling(), new Dragonborn()};
+        private GenericRace[] Races = {new Dragonborn()};
         public GenericRace GetRandomRace()
         {
             return Tools.GetRandomRaceArrayElement(Races);
