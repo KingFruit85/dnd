@@ -413,6 +413,38 @@ namespace Races
 
     public class HalfOrc : GenericRace
     {
+        public HalfOrc()
+        {
+            SetName("Half-Orc");
+
+            SetRacePerk("Ability Score Increase", "Your Strength score increases by 2, and your Constitution score increases by 1.");
+            SetAbilityScoreIncrease("STR", 2);
+            SetAbilityScoreIncrease("CON", 1);
+
+            SetRacePerk("Age", "Half-orcs mature a little faster than humans, reaching adulthood around age 14. They age noticeably faster and rarely live longer than 75 years.");
+            SetAge(Tools.GetRandomNumberInRange(14, 75));
+
+            SetRacePerk("Alignment", "Half-orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward good. Half-orcs raised among orcs and willing to live out their lives among them are usually evil.");
+            SetAlignment();
+
+            SetRacePerk("Size", "Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall. Your size is Medium.");
+            SetSize("Medium");
+
+            SetRacePerk("Speed", "Your base walking speed is 30 feet.");
+            SetSpeed(30);
+
+            SetRacePerk("Darkvision", "Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+
+            SetRacePerk("Menacing", "You gain proficiency in the Intimidation skill.");
+
+            SetRacePerk("Relentless Endurance","When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.");
+
+            SetRacePerk("Savage Attacks"," When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.");
+
+            SetRacePerk("Languages","You can speak, read, and write Common and Orc. Orc is a harsh, grating language with hard consonants. It has no script of its own but is written in the Dwarvish script.");
+            AddLangugage("Common");
+            AddLangugage("Orc");
+        }
         
 
     }
@@ -458,15 +490,43 @@ namespace Races
 
     public class Tiefling : GenericRace
     {
+        public Tiefling()
+        {
+            SetName("Tiefling");
+
+            SetRacePerk("Ability Score Increase", "Your Intelligence score increases by 1, and your Charisma score increases by 2.");
+            SetAbilityScoreIncrease("INT", 1);
+            SetAbilityScoreIncrease("CHA", 2);
+
+            SetRacePerk("Age", "Tieflings mature at the same rate as humans but live a few years longer.");
+            SetAge(Tools.GetRandomNumberInRange(18,70));
+
+            SetRacePerk("Alignment", " Tieflings might not have an innate tendency toward evil, but many of them end up there. Evil or not, an independent nature inclines many tieflings toward a chaotic alignment.");
+            SetAlignment();
+
+            SetRacePerk("Size", "Tieflings are about the same size and build as humans. Your size is Medium.");
+            SetSize("Medium");
+
+            SetRacePerk("Speed", "Your base walking speed is 30 feet.");
+            SetSpeed(30);
+
+            SetRacePerk("Darkvision", "Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+
+            SetRacePerk("Hellish Resistance", "You have resistance to fire damage.");
+
+            SetRacePerk("Infernal Legacy", "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.");
+
+            SetRacePerk("Languages", "You can speak, read, and write Common and Infernal.");
+            AddLangugage("Common");
+            AddLangugage("Infernal");
+        }
         
 
     }
 
         public class RaceLists 
     {
-        // private string[] Races = {"Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling"};
-        // private GenericRace[] Races = {new Dwarf(), new Human(), new Halfling(), new Dragonborn()};
-        private GenericRace[] Races = {new HalfElf()};
+        private GenericRace[] Races = {new Dwarf(), new Human(), new Halfling(), new Dragonborn()};
         public GenericRace GetRandomRace()
         {
             return Tools.GetRandomRaceArrayElement(Races);
