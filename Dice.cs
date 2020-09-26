@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Dice
+namespace Character
 {
     class DiceTypes
     {

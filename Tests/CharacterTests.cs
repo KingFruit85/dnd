@@ -11,9 +11,9 @@ namespace CharacterTests
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            testCharacter.SetRandomName(testCharacter.Gender, testCharacter.Race.GetName());
+            testCharacter.SetRandomName(testCharacter.GetGender(), testCharacter.GetRace().GetName());
             // Assert
-            Assert.NotNull(testCharacter.FirstName);
+            Assert.NotNull(testCharacter.GetFirstName());
         }
 
         [Fact]
@@ -22,9 +22,9 @@ namespace CharacterTests
             // Arrange
             RandomCharacter testCharacter = new RandomCharacter();
             // Act
-            testCharacter.SetRandomName(testCharacter.Gender, testCharacter.Race.GetName());
+            testCharacter.SetRandomName(testCharacter.GetGender(), testCharacter.GetRace().GetName());
             // Assert
-            Assert.NotNull(testCharacter.LastName);
+            Assert.NotNull(testCharacter.GetLastName());
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace CharacterTests
             // Act
             testCharacter.SetRandomRace();
             // Assert
-            Assert.NotNull(testCharacter.Race);
+            Assert.NotNull(testCharacter.GetRace());
 
         }
     
@@ -47,7 +47,7 @@ namespace CharacterTests
             // Act
             testCharacter.SetRandomGender();
             // Assert
-            Assert.NotNull(testCharacter.Gender);
+            Assert.NotNull(testCharacter.GetGender());
         }
 
 

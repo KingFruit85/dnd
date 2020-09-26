@@ -1,5 +1,5 @@
+using Character;
 using Xunit;
-using Dice;
 
 namespace DiceTests
 {

@@ -15,8 +15,8 @@ namespace Character
         private string LastName;
         private string CharacterClass;
         private string Gender;
-        private int[] RawAbilityScores;
-        private AbilityScore UpdatedAbilityScores = new AbilityScore();
+        private AbilityScore AbilityScores = new AbilityScore();
+
 
         // Getters & Setters
         public GenericRace GetRace(){return Race;}
@@ -34,11 +34,9 @@ namespace Character
         public string GetGender(){return Gender;}
         public void SetGender(string gender){Gender = gender;}
 
-        public int[] GetRawAbilityScores(){return RawAbilityScores;}
-        public void SetRawAbilityScores(int[] scores){RawAbilityScores = scores;}
+        public AbilityScore GetAbilityScores(){return AbilityScores;}
+        public void SetAbilityScores(){}
 
-        public AbilityScore GetUpdatedAbilityScores(){return UpdatedAbilityScores;}
-        public void SetUpdatedAbilityScores(AbilityScore scores){UpdatedAbilityScores = scores;}
     }
 
     public class ManualCharacter : CharacterTemplate
@@ -54,10 +52,9 @@ namespace Character
         {
             SetRandomRace();
             SetRandomClass();
-            SetAbilityScores();
+            GetAbilityScores().Arrange(GetCharacterClass());
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
-            UpdateAbilityScores(GetRawAbilityScores());
         }
 
         public void SetRandomRace()
@@ -97,32 +94,10 @@ namespace Character
             }
         }
 
-        public void SetAbilityScores()
-        {
-            SetRawAbilityScores(new DiceTypes().ReturnAbilityScores()); 
-        }
 
         public void UpdateAbilityScores(int[] rawScores)
         {
-            var character = GetCharacterClass();
-            var results = new Dictionary<string,int>();
 
-            // rawScores should return a list of ints in decending order
-
-            switch (character)
-            {   
-                case "Bard":
-                    results.Add("CHA",rawScores[0]);
-                    results.Add("DEX",rawScores[1]);
-                    results.Add("CON",rawScores[2]);
-                    results.Add("WIS",rawScores[3]);
-                    results.Add("STR",rawScores[4]);
-                    results.Add("INT",rawScores[5]);
-                    break;
-
-                
-                default: throw new Exception("program fell through switchcase");
-            }
 
             // this.UpdatedAbilityScores = results;
             
@@ -134,7 +109,7 @@ namespace Character
             Console.WriteLine($"Name:{GetFirstName()} {GetLastName()}");
             Console.WriteLine($"Class:{GetCharacterClass()}");
             Console.WriteLine($"Gender:{GetGender()}");
-            Console.WriteLine($"Raw Scores: [{GetRawAbilityScores()[0]}] [{GetRawAbilityScores()[1]}] [{GetRawAbilityScores()[2]}] [{GetRawAbilityScores()[3]}] [{GetRawAbilityScores()[4]}] [{GetRawAbilityScores()[5]}]");
+            //Console.WriteLine($"Raw Scores: [{GetRawAbilityScores()[0]}] [{GetRawAbilityScores()[1]}] [{GetRawAbilityScores()[2]}] [{GetRawAbilityScores()[3]}] [{GetRawAbilityScores()[4]}] [{GetRawAbilityScores()[5]}]");
             Console.WriteLine();
 
             Console.WriteLine("*-Race Attributes-*");
