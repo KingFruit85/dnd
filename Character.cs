@@ -1,98 +1,44 @@
 using System;
 using Names;
-using Races;
 using CharacterClasses;
-using Dice;
 using System.Linq;
+using System.Collections.Generic;
+using Races;
 
 namespace Character
 {
     public class CharacterTemplate
     {
-        private GenericRace _race;
-        public GenericRace Race
-        {
-            get
-            {
-                return _race;
-            }
-            set
-            {
-                _race = value;
-            }
-        }
-        private string _firstName;
-        public string FirstName
-        {
-            get
-            {
-                return _firstName;
-            }
-            set
-            {
-                _firstName = value;
-            }
-        }
-        private string _lastName;
-        public string LastName
-        {
-            get
-            {
-                return _lastName;
-            }
-            set
-            {
-                _lastName = value;
-            }
-        }
-        private string _characterClass;
-        public string CharacterClass
-        {
-            get
-            {
-                return _characterClass;
-            }
-            set
-            {
-                _characterClass = value;
-            }
-        }
+        
+        private GenericRace Race;
+        private string FirstName;
+        private string LastName;
+        private string CharacterClass;
+        private string Gender;
+        private int[] RawAbilityScores;
+        private AbilityScore UpdatedAbilityScores = new AbilityScore();
 
-        private string _gender;
-        public string Gender
-        {
-            get
-            {
-                return _gender;
-            }
-            set
-            {
-                _gender = value;
-            }
-        }
+        // Getters & Setters
+        public GenericRace GetRace(){return Race;}
+        public void SetRace(GenericRace race){Race = race;}
 
-        private int[] _abilityScores;
+        public string GetFirstName(){return FirstName;}
+        public void SetFirstName(string name){FirstName = name;}
 
-        public int[] AbilityScores
-        {
-            get
-            {
-                return _abilityScores;
-            }
-            set
-            {
-                if (value.Length == 6)
-                {
-                    _abilityScores = value;
-                }
-                else
-                {
-                    throw new Exception("Provided ability score array does not contain the correct number of values");
-                }
-                
-            }
-        }
+        public string GetLastName(){return LastName;}
+        public void SetLastName(string name){LastName = name;}
 
+        public string GetCharacterClass(){return CharacterClass;}
+        public void SetCharacterClass(string className){CharacterClass = className;}
+
+        public string GetGender(){return Gender;}
+        public void SetGender(string gender){Gender = gender;}
+
+        public int[] GetRawAbilityScores(){return RawAbilityScores;}
+        public void SetRawAbilityScores(int[] scores){RawAbilityScores = scores;}
+
+        public AbilityScore GetUpdatedAbilityScores(){return UpdatedAbilityScores;}
+        public void SetUpdatedAbilityScores(AbilityScore scores){UpdatedAbilityScores = scores;}
     }
 
     public class ManualCharacter : CharacterTemplate
@@ -107,28 +53,29 @@ namespace Character
         public RandomCharacter()
         {
             SetRandomRace();
-            SetRandomGender();
-            SetRandomName(this.Gender, this.Race.GetName());
             SetRandomClass();
             SetAbilityScores();
+            SetRandomGender();
+            SetRandomName(GetGender(), GetRace().GetName());
+            UpdateAbilityScores(GetRawAbilityScores());
         }
 
         public void SetRandomRace()
         {
-            this.Race = new RaceLists().GetRandomRace();
+            SetRace(new RaceLists().GetRandomRace());
         }
 
         public void SetRandomName(string gender, string race)
         {
             NameLists name = new NameLists();
             var FullName = name.SetRandomName(gender, race);
-            this.FirstName = FullName[0];
-            this.LastName = FullName[1];
+            SetFirstName(FullName[0]);
+            SetLastName(FullName[1]);
         }
 
         public void SetRandomClass()
         {
-            this.CharacterClass = new CharacterClassList().GetRandomClass();
+            SetCharacterClass(new CharacterClassList().GetRandomClass());
         }
 
         public void SetRandomGender()
@@ -138,43 +85,69 @@ namespace Character
             
             if (i >= 1 && i <=39)
             {
-                this.Gender = "Male";   
+                SetGender("Male");   
             }
             else if (i >= 40 && i <=79)
             {
-                this.Gender = "Female";
+                SetGender("Female");
             }
             else
             {
-                this.Gender = "Non-Binary";
+                SetGender("Non-Binary");
             }
         }
 
         public void SetAbilityScores()
         {
-            this.AbilityScores = new DiceTypes().ReturnAbilityScores(); 
+            SetRawAbilityScores(new DiceTypes().ReturnAbilityScores()); 
+        }
+
+        public void UpdateAbilityScores(int[] rawScores)
+        {
+            var character = GetCharacterClass();
+            var results = new Dictionary<string,int>();
+
+            // rawScores should return a list of ints in decending order
+
+            switch (character)
+            {   
+                case "Bard":
+                    results.Add("CHA",rawScores[0]);
+                    results.Add("DEX",rawScores[1]);
+                    results.Add("CON",rawScores[2]);
+                    results.Add("WIS",rawScores[3]);
+                    results.Add("STR",rawScores[4]);
+                    results.Add("INT",rawScores[5]);
+                    break;
+
+                
+                default: throw new Exception("program fell through switchcase");
+            }
+
+            // this.UpdatedAbilityScores = results;
+            
         }
 
         public void PrintCharacterInfoToConsole()
         {
             Console.WriteLine("*-Character Attributes-*");
-            Console.WriteLine($"Name:{FirstName} {LastName}");
-            Console.WriteLine($"Class:{CharacterClass}");
-            Console.WriteLine($"Gender:{Gender}");
-            Console.WriteLine($"Raw Scores: [{AbilityScores[0]}] [{AbilityScores[1]}] [{AbilityScores[2]}] [{AbilityScores[3]}] [{AbilityScores[4]}] [{AbilityScores[5]}]");
+            Console.WriteLine($"Name:{GetFirstName()} {GetLastName()}");
+            Console.WriteLine($"Class:{GetCharacterClass()}");
+            Console.WriteLine($"Gender:{GetGender()}");
+            Console.WriteLine($"Raw Scores: [{GetRawAbilityScores()[0]}] [{GetRawAbilityScores()[1]}] [{GetRawAbilityScores()[2]}] [{GetRawAbilityScores()[3]}] [{GetRawAbilityScores()[4]}] [{GetRawAbilityScores()[5]}]");
             Console.WriteLine();
 
             Console.WriteLine("*-Race Attributes-*");
-            Console.WriteLine($"Race:{Race.GetName()}");
+            Console.WriteLine($"Race:{GetRace()}");
             Console.WriteLine("-Known Languages-");
-            Race.GetLanguages().ForEach(i => Console.WriteLine("{0}\t", i));
+            GetRace().GetLanguages().ForEach(i => Console.WriteLine("{0}\t", i));
             Console.WriteLine("-");
-            Console.WriteLine($"Speed:{Race.GetSpeed()}");
-            Console.WriteLine($"Age:{Race.GetAge()}");
-            Console.WriteLine($"Alignment:{Race.GetAlignment()}");
-            Console.WriteLine($"Size:{Race.GetSize()}");
+            Console.WriteLine($"Speed:{GetRace().GetSpeed()}");
+            Console.WriteLine($"Age:{GetRace().GetAge()}");
+            Console.WriteLine($"Alignment:{GetRace().GetAlignment()}");
+            Console.WriteLine($"Size:{GetRace().GetSize()}");
             Console.WriteLine("-Ability Score Increases-");
-            Race.GetAbilityScoreIncrease().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
+            GetRace().GetAbilityScoreIncrease().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
         }
 
     }
