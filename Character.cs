@@ -35,7 +35,10 @@ namespace Character
         public void SetGender(string gender){Gender = gender;}
 
         public AbilityScore GetAbilityScores(){return AbilityScores;}
-        public void SetAbilityScores(){}
+        public void SetAbilityScore(AbilityScore abilityScore)
+        {
+            AbilityScores = abilityScore;
+        }
 
     }
 
@@ -50,9 +53,10 @@ namespace Character
     {
         public RandomCharacter()
         {
-            SetRandomRace();
             SetRandomClass();
             GetAbilityScores().Arrange(GetCharacterClass());
+            SetRandomRace();
+            UpdateAbilityScores();
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
         }
@@ -95,12 +99,16 @@ namespace Character
         }
 
 
-        public void UpdateAbilityScores(int[] rawScores)
+        public void UpdateAbilityScores()
         {
+            // Grab the the scores to be added
+            var ASU = GetRace().GetAbilityScoreIncrease();
 
-
-            // this.UpdatedAbilityScores = results;
-            
+            // Update the characters abilityscores
+            foreach (var stat in ASU)
+            {
+                   GetAbilityScores().SetProvidedScore(stat.Key,stat.Value);
+            }
         }
 
         public void PrintCharacterInfoToConsole()
@@ -109,7 +117,8 @@ namespace Character
             Console.WriteLine($"Name:{GetFirstName()} {GetLastName()}");
             Console.WriteLine($"Class:{GetCharacterClass()}");
             Console.WriteLine($"Gender:{GetGender()}");
-            //Console.WriteLine($"Raw Scores: [{GetRawAbilityScores()[0]}] [{GetRawAbilityScores()[1]}] [{GetRawAbilityScores()[2]}] [{GetRawAbilityScores()[3]}] [{GetRawAbilityScores()[4]}] [{GetRawAbilityScores()[5]}]");
+            Console.WriteLine($"Raw Scores: [{GetAbilityScores().GetRawScores()[0]}] [{GetAbilityScores().GetRawScores()[1]}] [{GetAbilityScores().GetRawScores()[2]}] [{GetAbilityScores().GetRawScores()[3]}] [{GetAbilityScores().GetRawScores()[4]}] [{GetAbilityScores().GetRawScores()[5]}]");
+            Console.WriteLine($"AbilityScores: STR:[{GetAbilityScores().GetStrengthScore()}] DEX:[{GetAbilityScores().GetDexterityScore()}] CON:[{GetAbilityScores().GetConstitutionScore()}] INT:[{GetAbilityScores().GetIntelligenceScore()}] WIS:[{GetAbilityScores().GetWisdomScore()}] CHA:[{GetAbilityScores().GetCharismaScore()}]");
             Console.WriteLine();
 
             Console.WriteLine("*-Race Attributes-*");

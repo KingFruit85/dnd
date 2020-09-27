@@ -10,7 +10,5 @@ namespace dnd
             newCharacter.PrintCharacterInfoToConsole();
         }
 
-
-
     }
 }

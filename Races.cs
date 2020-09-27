@@ -173,6 +173,7 @@ namespace Races
         // Humans reach adulthood in their late teens and live less than a century.
         SetAge(Tools.GetRandomNumberInRange(18,65));
         // Human ability scores each increase by 1.
+        
         SetAbilityScoreIncrease("STR", 1);
         SetAbilityScoreIncrease("DEX", 1);
         SetAbilityScoreIncrease("CON", 1);

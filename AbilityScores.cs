@@ -193,34 +193,97 @@ namespace Character
             AbilityScores["INT"] = RawScores[5];    
         }
 
-        public void setStrengthScore(int score)
+        public int[] GetRawScores()
+        {
+            return RawScores;
+        }
+
+        public void SetStrengthScore(int score)
         {
             AbilityScores["STR"] = score;
         }
 
-        public void setDexterityScore(int score)
+        public int GetStrengthScore()
+        {
+            return AbilityScores["STR"];
+        }
+
+        public void SetDexterityScore(int score)
         {
             AbilityScores["DEX"] = score;
         }
 
-        public void setConstitutionScore(int score)
+        public int GetDexterityScore()
+        {
+            return AbilityScores["DEX"];
+        }
+
+        public void SetConstitutionScore(int score)
         {
             AbilityScores["CON"] = score;
         }
 
-        public void setIntelligenceScore(int score)
+        public int GetConstitutionScore()
+        {
+            return AbilityScores["CON"];
+        }
+
+        public void SetIntelligenceScore(int score)
         {
             AbilityScores["INT"] = score;
         }
 
-        public void setWisdomScore(int score)
+        public int GetIntelligenceScore()
+        {
+            return AbilityScores["INT"];
+        }
+
+        public void SetWisdomScore(int score)
         {
             AbilityScores["WIS"] = score;
         }
 
-        public void setCharismaScore(int score)
+        public int GetWisdomScore()
+        {
+            return AbilityScores["WIS"];
+        }
+
+        public void SetCharismaScore(int score)
         {
             AbilityScores["CHA"] = score;
+        }
+
+        public int GetCharismaScore()
+        {
+            return AbilityScores["CHA"];
+        }
+
+        public void SetProvidedScore(string stat, int score)
+        {
+            switch (stat)
+            {
+                case "STR":
+                    AbilityScores["STR"] += score;
+                    break;
+                case "DEX":
+                    AbilityScores["DEX"] += score;
+                    break;
+                case "CON":
+                    AbilityScores["CON"] += score;
+                    break;
+                case "WIS":
+                    AbilityScores["WIS"] += score;
+                    break;
+                case "INT":
+                    AbilityScores["INT"] += score;
+                    break;
+                case "CHA":
+                    AbilityScores["CHA"] += score;
+                    break;
+                
+                default: throw new Exception("Unable to increment ability score");
+            }
+
         }
     }
 }
