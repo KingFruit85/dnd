@@ -9,6 +9,7 @@ namespace Character
 {
     public class CharacterTemplate
     {
+        public ClassFeatures CC;
         
         private GenericRace Race;
         private string FirstName;
@@ -16,6 +17,8 @@ namespace Character
         private string CharacterClass;
         private string Gender;
         private AbilityScore AbilityScores = new AbilityScore();
+        private Dictionary<string,string> Skills;
+        private Dictionary<string,string> SavingThrows;
 
 
         // Getters & Setters
@@ -59,6 +62,8 @@ namespace Character
             UpdateAbilityScores();
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
+
+            CC = new Bard();
         }
 
         public void SetRandomRace()
