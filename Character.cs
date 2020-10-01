@@ -7,7 +7,7 @@ using Races;
 
 namespace Character
 {
-    public class CharacterTemplate
+    public abstract class CharacterTemplate
     {
         public ClassFeatures CC;
         
