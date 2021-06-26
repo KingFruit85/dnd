@@ -6,14 +6,30 @@ namespace Races
     public class GenericRace
     {
         private string Name;
-        private Dictionary<string,int> AbilityScoreIncrease = new Dictionary<string, int>();
-        private int Age {get; set;}
-        private string Alignment {get; set;}
-        private string Size {get; set;}
-        private int Speed {get; set;}
+        private Dictionary<string, int> AbilityScoreIncrease = new Dictionary<string, int>();
+        private int Age { get; set; }
+        private string Alignment { get; set; }
+        private string Size { get; set; }
+        private int Speed { get; set; }
         private List<string> Languages = new List<string>();
-        private string SubRace {get; set;}
-        private Dictionary<string,string> RacePerks = new Dictionary<string, string>();
+        private string SubRace { get; set; }
+        private Dictionary<string, string> RacePerks = new Dictionary<string, string>();
+
+        private List<KeyValuePair<string, int>> weightedAlignments = new List<KeyValuePair<string, int>>()
+        {
+            new KeyValuePair<string, int>("Lawful Good",1),
+            new KeyValuePair<string, int>("Neutral Good",1),
+            new KeyValuePair<string, int>("Chaotic Good",1),
+            new KeyValuePair<string, int>("Lawful Neutral",1),
+            new KeyValuePair<string, int>("True Neutral",1),
+            new KeyValuePair<string, int>("Chaotic Neutral",1),
+            new KeyValuePair<string, int>("Lawful Evil",1),
+            new KeyValuePair<string, int>("Neutral Evil",1),
+            new KeyValuePair<string, int>("Chaotic Evil",1),
+
+        };
+
+                              
         public struct DraconicAncestryDetails
         {
             public string Name;
@@ -30,7 +46,7 @@ namespace Races
         {
             return Name;
         }
-        public Dictionary<string,int> GetAbilityScoreIncrease()
+        public Dictionary<string, int> GetAbilityScoreIncrease()
         {
             return AbilityScoreIncrease;
         }
@@ -52,7 +68,7 @@ namespace Races
             {
                 Age = age;
             }
-            
+
         }
 
         public string GetAlignment()
@@ -60,9 +76,10 @@ namespace Races
             return Alignment;
         }
 
+        // Returns a random alignment. useful for races with no strong alignment to any alignment
         public void SetAlignment()
         {
-            var Alignments = new string[]{"Lawful Good", 
+            var Alignments = new string[]{"Lawful Good",
                               "Neutral Good",
                               "Chaotic Good",
                               "Lawful Neutral",
@@ -73,6 +90,29 @@ namespace Races
                               "Chaotic Evil"};
 
             Alignment = Tools.GetRandomStringArrayElement(Alignments);
+        }
+
+        // Takes in the races weighted alignment list and returns an alignment
+        public void SetAlignment(List<KeyValuePair<string,float>> raceAlignments)
+        {
+            var alignments = raceAlignments;
+            var newWeightedAlignments = new List<KeyValuePair<string,float>>();
+            
+            // For each key in the raceAlignments param we're going to add a random float to the 
+            // key's value that will increase it randomly but will not exceed a value of 1.0f
+            foreach (var item in alignments)
+            {
+                var r = new Random();
+                var weightToAdd = r.NextDouble();
+                var newWeight = item.Value + (weightToAdd - item.Value);
+                newWeightedAlignments.Add(new KeyValuePair<string, float>(item.Key, (float)newWeight));
+            }
+            
+            // Sorts the KVP list by Value in decenting order 
+            newWeightedAlignments.Sort((x, y) => (y.Value.CompareTo(x.Value)));
+            // Sets the alignment
+            Alignment = weightedAlignments[0].Key;
+            
         }
 
         public string GetSize()
@@ -208,7 +248,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(15,80));
 
             SetRacePerk("Alignment","Dragonborn tend to extremes, making a conscious choice for one side or the other in the cosmic war between good and evil. Most dragonborn are good, but those who side with evil can be terrible villains.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.3f),
+                    new KeyValuePair<string, float>("Neutral Good",0f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.2f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0f),
+                    new KeyValuePair<string, float>("True Neutral",0f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.3f),
+                    new KeyValuePair<string, float>("Neutral Evil",0f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.2f),
+                };
+
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size","Dragonborn are taller and heavier than humans, standing well over 6 feet tall and averaging almost 250 pounds. Your size is Medium.");
             SetSize("Medium");
@@ -257,7 +311,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(50,350));
 
             SetRacePerk("Alignment","Most dwarves are lawful, believing firmly in the benefits of a well-­‐‑ordered society. They tend toward good as well, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.5f),
+                    new KeyValuePair<string, float>("Neutral Good",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.0f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.3f),
+                    new KeyValuePair<string, float>("True Neutral",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.0f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.2f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.0f),
+                };
+
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size", "Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.");
             SetSize("Medium");
@@ -295,7 +363,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(100,750));
 
             SetRacePerk("Alignment","Elves love freedom, variety, and self-expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others’ freedom as well as their own, and they are more often good than not. The drow are an exception; their exile has made them vicious and dangerous. Drow are more often evil than not.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.1f),
+                    new KeyValuePair<string, float>("Neutral Good",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.3f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.0f),
+                    new KeyValuePair<string, float>("True Neutral",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.3f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.0f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.1f),
+                };
+            
+            SetAlignment(weightedAlignments);
             
             SetRacePerk("Size","Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.");
             SetSize("Medium");
@@ -337,7 +419,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(40,500));
 
             SetRacePerk("Alignment","Gnomes are most often good. Those who tend toward law are sages, engineers, researchers, scholars, investigators, or inventors. Those who tend toward chaos are minstrels, tricksters, wanderers, or fanciful jewelers. Gnomes are good-hearted, and even the tricksters among them are more playful than vicious.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.2f),
+                    new KeyValuePair<string, float>("Neutral Good",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.2f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.2f),
+                    new KeyValuePair<string, float>("True Neutral",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.2f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.1f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.1f),
+                };
+            
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size","Gnomes are between 3 and 4 feet tall and average about 40 pounds. Your size is Small.");
             SetSize("Small");
@@ -389,7 +485,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(20,180));
 
             SetRacePerk("Alignment","Half-elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers. They chafe at rules, resent others’ demands, and sometimes prove unreliable, or at least unpredictable.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.0f),
+                    new KeyValuePair<string, float>("Neutral Good",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.2f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.1f),
+                    new KeyValuePair<string, float>("True Neutral",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.2f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.0f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.2f),
+                };
+            
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size","Half-elves are about the same size as humans, ranging from 5 to 6 feet tall. Your size is Medium.");
             SetSize("Medium");
@@ -426,7 +536,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(14, 75));
 
             SetRacePerk("Alignment", "Half-orcs inherit a tendency toward chaos from their orc parents and are not strongly inclined toward good. Half-orcs raised among orcs and willing to live out their lives among them are usually evil.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.0f),
+                    new KeyValuePair<string, float>("Neutral Good",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.2f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.0f),
+                    new KeyValuePair<string, float>("True Neutral",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.2f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.1f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.4f),
+                };
+            
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size", "Half-orcs are somewhat larger and bulkier than humans, and they range from 5 to well over 6 feet tall. Your size is Medium.");
             SetSize("Medium");
@@ -463,7 +587,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(20,250));
 
             SetRacePerk("Alignment", "Most halflings are lawful good. As a rule, they are good-hearted and kind, hate to see others in pain, and have no tolerance for oppression. They are also very orderly and traditional, leaning heavily on the support of their community and the comfort of their old ways.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.6f),
+                    new KeyValuePair<string, float>("Neutral Good",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.1f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.0f),
+                    new KeyValuePair<string, float>("True Neutral",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.1f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.0f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.0f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.1f),
+                };
+            
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size", "Halflings average about 3 feet tall and weigh about 40 pounds. Your size is Small.");
             SetSize("Small");
@@ -503,7 +641,21 @@ namespace Races
             SetAge(Tools.GetRandomNumberInRange(18,70));
 
             SetRacePerk("Alignment", " Tieflings might not have an innate tendency toward evil, but many of them end up there. Evil or not, an independent nature inclines many tieflings toward a chaotic alignment.");
-            SetAlignment();
+            
+            List<KeyValuePair<string, float>> weightedAlignments = new List<KeyValuePair<string, float>>()
+                {
+                    new KeyValuePair<string, float>("Lawful Good",0.0f),
+                    new KeyValuePair<string, float>("Neutral Good",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Good",0.1f),
+                    new KeyValuePair<string, float>("Lawful Neutral",0.0f),
+                    new KeyValuePair<string, float>("True Neutral",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Neutral",0.1f),
+                    new KeyValuePair<string, float>("Lawful Evil",0.1f),
+                    new KeyValuePair<string, float>("Neutral Evil",0.1f),
+                    new KeyValuePair<string, float>("Chaotic Evil",0.4f),
+                };
+            
+            SetAlignment(weightedAlignments);
 
             SetRacePerk("Size", "Tieflings are about the same size and build as humans. Your size is Medium.");
             SetSize("Medium");
@@ -525,12 +677,30 @@ namespace Races
 
     }
 
-        public class RaceLists 
+    public class RaceLists 
     {
-        private GenericRace[] Races = {new Dwarf(), new Human(), new Halfling(), new Dragonborn()};
+
         public GenericRace GetRandomRace()
         {
-            return Tools.GetRandomRaceArrayElement(Races);
+            Random r = new Random();
+            int RandomRace = r.Next(1, 9);
+
+            switch (RandomRace)
+            {
+                default: throw new Exception("Race not found");
+
+                case 1: return new Dwarf(); 
+                case 2: return new Dragonborn(); 
+                case 3: return new Elf(); 
+                case 4: return new Gnome(); 
+                case 5: return new HalfElf(); 
+                case 6: return new HalfOrc(); 
+                case 7: return new Halfling(); 
+                case 8: return new Human(); 
+                case 9: return new Tiefling(); 
+
+
+            }
         }
 
     }

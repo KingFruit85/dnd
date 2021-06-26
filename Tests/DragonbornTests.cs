@@ -51,16 +51,16 @@ namespace DragonbornTests
             // Arrange
             var Alignment = new Dragonborn().GetAlignment();
             //Assert
-            Assert.IsType(typeof(string), Alignment);
+            Assert.IsType<string>(Alignment);
         }
 
         [Fact]
-        public void AgeNotNull()
+        public void AgeNotZero()
         {
             //Arrange
             var Age = new Dragonborn().GetAge();
             // Assert
-            Assert.NotNull(Age);
+            Assert.True(Age > 0);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace DragonbornTests
             //Arrange
             var Age = new Dragonborn().GetAge();
             // Assert
-            Assert.IsType(typeof(int),Age);
+            Assert.IsType<int>(Age);
         }
 
         [Fact]
@@ -96,16 +96,16 @@ namespace DragonbornTests
             // Arrange 
             var Size = new Dragonborn().GetSize();
             // Assert
-            Assert.IsType(typeof(string),Size);
+            Assert.IsType<string>(Size);
         }
 
         [Fact]
-        public void SpeedIsNotNull()
+        public void SpeedIsNotZero()
         {
             // Arrange 
             var Size = new Dragonborn().GetSpeed();
             // Assert
-            Assert.NotNull(Size);
+            Assert.True(Size > 0);
         }
 
         [Fact]
@@ -114,7 +114,7 @@ namespace DragonbornTests
             // Arrange 
             var Size = new Dragonborn().GetSpeed();
             // Assert
-            Assert.IsType(typeof(int), Size);
+            Assert.IsType<int>(Size);
         }
 
         [Fact]
@@ -147,7 +147,7 @@ namespace DragonbornTests
             // Act
             var STRValue = Scores["STR"];
             // Assert
-            Assert.Equal(STRValue,2);
+            Assert.Equal(2,STRValue);
 
         }
 
@@ -159,18 +159,18 @@ namespace DragonbornTests
             // Act
             var CHAValue = Scores["CHA"];
             // Assert
-            Assert.Equal(CHAValue,1);
+            Assert.Equal(1,CHAValue);
 
         }
 
         [Fact]
-        public void DraconicAncestryNotNull()
+        public void DraconicAncestryIsCorrectType()
         {
             // Arrange
             var DraconicAncestry = new Dragonborn().GetDraconicAncestry();
 
             // Assert
-            Assert.NotNull(DraconicAncestry);
+            Assert.IsType<GenericRace.DraconicAncestryDetails>(DraconicAncestry);
         }
 
     }

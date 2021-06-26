@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Christopher\\OneDrive\\Desktop\\c# Projects\\dnd\\dnd.csproj": {}
+    "E:\\Coding projects\\dnd\\dnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Christopher\\OneDrive\\Desktop\\c# Projects\\dnd\\dnd.csproj": {
+    "E:\\Coding projects\\dnd\\dnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Christopher\\OneDrive\\Desktop\\c# Projects\\dnd\\dnd.csproj",
+        "projectUniqueName": "E:\\Coding projects\\dnd\\dnd.csproj",
         "projectName": "dnd",
-        "projectPath": "C:\\Users\\Christopher\\OneDrive\\Desktop\\c# Projects\\dnd\\dnd.csproj",
+        "projectPath": "E:\\Coding projects\\dnd\\dnd.csproj",
         "packagesPath": "C:\\Users\\Christopher\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Christopher\\OneDrive\\Desktop\\c# Projects\\dnd\\obj\\",
+        "outputPath": "E:\\Coding projects\\dnd\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Christopher\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -29,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
@@ -73,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
