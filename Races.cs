@@ -3,19 +3,20 @@ using System.Collections.Generic;
 
 namespace Races
 {
+    [Serializable]
     public class GenericRace
     {
-        private string Name;
-        private Dictionary<string, int> AbilityScoreIncrease = new Dictionary<string, int>();
-        private int Age { get; set; }
-        private string Alignment { get; set; }
-        private string Size { get; set; }
-        private int Speed { get; set; }
-        private List<string> Languages = new List<string>();
-        private string SubRace { get; set; }
-        private Dictionary<string, string> RacePerks = new Dictionary<string, string>();
+        public string Name {get;set;}
+        public Dictionary<string, int> AbilityScoreIncrease {get;set;} = new Dictionary<string, int>();
+        public int Age { get; set; }
+        public string Alignment { get; set; }
+        public string Size { get; set; }
+        public int Speed { get; set; }
+        public List<string> Languages {get;set;} = new List<string>();
+        public string SubRace { get; set; }
+        public Dictionary<string, string> RacePerks {get;set;} = new Dictionary<string, string>();
 
-        private List<KeyValuePair<string, int>> weightedAlignments = new List<KeyValuePair<string, int>>()
+        private List<KeyValuePair<string, int>> weightedAlignments {get;set;} = new List<KeyValuePair<string, int>>()
         {
             new KeyValuePair<string, int>("Lawful Good",1),
             new KeyValuePair<string, int>("Neutral Good",1),
@@ -36,7 +37,7 @@ namespace Races
             public string DamageType;
             public string BreathWeapon;
         }
-        private DraconicAncestryDetails DraconicAncestry;
+        private DraconicAncestryDetails DraconicAncestry {get;set;}
 
         public void SetName(string name)
         {
@@ -204,7 +205,7 @@ namespace Races
             DraconicAncestry = x;
         }
     }
-
+    [Serializable]
     public class Human : GenericRace
     {
         public Human()
@@ -233,7 +234,7 @@ namespace Races
         AddLangugage(1);
         }
     }
-
+    [Serializable]
     public class Dragonborn : GenericRace
     {
         public Dragonborn()
@@ -296,7 +297,7 @@ namespace Races
             AddLangugage("Draconic");
         }
     }
-
+    [Serializable]
     public class Dwarf : GenericRace
     {
         public Dwarf()
@@ -349,7 +350,7 @@ namespace Races
             SetRacePerk("Dwarven Toughness", "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.");
         }
     }
-
+    [Serializable]
     public class Elf : GenericRace
     {
         public Elf()
@@ -405,7 +406,7 @@ namespace Races
             AddLangugage();
 ;        }
     }
-
+    [Serializable]
     public class Gnome : GenericRace
     {
         public Gnome()
@@ -455,7 +456,7 @@ namespace Races
             SetRacePerk("Tinker","You have proficiency with artisan’s tools (tinker’s tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:");
         }
     }
-
+    [Serializable]
     public class HalfElf : GenericRace
     {
         public HalfElf()
@@ -521,7 +522,7 @@ namespace Races
         
 
     }
-
+    [Serializable]
     public class HalfOrc : GenericRace
     {
         public HalfOrc()
@@ -573,7 +574,7 @@ namespace Races
         
 
     }
-
+    [Serializable]
     public class Halfling : GenericRace
     {
         public Halfling()
@@ -626,7 +627,7 @@ namespace Races
             SetRacePerk("Naturally Stealthy", "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.");
         }
     }
-
+    [Serializable]
     public class Tiefling : GenericRace
     {
         public Tiefling()

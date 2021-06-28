@@ -7,18 +7,18 @@ using Races;
 
 namespace Character
 {
+    [Serializable]
     public abstract class CharacterTemplate
     {
-        public ClassFeatures CC;
-        
-        private GenericRace Race;
-        private string FirstName;
-        private string LastName;
-        private string CharacterClass;
-        private string Gender;
-        private AbilityScore AbilityScores = new AbilityScore();
-        private Dictionary<string,string> Skills;
-        private Dictionary<string,string> SavingThrows;
+        public ClassFeatures ClassFeatures {get;set;}
+        public GenericRace Race {get;set;}
+        public string FirstName {get;set;}
+        public string LastName {get;set;}
+        public string CharacterClass {get;set;}
+        public string Gender {get;set;}
+        public AbilityScore AbilityScores {get;set;} = new AbilityScore();
+        public Dictionary<string,string> Skills {get;set;}
+        public Dictionary<string,string> SavingThrows {get;set;}
 
 
         // Getters & Setters
@@ -36,7 +36,7 @@ namespace Character
 
         public string GetGender(){return Gender;}
         public void SetGender(string gender){Gender = gender;}
-
+    
         public AbilityScore GetAbilityScores(){return AbilityScores;}
         public void SetAbilityScore(AbilityScore abilityScore)
         {
@@ -52,6 +52,7 @@ namespace Character
     }
 
     // -- Returns a character object where all character customisation steps have been randomised
+    [Serializable]
     public class RandomCharacter : CharacterTemplate
     {
         public RandomCharacter()
@@ -63,7 +64,7 @@ namespace Character
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
 
-            CC = new Bard();
+            ClassFeatures = new Bard();
         }
 
         public void SetRandomRace()
@@ -137,6 +138,9 @@ namespace Character
             Console.WriteLine($"Size:{GetRace().GetSize()}");
             Console.WriteLine("-Ability Score Increases-");
             GetRace().GetAbilityScoreIncrease().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
+
+
+
         }
 
     }

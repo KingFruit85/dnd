@@ -1,21 +1,22 @@
+using System;
 using System.Collections.Generic;
 
 namespace Character
 {
+    [Serializable]
     public class ClassFeatures
     {
-        string Name;
-        int HitPoints;
-        int ProficiencyBonus;
+        public string Name {get;set;}
+        public int HitPoints {get;set;}
+        public int ProficiencyBonus {get;set;}
         
-        Dictionary<string,string[]> Proficiencies;
-        Dictionary<string,string> Equipment;
-        Dictionary<string,string> Spells;
-        Dictionary<string,string> Features;
+        public Dictionary<string,string[]> Proficiencies{get;set;}
+        public Dictionary<string,string> Equipment{get;set;}
+        public Dictionary<string,string> Spells{get;set;}
+        public Dictionary<string,string> Features{get;set;}
+        public List<string> Tools {get;set;}
 
-        List<string> Tools;
-
-        public void SetName(string name){Name = name;}
+        public void SetName(string name){Name = name;} 
         public string GetName(){return Name;}
         public void SetHitPoints(int hitpoints){HitPoints = hitpoints;}
         public int GetHitPoints(){return HitPoints;}
@@ -36,7 +37,7 @@ namespace Character
         
 
     }
-
+    [Serializable]
     public class Bard : ClassFeatures
     {
         public Bard()
