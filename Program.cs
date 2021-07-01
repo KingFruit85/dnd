@@ -17,12 +17,7 @@ namespace dnd
         static void Main(string[] args)
         {
             RandomCharacter newCharacter = new RandomCharacter();
-            // newCharacter.PrintCharacterInfoToConsole();
-
-            
             saveCharacterToJSON(newCharacter);
-
-
         }
 
         public static void saveCharacterToJSON(RandomCharacter characterToSave)
