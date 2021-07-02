@@ -1,0 +1,74 @@
+{"MusicalInstruments" :[
+
+	{
+		"name": "Bagpipes",
+		"cost":"30 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Drum",
+		"cost":"6 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Dulcimer",
+		"cost":"25 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Flute",
+		"cost":"2 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Lute",
+		"cost":"35 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Lyre",
+		"cost":"30 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Horn",
+		"cost":"3 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Pan Flute",
+		"cost":"12 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Shawm",
+		"cost":"2 gp",
+		"weight":"6lb",
+		"description":""
+	},
+	
+	{
+		"name": "Viol",
+		"cost":"30 gp",
+		"weight":"6lb",
+		"description":""
+	}
+
+]
+}

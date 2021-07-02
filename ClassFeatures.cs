@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Character
 {
@@ -10,11 +11,33 @@ namespace Character
         public int HitPoints {get;set;}
         public int ProficiencyBonus {get;set;}
         
-        public Dictionary<string,string[]> Proficiencies{get;set;}
-        public List<string> Equipment{get;set;} = new List<string>();
+        public Dictionary<string,List<string>> Proficiencies{get;set;}
+        public List<Equipment> Equipment{get;set;} = new List<Equipment>();
         public Dictionary<string,string> Spells{get;set;}
         public Dictionary<string,string> Features{get;set;}
         public List<string> Tools {get;set;}
+
+        public List<string> Skills = new List<string>()
+        {
+            "athletics",
+            "acrobatics",
+            "sleightOfHand",
+            "arcana",
+            "stealth",
+            "history",
+            "nature",
+            "religion",
+            "animalHandling",
+            "insight",
+            "medicine",
+            "perception",
+            "survival",
+            "deception",
+            "intimidation",
+            "investigation",
+            "performance",
+            "persuasion"
+        };
 
         public void SetName(string name){Name = name;} 
         public string GetName(){return Name;}
@@ -23,21 +46,21 @@ namespace Character
         public void SetProficiencyBonus(int pb){ProficiencyBonus = pb;}
         public int GetProficiencyBonus(){return ProficiencyBonus;}
 
-        public void SetProficiencies(Dictionary<string,string[]> profs)
+        public void SetProficiencies(Dictionary<string,List<string>> profs)
         {
             Proficiencies = profs;
         }
-        public Dictionary<string,string[]> GetProficiencies()
+        public Dictionary<string,List<string>> GetProficiencies()
         {
             return Proficiencies;
         }
         
-        /// <summary>Add a specific instument to the equipment collection</summary>
-        /// <param name="instrument">the instrument to add as a string</param>
-        public void AddMusicalinstrumentToEquipment(string instrument)
-        {
-            Equipment.Add(instrument);
-        }
+        // /// <summary>Add a specific instument to the equipment collection</summary>
+        // /// <param name="instrument">the instrument to add as a string</param>
+        // public void AddMusicalinstrumentToEquipment(string instrument)
+        // {
+        //     Equipment.Add(instrument);
+        // }
 
         
 
@@ -45,22 +68,11 @@ namespace Character
         /// <summary>Add a random instument to the equipment collection</summary>
         public void AddMusicalinstrumentToEquipment()
         {
-            List<string> avalibleInstruments = new List<string>()
-            {
-                "Bagpipes",
-                "Drum",
-                "Dulcimer",
-                "Flute",
-                "Lute",
-                "Lyre",
-                "Horn",
-                "Pan Flute",
-                "Shawm",
-                "Viol"
-            };
+            var instrumentList = new Equipment().MusicalInstrument().MusicalInstruments;
+            
             // Get random instrument from list above
             Random r = new Random();
-            var instrument = avalibleInstruments[r.Next(0,avalibleInstruments.Count)];
+            var instrument = instrumentList[r.Next(0,instrumentList.Count)];
 
             // Add it to equipment
             Equipment.Add(instrument);
@@ -79,15 +91,37 @@ namespace Character
             SetProficiencyBonus(2);
 
             // Propulate Proficiencies
-            var bardProfs = new Dictionary<string,string[]>()
+            var bardProfs = new Dictionary<string,List<string>>()
             {
-                {"Armor", new string[]{"Light Armor"}},
-                {"Weapons",new string[]{"Simple weapons", "hand crossbows", "longswords", "rapiers", "shortswords"}},
-                {"Tools", new string[]{}},
-                {"Saving Throws", new string[]{"Dexterity", "Charisma"}},
-                {"Skills", new string[]{}}
+                {"Armor", new List<string>(){"Light Armor"}},
+                {"Weapons",new List<string>(){"Simple weapons", "hand crossbows", "longswords", "rapiers", "shortswords"}},
+                {"Tools", new List<string>()},
+                {"Saving Throws", new List<string>(){"Dexterity", "Charisma"}},
+                {"Skills", new List<string>(){}}
             
             };
+
+            // Get 3 random instrument profs
+            var instrumentList = new Equipment().MusicalInstrument().MusicalInstruments;
+            Random r = new Random();
+            var randomizedInstrumentList = instrumentList.OrderBy(i => r.Next()).ToArray();
+            bardProfs["Tools"].Add(randomizedInstrumentList[0].Name);
+            bardProfs["Tools"].Add(randomizedInstrumentList[1].Name);
+            bardProfs["Tools"].Add(randomizedInstrumentList[2].Name);
+
+            // Get 3 ransom skill profs
+            var randomizedSkillList = Skills.OrderBy(s => r.Next()).ToList();
+            bardProfs["Skills"].Add(randomizedSkillList[0]);
+            bardProfs["Skills"].Add(randomizedSkillList[1]);
+            bardProfs["Skills"].Add(randomizedSkillList[2]);
+
+
+
+
+
+
+            
+
             SetProficiencies(bardProfs);
             AddMusicalinstrumentToEquipment();
 

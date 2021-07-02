@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Races;
 using static Races.GenericRace;
 
@@ -38,6 +39,12 @@ public class Tools
         var R = new Random();
         var i = R.Next(start,end);
         return i;
+    }
+
+    public static List<string> ShuffleList(List<string> list)
+    {
+        Random r = new Random();
+        return list.OrderBy(i => r.Next()).ToList();
     }
 
     }

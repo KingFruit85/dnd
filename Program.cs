@@ -3,6 +3,7 @@ using Character;
 using System.Text.Json;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace dnd
 {
@@ -18,6 +19,9 @@ namespace dnd
         {
             RandomCharacter newCharacter = new RandomCharacter();
             saveCharacterToJSON(newCharacter);
+
+            // var a = new Equipment().Armor().HeavyArmor.Where(a => a.Name == "Chain Mail").ToArray();
+
         }
 
         public static void saveCharacterToJSON(RandomCharacter characterToSave)
