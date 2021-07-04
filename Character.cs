@@ -17,9 +17,6 @@ namespace Character
         public string CharacterClass {get;set;}
         public string Gender {get;set;}
         public AbilityScore AbilityScores {get;set;} = new AbilityScore();
-        public Dictionary<string,string> Skills {get;set;}
-        public Dictionary<string,string> SavingThrows {get;set;}
-
 
         // Getters & Setters
         public GenericRace GetRace(){return Race;}

@@ -19,6 +19,18 @@ namespace Character
 
         [JsonProperty("heavyArmor")]
         public List<HeavyArmor> HeavyArmor { get; set; }
+
+        [JsonProperty("Simple Weapons")]
+        public List<SimpleWeapon> SimpleWeapons { get; set; }
+
+        [JsonProperty("Martial Melee Weapons")]
+        public List<MartialMeleeWeapon> MartialMeleeWeapons { get; set; }
+
+        [JsonProperty("Martial Ranged Weapons")]
+        public List<MartialRangedWeapon> MartialRangedWeapons { get; set; }
+
+        [JsonProperty("Simple ranged Weapons")]
+        public List<SimpleRangedWeapon> SimpleRangedWeapons { get; set; }
     }
 
     public class Equipment
@@ -35,11 +47,14 @@ namespace Character
         public Root MusicalInstrument()
         {
             var instruments = File.ReadAllText(@".\data\Equipment\MusicalInstruments\MusicalInstruments.json");
-            return  JsonConvert.DeserializeObject<Root>(instruments);
+            return JsonConvert.DeserializeObject<Root>(instruments);
         }
 
+        public Root Weapons()
+        {
+            var weapons = File.ReadAllText(@".\data\Weapons\Weapons.json");
+            return JsonConvert.DeserializeObject<Root>(weapons);
+        }
 
-    }
-
-    
+    }    
 }

@@ -20,7 +20,7 @@ namespace dnd
             RandomCharacter newCharacter = new RandomCharacter();
             saveCharacterToJSON(newCharacter);
 
-            // var a = new Equipment().Armor().HeavyArmor.Where(a => a.Name == "Chain Mail").ToArray();
+            // Why isn't equipment being deserialised?
 
         }
 
@@ -29,10 +29,10 @@ namespace dnd
             // Set the path to save the file
             var exportFolderPath = "c:/temp/characterExports/JSON/";
             // Set the file name
-            var filename = characterToSave.FirstName + characterToSave.LastName + ".json";
+            var filename = characterToSave.FirstName + " " + characterToSave.LastName + ".json";
 
             // Create the JSON string
-            var json = JsonSerializer.Serialize(characterToSave);
+            var json = JsonSerializer.Serialize(characterToSave, new JsonSerializerOptions {MaxDepth = 64});
             // Format it so it's nice and readable 
             json = JToken.Parse(json).ToString();
 

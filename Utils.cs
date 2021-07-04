@@ -4,7 +4,10 @@ using System.Linq;
 using Races;
 using static Races.GenericRace;
 
-public class Tools
+namespace Utils
+
+{
+    public class Tools
     {
     public static string GetRandomStringArrayElement(string[] array)
     {
@@ -47,5 +50,14 @@ public class Tools
         return list.OrderBy(i => r.Next()).ToList();
     }
 
+    public static List<SimpleWeapon> ShuffleList(List<SimpleWeapon> list)
+    {
+        Random r = new Random();
+        return list.OrderBy(i => r.Next()).ToList();
     }
+
+    }
+
+}
+
     
