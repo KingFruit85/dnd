@@ -31,6 +31,9 @@ namespace Character
 
         [JsonProperty("Simple ranged Weapons")]
         public List<SimpleRangedWeapon> SimpleRangedWeapons { get; set; }
+
+        [JsonProperty("Equipment Packs")]
+        public List<EquipmentPack> EquipmentPacks { get; set; }
     }
 
     public class Equipment
@@ -54,6 +57,12 @@ namespace Character
         {
             var weapons = File.ReadAllText(@".\data\Weapons\Weapons.json");
             return JsonConvert.DeserializeObject<Root>(weapons);
+        }
+
+        public Root EquipmentPacks()
+        {
+            var packs = File.ReadAllText(@".\data\Equipment\Packs\Packs.json");
+            return JsonConvert.DeserializeObject<Root>(packs);
         }
 
     }    

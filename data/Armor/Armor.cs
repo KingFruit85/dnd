@@ -1,6 +1,7 @@
+using Character;
 using Newtonsoft.Json;
 
-    public class LightArmor
+    public class LightArmor : Equipment
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -33,7 +34,7 @@ using Newtonsoft.Json;
         public string Category { get; set; }
     }
 
-    public class MediumArmor
+    public class MediumArmor : Equipment
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -66,7 +67,7 @@ using Newtonsoft.Json;
         public string Category { get; set; }
     }
 
-    public class HeavyArmor
+    public class HeavyArmor : Equipment
     {
         [JsonProperty("name")]
         public string Name { get; set; }

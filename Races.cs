@@ -16,21 +16,6 @@ namespace Races
         public List<string> Languages {get;set;} = new List<string>();
         public string SubRace { get; set; }
         public Dictionary<string, string> RacePerks {get;set;} = new Dictionary<string, string>();
-
-        private List<KeyValuePair<string, int>> weightedAlignments {get;set;} = new List<KeyValuePair<string, int>>()
-        {
-            new KeyValuePair<string, int>("Lawful Good",1),
-            new KeyValuePair<string, int>("Neutral Good",1),
-            new KeyValuePair<string, int>("Chaotic Good",1),
-            new KeyValuePair<string, int>("Lawful Neutral",1),
-            new KeyValuePair<string, int>("True Neutral",1),
-            new KeyValuePair<string, int>("Chaotic Neutral",1),
-            new KeyValuePair<string, int>("Lawful Evil",1),
-            new KeyValuePair<string, int>("Neutral Evil",1),
-            new KeyValuePair<string, int>("Chaotic Evil",1),
-
-        };
-
                               
         public struct DraconicAncestryDetails
         {
@@ -113,7 +98,7 @@ namespace Races
             // Sorts the KVP list by Value in decenting order 
             newWeightedAlignments.Sort((x, y) => (y.Value.CompareTo(x.Value)));
             // Sets the alignment
-            Alignment = weightedAlignments[0].Key;
+            Alignment = newWeightedAlignments[0].Key;
             
         }
 
@@ -380,6 +365,7 @@ namespace Races
                 };
             
             SetAlignment(weightedAlignments);
+            weightedAlignments = null;
             
             SetRacePerk("Size","Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.");
             SetSize("Medium");

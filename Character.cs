@@ -17,6 +17,7 @@ namespace Character
         public string CharacterClass {get;set;}
         public string Gender {get;set;}
         public AbilityScore AbilityScores {get;set;} = new AbilityScore();
+        public Dictionary<string, int> SkillsAndModifiers {get; set;}
 
         // Getters & Setters
         public GenericRace GetRace(){return Race;}
@@ -34,10 +35,66 @@ namespace Character
         public string GetGender(){return Gender;}
         public void SetGender(string gender){Gender = gender;}
     
-        public AbilityScore GetAbilityScores(){return AbilityScores;}
+        public AbilityScore GetAbilityScores()
+        {
+            return AbilityScores;
+        }
+
+        public AbilityScore GetAbilityScores(string score)
+        {
+            return AbilityScores;
+        }
+
         public void SetAbilityScore(AbilityScore abilityScore)
         {
             AbilityScores = abilityScore;
+        }
+
+        public void SetSkillsAndModifiers()
+        {
+            var Intelligence = AbilityScores.GetIntelligenceScore();
+            var Strength = AbilityScores.GetStrengthScore();
+            var Dexterity = AbilityScores.GetDexterityScore();
+            var Wisdom = AbilityScores.GetWisdomScore();
+            var Charisma = AbilityScores.GetWisdomScore();
+
+            var skillAndMods = new Dictionary<string, int>();
+
+            skillAndMods["athletics"] = Strength;
+            skillAndMods["acrobatics"] = Dexterity;
+            skillAndMods["sleightOfHand"] = Dexterity;
+            skillAndMods["arcana"] = Intelligence;
+            skillAndMods["stealth"] = Dexterity;
+            skillAndMods["history"] = Intelligence;
+            skillAndMods["nature"] = Intelligence;
+            skillAndMods["religion"] = Intelligence;
+            skillAndMods["animalHandling"] = Wisdom;
+            skillAndMods["insight"] = Wisdom;
+            skillAndMods["medicine"] = Wisdom;
+            skillAndMods["perception"] = Wisdom;
+            skillAndMods["survival"] = Wisdom;
+            skillAndMods["deception"] = Charisma;
+            skillAndMods["intimidation"] = Charisma;
+            skillAndMods["investigation"] = Intelligence;
+            skillAndMods["performance"] = Charisma;
+            skillAndMods["persuasion"] = Charisma;
+
+            // Add prof bonus 
+
+            var profBonuses = ClassFeatures.GetProficiencies()["Skills"];
+
+            foreach (var skill in profBonuses)
+            {
+                if (skillAndMods.ContainsKey(skill))
+                {
+                    skillAndMods[skill] += ClassFeatures.GetProficiencyBonus();
+                }
+            }
+
+
+
+            SkillsAndModifiers = skillAndMods;
+
         }
 
     }
@@ -62,6 +119,9 @@ namespace Character
             SetRandomName(GetGender(), GetRace().GetName());
 
             ClassFeatures = new Bard();
+
+            SetSkillsAndModifiers();
+
         }
 
         public void SetRandomRace()

@@ -115,20 +115,36 @@ namespace Character
             SetProficiencies(bardProfs);
             AddMusicalinstrumentToEquipment();
 
-            // Add weapons //
-
-            // All bards get a dagger
+            // All bards get a dagger and leather armor
             var dagger = new Equipment().Weapons().SimpleWeapons.Where(w => w.Name == "Dagger").ToList()[0];
+            var leatherArmor = new Equipment().Armor().LightArmor.Where(a => a.Name == "Leather Armor").ToList()[0];
             Equipment.Add(dagger);
+            Equipment.Add(leatherArmor);
+
+            // They also get either a Diplomat's pack or and entertainer's pack
+            switch (r.Next(1,2))
+            {
+                default: throw new Exception("Option no valid");
+                case 1:
+
+                    var diplomatsPack = new Equipment().EquipmentPacks().EquipmentPacks.Where(p => p.Name == "Diplomat's Pack").ToList()[0];
+                    Equipment.Add(diplomatsPack);
+                    break;
+
+                case 2:
+
+                    var entertainersPack = new Equipment().EquipmentPacks().EquipmentPacks.Where(p => p.Name == "Entertainer's Pack").ToList()[0];
+                    Equipment.Add(entertainersPack);
+                    break;
+
+            }
 
             // They also get either a Rapier, Longsword or a any simple weapon
-            var option = r.Next(1,3);
-
-            switch (option)
+            switch (r.Next(1,3))
             {
-                default: throw new Exception("option no valid");
+                default: throw new Exception("Option no valid");
                 case 1:
-                    
+
                     var rapier = new Equipment().Weapons().MartialMeleeWeapons.Where(w => w.Name == "Rapier").ToList()[0];
                     Equipment.Add(rapier);
                     break;
@@ -144,9 +160,11 @@ namespace Character
                     var randomSimpleWeapon = new Equipment().Weapons().SimpleWeapons.ToList();
                     randomSimpleWeapon = Utils.Tools.ShuffleList(randomSimpleWeapon);
                     Equipment.Add(randomSimpleWeapon[0]);
-
                     break;
+
             }
+
+            
 
 
 
