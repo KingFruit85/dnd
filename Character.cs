@@ -17,7 +17,10 @@ namespace Character
         public string CharacterClass {get;set;}
         public string Gender {get;set;}
         public AbilityScore AbilityScores {get;set;} = new AbilityScore();
-        public Dictionary<string, int> SkillsAndModifiers {get; set;}
+        public Dictionary<string, int> Skills {get; set;}
+        public Dictionary<string, int> SavingThrows {get; set;}
+        public int HitPoints {get; set;}
+
 
         // Getters & Setters
         public GenericRace GetRace(){return Race;}
@@ -50,13 +53,15 @@ namespace Character
             AbilityScores = abilityScore;
         }
 
-        public void SetSkillsAndModifiers()
+        public void SetSkillsAndSavingThrows()
         {
+            // SKILLS
             var Intelligence = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetIntelligenceScore());
             var Strength = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetStrengthScore());
+            var Constitution = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetConstitutionScore());
             var Dexterity = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetDexterityScore());
             var Wisdom = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetWisdomScore());
-            var Charisma = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetWisdomScore());
+            var Charisma = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetCharismaScore());
 
             var skillAndMods = new Dictionary<string, int>();
 
@@ -91,11 +96,59 @@ namespace Character
                 }
             }
 
-            SkillsAndModifiers = skillAndMods;
-            
+            Skills = skillAndMods;
+
+            // SAVING THROWS
+
+            var savingThrowProfs = ClassFeatures.GetProficiencies()["Saving Throws"];
+
+            var savingThrows = new Dictionary<string, int>()
+            {
+                {"Strength",Strength},
+                {"Dexterity",Dexterity},
+                {"Constitution",Constitution},
+                {"Intelligence",Intelligence},
+                {"Wisdom",Wisdom},
+                {"Charisma",Charisma}
+            };
+
+            foreach (var savingThrow in savingThrowProfs)
+            {
+                if (skillAndMods.ContainsKey(savingThrow))
+                {
+                    savingThrows[savingThrow] += ClassFeatures.GetProficiencyBonus();
+                }
+            }
+
+            SavingThrows = savingThrows;
+
+        }
+
+        public void SetLevel1HitPoints()
+        {
+            var constitutionModifier = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetConstitutionScore());
+
+            switch (ClassFeatures.Name)
+            {
+                default: throw new Exception("invalid characterClass provided");
+                case "Barbarian":HitPoints = 12 + constitutionModifier;break;
+                case "Bard": HitPoints = 8 + constitutionModifier;break;
+                case "Cleric":HitPoints = 8 + constitutionModifier;break;
+                case "Druid":HitPoints = 8 + constitutionModifier;break;
+                case "Fighter":HitPoints = 10 + constitutionModifier;break;
+                case "Monk":HitPoints = 8 + constitutionModifier;break;
+                case "Paladin":HitPoints = 10 + constitutionModifier;break;
+                case "Ranger":HitPoints = 10 + constitutionModifier;break;
+                case "Rogue":HitPoints = 8 + constitutionModifier;break;
+                case "Sorcerer":HitPoints = 6 + constitutionModifier;break;
+                case "Warlock":HitPoints = 8 + constitutionModifier;break;
+                case "Wizard":HitPoints = 6 + constitutionModifier;break;
+            }
         }
 
     }
+
+    
 
     public class ManualCharacter : CharacterTemplate
     {
@@ -118,7 +171,8 @@ namespace Character
 
             ClassFeatures = new Bard();
 
-            SetSkillsAndModifiers();
+            SetSkillsAndSavingThrows();
+            SetLevel1HitPoints();
 
         }
 

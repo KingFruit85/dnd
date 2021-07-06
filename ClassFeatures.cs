@@ -7,7 +7,6 @@ namespace Character
     public class ClassFeatures
     {
         public string Name {get;set;}
-        public int HitPoints {get;set;}
         public int ProficiencyBonus {get;set;}
         
         public Dictionary<string,List<string>> Proficiencies{get;set;}
@@ -40,8 +39,6 @@ namespace Character
 
         public void SetName(string name){Name = name;} 
         public string GetName(){return Name;}
-        public void SetHitPoints(int hitpoints){HitPoints = hitpoints;}
-        public int GetHitPoints(){return HitPoints;}
         public void SetProficiencyBonus(int pb){ProficiencyBonus = pb;}
         public int GetProficiencyBonus(){return ProficiencyBonus;}
 
