@@ -52,11 +52,11 @@ namespace Character
 
         public void SetSkillsAndModifiers()
         {
-            var Intelligence = AbilityScores.GetIntelligenceScore();
-            var Strength = AbilityScores.GetStrengthScore();
-            var Dexterity = AbilityScores.GetDexterityScore();
-            var Wisdom = AbilityScores.GetWisdomScore();
-            var Charisma = AbilityScores.GetWisdomScore();
+            var Intelligence = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetIntelligenceScore());
+            var Strength = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetStrengthScore());
+            var Dexterity = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetDexterityScore());
+            var Wisdom = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetWisdomScore());
+            var Charisma = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetWisdomScore());
 
             var skillAndMods = new Dictionary<string, int>();
 
@@ -91,10 +91,8 @@ namespace Character
                 }
             }
 
-
-
             SkillsAndModifiers = skillAndMods;
-
+            
         }
 
     }
@@ -170,7 +168,7 @@ namespace Character
             // Update the characters abilityscores
             foreach (var stat in ASU)
             {
-                   GetAbilityScores().SetProvidedScore(stat.Key,stat.Value);
+                   GetAbilityScores().SetScore(stat.Key,stat.Value);
             }
         }
 

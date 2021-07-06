@@ -258,7 +258,12 @@ namespace Character
             return AbilityScores["CHA"];
         }
 
-        public void SetProvidedScore(string stat, int score)
+        public double getAbilityScoreModifier(int score)
+        {
+            return Math.Floor(((double)score - 10) /2);
+        }
+
+        public void SetScore(string stat, int score)
         {
             switch (stat)
             {
