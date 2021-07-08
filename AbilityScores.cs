@@ -263,6 +263,20 @@ namespace Character
             return Math.Floor(((double)score - 10) /2);
         }
 
+        public double getAbilityScoreModifier(string score)
+        {
+            switch (score)
+            {
+                default: throw new Exception("A valid ability score string was not provided");
+                case "STR":return getAbilityScoreModifier(AbilityScores[score]);
+                case "DEX":return getAbilityScoreModifier(AbilityScores[score]);
+                case "CON":return getAbilityScoreModifier(AbilityScores[score]);
+                case "INT":return getAbilityScoreModifier(AbilityScores[score]);
+                case "WIS":return getAbilityScoreModifier(AbilityScores[score]);
+                case "CHA":return getAbilityScoreModifier(AbilityScores[score]);
+            }
+        }
+
         public void SetScore(string stat, int score)
         {
             switch (stat)

@@ -6,31 +6,23 @@ using Newtonsoft.Json;
 namespace Character
 {
 
+    public class ArmorList
+    {
+        [JsonProperty("armor")]
+        public List<Armor> Armor { get; set; }
+    }
+
+    public class WeaponList
+    {
+        [JsonProperty("weapon")]
+        public List<Weapon> weapon { get; set; }
+    }
+
     public class Root
     {
+
         [JsonProperty("MusicalInstruments")]
         public List<MusicalInstrument> MusicalInstruments { get; set; }
-
-        [JsonProperty("lightArmor")]
-        public List<LightArmor> LightArmor { get; set; }
-
-        [JsonProperty("mediumArmor")]
-        public List<MediumArmor> MediumArmor { get; set; }
-
-        [JsonProperty("heavyArmor")]
-        public List<HeavyArmor> HeavyArmor { get; set; }
-
-        [JsonProperty("Simple Weapons")]
-        public List<SimpleWeapon> SimpleWeapons { get; set; }
-
-        [JsonProperty("Martial Melee Weapons")]
-        public List<MartialMeleeWeapon> MartialMeleeWeapons { get; set; }
-
-        [JsonProperty("Martial Ranged Weapons")]
-        public List<MartialRangedWeapon> MartialRangedWeapons { get; set; }
-
-        [JsonProperty("Simple ranged Weapons")]
-        public List<SimpleRangedWeapon> SimpleRangedWeapons { get; set; }
 
         [JsonProperty("Equipment Packs")]
         public List<EquipmentPack> EquipmentPacks { get; set; }
@@ -39,13 +31,18 @@ namespace Character
     public class Equipment
     {
 
-        public Root Armor()
+        public ArmorList ReturnArmorList()
         {
-            // you get stuff out of here with the following code 
-            // var a = new Equipment().Armor().HeavyArmor.Where(a => a.Name == "Chain Mail").ToArray();
             var armor = File.ReadAllText(@".\data\Armor\armor.json");
-            return JsonConvert.DeserializeObject<Root>(armor);
+            return JsonConvert.DeserializeObject<ArmorList>(armor);
         }
+
+        public WeaponList ReturnWeaponList()
+        {
+            var weapons = File.ReadAllText(@".\data\Weapons\Weapons.json");
+            return JsonConvert.DeserializeObject<WeaponList>(weapons);
+        }
+
 
         public Root MusicalInstrument()
         {
@@ -53,11 +50,6 @@ namespace Character
             return JsonConvert.DeserializeObject<Root>(instruments);
         }
 
-        public Root Weapons()
-        {
-            var weapons = File.ReadAllText(@".\data\Weapons\Weapons.json");
-            return JsonConvert.DeserializeObject<Root>(weapons);
-        }
 
         public Root EquipmentPacks()
         {

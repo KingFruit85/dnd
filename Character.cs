@@ -10,16 +10,17 @@ namespace Character
     [Serializable]
     public abstract class CharacterTemplate
     {
-        public ClassFeatures ClassFeatures {get;set;}
-        public GenericRace Race {get;set;}
         public string FirstName {get;set;}
         public string LastName {get;set;}
         public string CharacterClass {get;set;}
         public string Gender {get;set;}
+        public int HitPoints {get; set;}
+        public int ArmorClass {get; set;}
+        public GenericRace Race {get;set;}
         public AbilityScore AbilityScores {get;set;} = new AbilityScore();
+        public ClassFeatures ClassFeatures {get;set;}
         public Dictionary<string, int> Skills {get; set;}
         public Dictionary<string, int> SavingThrows {get; set;}
-        public int HitPoints {get; set;}
 
 
         // Getters & Setters
@@ -146,6 +147,21 @@ namespace Character
             }
         }
 
+        public void CalculateArmorClass()
+        {
+            int armorClassValue = ClassFeatures.Armor.BaseArmorClass;
+
+            if (ClassFeatures.Armor.AdditionalModifier != null)
+            {
+                var modValue = ClassFeatures.Armor.AdditionalModifier;
+                var abilityScoreMod = AbilityScores.getAbilityScoreModifier(modValue);
+                armorClassValue += (int)abilityScoreMod;
+            }
+
+            ArmorClass = armorClassValue;
+
+        }
+
     }
 
     
@@ -173,6 +189,7 @@ namespace Character
 
             SetSkillsAndSavingThrows();
             SetLevel1HitPoints();
+            CalculateArmorClass();
 
         }
 

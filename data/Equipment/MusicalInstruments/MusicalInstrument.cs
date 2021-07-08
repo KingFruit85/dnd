@@ -1,7 +1,6 @@
-using Character;
 using Newtonsoft.Json;
 
-public class MusicalInstrument : Equipment
+public class MusicalInstrument
     {
         [JsonProperty("name")]
         public string Name { get; set; }

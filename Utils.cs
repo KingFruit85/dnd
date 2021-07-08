@@ -50,7 +50,7 @@ namespace Utils
         return list.OrderBy(i => r.Next()).ToList();
     }
 
-    public static List<SimpleWeapon> ShuffleList(List<SimpleWeapon> list)
+    public static List<Weapon> ShuffleList(List<Weapon> list)
     {
         Random r = new Random();
         return list.OrderBy(i => r.Next()).ToList();

@@ -1,26 +1,23 @@
-﻿using System;
-using Character;
+﻿using Character;
 using System.Text.Json;
 using System.IO;
 using Newtonsoft.Json.Linq;
-using System.Linq;
 
 namespace dnd
-{
-    class MyObj
-    {
-        public int MyInt {get;set;}
-    }
 
+{
     class Program
     {
         
         static void Main(string[] args)
         {
-            RandomCharacter newCharacter = new RandomCharacter();
-            saveCharacterToJSON(newCharacter);
+            // RandomCharacter newCharacter = new RandomCharacter();
+            // saveCharacterToJSON(newCharacter);
+
+            var x = new SpellList().Spells;
 
             // Why isn't equipment being deserialised?
+            // Is it because they are cutom classes?
 
         }
 

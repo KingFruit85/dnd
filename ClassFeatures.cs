@@ -8,12 +8,14 @@ namespace Character
     {
         public string Name {get;set;}
         public int ProficiencyBonus {get;set;}
-        
+        public string HitDie { set; get;}        
         public Dictionary<string,List<string>> Proficiencies{get;set;}
-        public List<Equipment> Equipment{get;set;} = new List<Equipment>();
+        public Armor Armor {get; set;} = new Armor();
+        public Weapon PrimaryWeapon {get; set;} = new Weapon();
+        public List<Weapon> AdditionalWeapons { get; set; } = new List<Weapon>();
+        public List<MusicalInstrument> MusicalInstruments { get; set; } = new List<MusicalInstrument>();
+        public EquipmentPack EquipmentPack { get; set; }
         public Dictionary<string,string> Spells{get;set;}
-        public Dictionary<string,string> Features{get;set;}
-        public List<string> Tools {get;set;}
 
         public List<string> Skills = new List<string>()
         {
@@ -38,7 +40,6 @@ namespace Character
         };
 
         public void SetName(string name){Name = name;} 
-        public string GetName(){return Name;}
         public void SetProficiencyBonus(int pb){ProficiencyBonus = pb;}
         public int GetProficiencyBonus(){return ProficiencyBonus;}
 
@@ -51,31 +52,22 @@ namespace Character
             return Proficiencies;
         }
         
-        // /// <summary>Add a specific instument to the equipment collection</summary>
-        // /// <param name="instrument">the instrument to add as a string</param>
-        // public void AddMusicalinstrumentToEquipment(string instrument)
-        // {
-        //     Equipment.Add(instrument);
-        // }
+        /// <summary>Add a specific instument to the equipment collection</summary>
+        /// <param name="instrument">the instrument to add as a string</param>
+        public void AddMusicalinstrumentToEquipment(MusicalInstrument instrument)
+        {
+            MusicalInstruments.Add(instrument);
+        }
 
-        
         /// <summary>Add a random instument to the equipment collection</summary>
         public void AddMusicalinstrumentToEquipment()
         {
             var instrumentList = new Equipment().MusicalInstrument().MusicalInstruments;
-            
-            // Get random instrument from list above
+            // Get random instrument from list above and add it to character sheet
             Random r = new Random();
-            var instrument = instrumentList[r.Next(0,instrumentList.Count)];
-
-            // Add it to equipment
-            Equipment.Add(instrument);
+            MusicalInstruments.Add(instrumentList[r.Next(0,instrumentList.Count)]);
         }
-
-        public void SetTools(List<string> tools){Tools = tools;}
-        public List<string> GetTools(){return Tools;}
         
-
     }
     public class Bard : ClassFeatures
     {
@@ -83,6 +75,7 @@ namespace Character
         {
             SetName("Bard");
             SetProficiencyBonus(2);
+            HitDie = "1d8";
 
             // Propulate Proficiencies
             var bardProfs = new Dictionary<string,List<string>>()
@@ -108,15 +101,15 @@ namespace Character
             bardProfs["Skills"].Add(randomizedSkillList[0]);
             bardProfs["Skills"].Add(randomizedSkillList[1]);
             bardProfs["Skills"].Add(randomizedSkillList[2]);
-
+ 
             SetProficiencies(bardProfs);
             AddMusicalinstrumentToEquipment();
 
             // All bards get a dagger and leather armor
-            var dagger = new Equipment().Weapons().SimpleWeapons.Where(w => w.Name == "Dagger").ToList()[0];
-            var leatherArmor = new Equipment().Armor().LightArmor.Where(a => a.Name == "Leather Armor").ToList()[0];
-            Equipment.Add(dagger);
-            Equipment.Add(leatherArmor);
+            var dagger = new Equipment().ReturnWeaponList().weapon.Where(w => w.Name == "Dagger").ToList()[0];
+            AdditionalWeapons.Add(dagger);
+
+            Armor = new Equipment().ReturnArmorList().Armor.Where(a => a.Name == "Leather Armor").ToList()[0];
 
             // They also get either a Diplomat's pack or and entertainer's pack
             switch (r.Next(1,2))
@@ -124,14 +117,12 @@ namespace Character
                 default: throw new Exception("Option no valid");
                 case 1:
 
-                    var diplomatsPack = new Equipment().EquipmentPacks().EquipmentPacks.Where(p => p.Name == "Diplomat's Pack").ToList()[0];
-                    Equipment.Add(diplomatsPack);
+                    EquipmentPack = new Equipment().EquipmentPacks().EquipmentPacks.Where(p => p.Name == "Diplomat's Pack").ToList()[0];
                     break;
 
                 case 2:
 
-                    var entertainersPack = new Equipment().EquipmentPacks().EquipmentPacks.Where(p => p.Name == "Entertainer's Pack").ToList()[0];
-                    Equipment.Add(entertainersPack);
+                    EquipmentPack= new Equipment().EquipmentPacks().EquipmentPacks.Where(p => p.Name == "Entertainer's Pack").ToList()[0];
                     break;
 
             }
@@ -141,22 +132,20 @@ namespace Character
             {
                 default: throw new Exception("Option no valid");
                 case 1:
-
-                    var rapier = new Equipment().Weapons().MartialMeleeWeapons.Where(w => w.Name == "Rapier").ToList()[0];
-                    Equipment.Add(rapier);
+                    
+                    PrimaryWeapon = new Equipment().ReturnWeaponList().weapon.Where(w => w.Name == "Rapier").ToList()[0];
                     break;
 
                 case 2:
 
-                    var Longsword = new Equipment().Weapons().MartialMeleeWeapons.Where(w => w.Name == "Longsword").ToList()[0];
-                    Equipment.Add(Longsword);
+                    PrimaryWeapon = new Equipment().ReturnWeaponList().weapon.Where(w => w.Name == "Longsword").ToList()[0];
                     break;
 
                 case 3:
                     
-                    var randomSimpleWeapon = new Equipment().Weapons().SimpleWeapons.ToList();
+                    var randomSimpleWeapon = new Equipment().ReturnWeaponList().weapon.Where(w => w.Properties == "Simple Melee").ToList();
                     randomSimpleWeapon = Utils.Tools.ShuffleList(randomSimpleWeapon);
-                    Equipment.Add(randomSimpleWeapon[0]);
+                    PrimaryWeapon = randomSimpleWeapon[0];
                     break;
 
             }
