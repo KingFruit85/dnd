@@ -15,7 +15,10 @@ namespace Character
         public List<Weapon> AdditionalWeapons { get; set; } = new List<Weapon>();
         public List<MusicalInstrument> MusicalInstruments { get; set; } = new List<MusicalInstrument>();
         public EquipmentPack EquipmentPack { get; set; }
-        public Dictionary<string,string> Spells{get;set;}
+
+        public List<Spells> Cantrips { get; set; } = new List<Spells>();
+        public List<Spells> Level1Spells { get; set; } = new List<Spells>();
+        public int SpellSlots = 0;
 
         public List<string> Skills = new List<string>()
         {
@@ -67,6 +70,7 @@ namespace Character
             Random r = new Random();
             MusicalInstruments.Add(instrumentList[r.Next(0,instrumentList.Count)]);
         }
+
         
     }
     public class Bard : ClassFeatures
@@ -87,7 +91,6 @@ namespace Character
                 {"Skills", new List<string>(){}}
             
             };
-
             // Get 3 random instrument profs
             var instrumentList = new Equipment().MusicalInstrument().MusicalInstruments;
             Random r = new Random();
@@ -149,6 +152,76 @@ namespace Character
                     break;
 
             }
+
+            // Spells
+
+            // At level 1 bards get 
+            // 2 cantrips
+            // 2 1st level spells
+
+            List<string> bardCantrips = new List<string>()
+            {
+                "Dancing Lights",
+                "Light",
+                "Mage Hand",
+                "Mending",
+                "Message",
+                "Minor Illusion",
+                "Prestidigitation",
+                "True Strike"
+            };
+
+            for (int i = 0; i <= 1; i++)
+            {
+                var pickedSpell = Utils.Tools.ReturnRandomSpell(bardCantrips);
+
+                if (Cantrips.Contains(pickedSpell))
+                {
+                    i--;
+                }
+                else
+                {
+                    Cantrips.Add(pickedSpell);
+                }
+            }
+
+            List<string> bardLevel1Spells = new List<string>()
+            {
+                "Bane",
+                "Charm Person",
+                "Comprehend Languages",
+                "Cure Wounds",
+                "Detect Magic",
+                "Disguise Self",
+                "Faerie Fire",
+                "Feather Fall",
+                "Healing Word",
+                "Heroism",
+                "Hideous Laughter",
+                "Identify",
+                "Illusory Script",
+                "Longstrider",
+                "Silent Image",
+                "Sleep",
+                "Speak with Animals",
+                "Thunderwave",
+                "Unseen Servant"
+            };
+
+            for (int i = 0; i <= 1; i++)
+            {
+                var pickedSpell = Utils.Tools.ReturnRandomSpell(bardLevel1Spells);
+
+                if (Level1Spells.Contains(pickedSpell))
+                {
+                    i--;
+                }
+                else
+                {
+                    Level1Spells.Add(pickedSpell);
+                }
+            }
+
 
             
 

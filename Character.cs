@@ -16,26 +16,22 @@ namespace Character
         public string Gender {get;set;}
         public int HitPoints {get; set;}
         public int ArmorClass {get; set;}
+        public int Initiative { get; set; }
         public GenericRace Race {get;set;}
         public AbilityScore AbilityScores {get;set;} = new AbilityScore();
         public ClassFeatures ClassFeatures {get;set;}
         public Dictionary<string, int> Skills {get; set;}
         public Dictionary<string, int> SavingThrows {get; set;}
 
-
         // Getters & Setters
         public GenericRace GetRace(){return Race;}
         public void SetRace(GenericRace race){Race = race;}
-
         public string GetFirstName(){return FirstName;}
         public void SetFirstName(string name){FirstName = name;}
-
         public string GetLastName(){return LastName;}
         public void SetLastName(string name){LastName = name;}
-
         public string GetCharacterClass(){return CharacterClass;}
         public void SetCharacterClass(string className){CharacterClass = className;}
-
         public string GetGender(){return Gender;}
         public void SetGender(string gender){Gender = gender;}
     
@@ -162,13 +158,10 @@ namespace Character
 
         }
 
-    }
-
-    
-
-    public class ManualCharacter : CharacterTemplate
-    {
-        
+        public void CalculateInitiative()
+        {
+            Initiative = (int)AbilityScores.getAbilityScoreModifier("DEX");
+        }
 
     }
 
@@ -184,13 +177,11 @@ namespace Character
             UpdateAbilityScores();
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
-
             ClassFeatures = new Bard();
-
             SetSkillsAndSavingThrows();
             SetLevel1HitPoints();
             CalculateArmorClass();
-
+            CalculateInitiative();
         }
 
         public void SetRandomRace()
@@ -241,32 +232,6 @@ namespace Character
             {
                    GetAbilityScores().SetScore(stat.Key,stat.Value);
             }
-        }
-
-        public void PrintCharacterInfoToConsole()
-        {
-            Console.WriteLine("*-Character Attributes-*");
-            Console.WriteLine($"Name:{GetFirstName()} {GetLastName()}");
-            Console.WriteLine($"Class:{GetCharacterClass()}");
-            Console.WriteLine($"Gender:{GetGender()}");
-            Console.WriteLine($"Raw Scores: [{GetAbilityScores().GetRawScores()[0]}] [{GetAbilityScores().GetRawScores()[1]}] [{GetAbilityScores().GetRawScores()[2]}] [{GetAbilityScores().GetRawScores()[3]}] [{GetAbilityScores().GetRawScores()[4]}] [{GetAbilityScores().GetRawScores()[5]}]");
-            Console.WriteLine($"AbilityScores: STR:[{GetAbilityScores().GetStrengthScore()}] DEX:[{GetAbilityScores().GetDexterityScore()}] CON:[{GetAbilityScores().GetConstitutionScore()}] INT:[{GetAbilityScores().GetIntelligenceScore()}] WIS:[{GetAbilityScores().GetWisdomScore()}] CHA:[{GetAbilityScores().GetCharismaScore()}]");
-            Console.WriteLine();
-
-            Console.WriteLine("*-Race Attributes-*");
-            Console.WriteLine($"Race:{GetRace()}");
-            Console.WriteLine("-Known Languages-");
-            GetRace().GetLanguages().ForEach(i => Console.WriteLine("{0}\t", i));
-            Console.WriteLine("-");
-            Console.WriteLine($"Speed:{GetRace().GetSpeed()}");
-            Console.WriteLine($"Age:{GetRace().GetAge()}");
-            Console.WriteLine($"Alignment:{GetRace().GetAlignment()}");
-            Console.WriteLine($"Size:{GetRace().GetSize()}");
-            Console.WriteLine("-Ability Score Increases-");
-            GetRace().GetAbilityScoreIncrease().ToList().ForEach(x => Console.WriteLine(x.Key + ": " + x.Value));
-
-
-
         }
 
     }

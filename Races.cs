@@ -22,7 +22,7 @@ namespace Races
             public string Name;
             public string DamageType;
             public string BreathWeapon;
-        }
+        } 
         private DraconicAncestryDetails DraconicAncestry {get;set;}
 
         public void SetName(string name)
@@ -66,7 +66,7 @@ namespace Races
         // Returns a random alignment. useful for races with no strong alignment to any alignment
         public void SetAlignment()
         {
-            var Alignments = new string[]{"Lawful Good",
+            var Alignments = new List<string>{"Lawful Good",
                               "Neutral Good",
                               "Chaotic Good",
                               "Lawful Neutral",
@@ -76,7 +76,7 @@ namespace Races
                               "Neutral Evil",
                               "Chaotic Evil"};
 
-            Alignment = Tools.GetRandomStringArrayElement(Alignments);
+            Alignment = Tools.GetRandomListElement(Alignments);
         }
 
         // Takes in the races weighted alignment list and returns an alignment
@@ -276,6 +276,27 @@ namespace Races
             SetDraconicAncestryDetails(Tools.GetRandomListElement(DraconicAncestry));
 
             SetRacePerk("Breath Weapon","You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can’t use it again until you complete a short or long rest.");
+            
+            var breathWeaponSpell = new Spells();
+
+            // switch (switch_on)
+            // {
+                
+            //     default:
+            // }
+
+            // Dragon	Damage Type	Breath Weapon
+            // Black	Acid	5 by 30 ft. line (Dex. save)
+            // Blue	Lightning	5 by 30 ft. line (Dex. save)
+            // Brass	Fire	5 by 30 ft. line (Dex. save)
+            // Bronze	Lightning	5 by 30 ft. line (Dex. save)
+            // Copper	Acid	5 by 30 ft. line (Dex. save)
+            // Gold	Fire	15 ft. cone (Dex. save)
+            // Green	Poison	15 ft. cone (Con. save)
+            // Red	Fire	15 ft. cone (Dex. save)
+            // Silver	Cold	15 ft. cone (Con. save)
+            // White	Cold	15 ft. cone (Con. save)
+            
             SetRacePerk("Damage Resistance","You have resistance to the damage type associated with your draconic ancestry.");
             
             SetRacePerk("Languages","You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.");

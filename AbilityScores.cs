@@ -5,7 +5,7 @@ namespace Character
 {
     public class AbilityScore
     {
-        public int[] RawScores {get;set;} = new DiceTypes().ReturnAbilityScores();
+        private int[] RawScores = new DiceTypes().ReturnAbilityScores();
         public Dictionary<string, int> AbilityScores {get;set;} = new Dictionary<string, int>()
         {
             {"STR",0},

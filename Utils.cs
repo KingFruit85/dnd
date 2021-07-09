@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
+using Character;
+using Newtonsoft.Json.Linq;
 using Races;
 using static Races.GenericRace;
 
@@ -9,27 +13,43 @@ namespace Utils
 {
     public class Tools
     {
-    public static string GetRandomStringArrayElement(string[] array)
+    
+    /// <summary>Saves the provided character to the exports folder<string></summary>
+    /// <param name="characterToSave">the character to save<string></param>
+    public static void saveCharacterToJSON(RandomCharacter characterToSave)
     {
-        var R = new Random();
-        var i = R.Next(0,array.Length);
-        return array[i];
+        // Set the path to save the file
+        var exportFolderPath = "c:/temp/characterExports/JSON/";
+        // Set the file name
+        var filename = characterToSave.FirstName + " " + characterToSave.LastName + ".json";
+
+        // Create the JSON string
+        var json = JsonSerializer.Serialize(characterToSave, new JsonSerializerOptions {MaxDepth = 64});
+        // Format it so it's nice and readable 
+        json = JToken.Parse(json).ToString();
+
+        // If directory already exists just save the file
+        if (Directory.Exists(exportFolderPath))
+        {
+            File.WriteAllText(exportFolderPath + filename, json);
+        }
+        // Else create the folder structure then save the file
+        else
+        {
+            Directory.CreateDirectory(exportFolderPath);
+            File.WriteAllText(exportFolderPath + filename, json);
+        }
     }
 
-    public static GenericRace GetRandomRaceArrayElement(GenericRace[] array)
-    {
-        var R = new Random();
-        var i = R.Next(0,array.Length);
-        return array[i];
-    }
-
+    /// <summary>Returns a random element from the provided list<string></summary>
+    /// <param name="list">the list of type <string></param>
     public static string GetRandomListElement(List<string> list)
     {
-        var R = new Random();
-        var i = R.Next(0,list.Count);
-        return list[i];
+        return list[new Random().Next(0,list.Count)];
     }
 
+    /// <summary>Returns a random element from the provided list<DraconicAncestryDetails></summary>
+    /// <param name="list">the list of type <DraconicAncestryDetails></param>
     public static DraconicAncestryDetails GetRandomListElement(List<DraconicAncestryDetails> list)
     {
         var R = new Random();
@@ -37,27 +57,49 @@ namespace Utils
         return list[i];
     }
 
+    /// <summary>Returns a random number between the two provided numbers</summary>
+    /// <param name="start">an int represnting the small number</param>
+    /// <param name="end">an int represnting the large number</param>
     public static int GetRandomNumberInRange(int start, int end)
     {
-        var R = new Random();
-        var i = R.Next(start,end);
-        return i;
+        return new Random().Next(start,end + 1);
     }
 
+    /// <summary>Shuffles the provided list in a random order and returns it</summary>
+    /// <param name="list">the list of type <string> to be shuffled</param>
     public static List<string> ShuffleList(List<string> list)
     {
-        Random r = new Random();
-        return list.OrderBy(i => r.Next()).ToList();
+        return list.OrderBy(i => new Random().Next()).ToList();
     }
 
+    /// <summary>Shuffles the provided list in a random order and returns it</summary>
+    /// <param name="list">the list of type <Weapon> to be shuffled</param>
     public static List<Weapon> ShuffleList(List<Weapon> list)
     {
         Random r = new Random();
         return list.OrderBy(i => r.Next()).ToList();
     }
 
+    /// <summary>return a random spell from a list<string> provided as a param</summary>
+    /// <param name="spellList">the list of strings that represent spells</param>
+    public static Spells ReturnRandomSpell(List<string> spellList)
+    {
+        // Get a ref to all the SRD spells
+        var AllSpells = new Spells().ReturnSpellList();
+
+        // Pick a spell from the provided list and return it
+        Random r = new Random();
+        var spellListLength = spellList.Count;
+        var randomIndex = r.Next(0,spellList.Count);
+        string randomSpell = spellList[r.Next(0,spellList.Count)].Trim(); 
+        Spells pickedSpell = AllSpells.Spells.Where(s => s.Name == randomSpell).ToList()[0];
+        
+        return pickedSpell;
+
+        }
     }
 
-}
+    }
+
 
     

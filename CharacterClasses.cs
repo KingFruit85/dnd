@@ -11,8 +11,7 @@ namespace CharacterClasses
 
         public string GetRandomClass()
         {
-            Random r = new Random();
-            int i = r.Next(0,CharacterClasses.Length);
+            int i = new Random().Next(0,CharacterClasses.Length);
             return CharacterClasses[i];
         }
     }
