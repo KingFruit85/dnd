@@ -97,6 +97,28 @@ namespace Utils
         return pickedSpell;
 
         }
+
+    public static List<Spells> ReturnXSpellsFromList(List<string> spellList,int count)
+    {
+        var spells = new List<Spells>();
+
+        for (int i = 1; i <= count; i++)
+        {   
+            // Pick a random spell from the provided list
+            var pickedSpell = ReturnRandomSpell(spellList);
+            // Ignore and loop again if already picked
+            if (spells.Contains(pickedSpell))
+            {
+                i--;
+            }
+            else
+            {
+                spells.Add(pickedSpell);
+            }
+        }
+            return spells;
+    }
+
     }
 
     }

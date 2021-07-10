@@ -1,7 +1,6 @@
 using System;
 using Names;
 using CharacterClasses;
-using System.Linq;
 using System.Collections.Generic;
 using Races;
 
@@ -17,15 +16,15 @@ namespace Character
         public int HitPoints {get; set;}
         public int ArmorClass {get; set;}
         public int Initiative { get; set; }
-        public GenericRace Race {get;set;}
+        public GenericRace RaceDetails {get;set;}
         public AbilityScore AbilityScores {get;set;} = new AbilityScore();
-        public ClassFeatures ClassFeatures {get;set;}
+        public GenericCharacterClass ClassDetails {get;set;}
         public Dictionary<string, int> Skills {get; set;}
         public Dictionary<string, int> SavingThrows {get; set;}
 
         // Getters & Setters
-        public GenericRace GetRace(){return Race;}
-        public void SetRace(GenericRace race){Race = race;}
+        public GenericRace GetRace(){return RaceDetails;}
+        public void SetRace(GenericRace race){RaceDetails = race;}
         public string GetFirstName(){return FirstName;}
         public void SetFirstName(string name){FirstName = name;}
         public string GetLastName(){return LastName;}
@@ -83,13 +82,13 @@ namespace Character
 
             // Add prof bonus 
 
-            var profBonuses = ClassFeatures.GetProficiencies()["Skills"];
+            var profBonuses = ClassDetails.GetProficiencies()["Skills"];
 
             foreach (var skill in profBonuses)
             {
                 if (skillAndMods.ContainsKey(skill))
                 {
-                    skillAndMods[skill] += ClassFeatures.GetProficiencyBonus();
+                    skillAndMods[skill] += ClassDetails.GetProficiencyBonus();
                 }
             }
 
@@ -97,7 +96,7 @@ namespace Character
 
             // SAVING THROWS
 
-            var savingThrowProfs = ClassFeatures.GetProficiencies()["Saving Throws"];
+            var savingThrowProfs = ClassDetails.GetProficiencies()["Saving Throws"];
 
             var savingThrows = new Dictionary<string, int>()
             {
@@ -113,7 +112,7 @@ namespace Character
             {
                 if (skillAndMods.ContainsKey(savingThrow))
                 {
-                    savingThrows[savingThrow] += ClassFeatures.GetProficiencyBonus();
+                    savingThrows[savingThrow] += ClassDetails.GetProficiencyBonus();
                 }
             }
 
@@ -125,7 +124,7 @@ namespace Character
         {
             var constitutionModifier = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetConstitutionScore());
 
-            switch (ClassFeatures.Name)
+            switch (ClassDetails.Name)
             {
                 default: throw new Exception("invalid characterClass provided");
                 case "Barbarian":HitPoints = 12 + constitutionModifier;break;
@@ -145,11 +144,20 @@ namespace Character
 
         public void CalculateArmorClass()
         {
-            int armorClassValue = ClassFeatures.Armor.BaseArmorClass;
+            int armorClassValue = ClassDetails.Armor.BaseArmorClass;
 
-            if (ClassFeatures.Armor.AdditionalModifier != null)
+            // Check from barbarian/Unarmored Defense
+            var isBarbarian = (this.ClassDetails.Name == "Barbarian") ? true : false ;
+
+            if (isBarbarian)
             {
-                var modValue = ClassFeatures.Armor.AdditionalModifier;
+                ArmorClass = 10 + (int)AbilityScores.getAbilityScoreModifier("DEX") + (int)AbilityScores.getAbilityScoreModifier("CON");
+                return;
+            }
+
+            if (ClassDetails.Armor.AdditionalModifier != null)
+            {
+                var modValue = ClassDetails.Armor.AdditionalModifier;
                 var abilityScoreMod = AbilityScores.getAbilityScoreModifier(modValue);
                 armorClassValue += (int)abilityScoreMod;
             }
@@ -177,7 +185,10 @@ namespace Character
             UpdateAbilityScores();
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
-            ClassFeatures = new Bard();
+            // ClassDetails = new Barbarian();
+            ClassDetails = new Cleric();
+
+            
             SetSkillsAndSavingThrows();
             SetLevel1HitPoints();
             CalculateArmorClass();

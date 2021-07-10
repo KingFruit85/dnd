@@ -10,7 +10,7 @@ namespace dnd
         static void Main(string[] args)
         {
             RandomCharacter newCharacter = new RandomCharacter();
-            Utils.Tools.saveCharacterToJSON(newCharacter);
+            // Utils.Tools.saveCharacterToJSON(newCharacter);
         }
 
     }
