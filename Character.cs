@@ -1,6 +1,5 @@
 using System;
 using Names;
-using CharacterClasses;
 using System.Collections.Generic;
 using Races;
 
@@ -173,6 +172,8 @@ namespace Character
 
     }
 
+    
+
     // -- Returns a character object where all character customisation steps have been randomised
     [Serializable]
     public class RandomCharacter : CharacterTemplate
@@ -185,10 +186,7 @@ namespace Character
             UpdateAbilityScores();
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
-            // ClassDetails = new Barbarian();
-            ClassDetails = new Cleric();
-
-            
+            GetSpecificCharacterClass(CharacterClass);
             SetSkillsAndSavingThrows();
             SetLevel1HitPoints();
             CalculateArmorClass();
@@ -211,6 +209,17 @@ namespace Character
         public void SetRandomClass()
         {
             SetCharacterClass(new CharacterClassList().GetRandomClass());
+        }
+
+        public void GetSpecificCharacterClass(string characterClass)
+        {
+            switch (characterClass)
+            {
+                default: throw new Exception("Unknown Character Class provided as argument");
+                case "Bard": ClassDetails = new Bard();break;
+                case "Barbarian": ClassDetails = new Barbarian();break;
+                case "Cleric": ClassDetails = new Cleric();break;
+            }
         }
 
         public void SetRandomGender()

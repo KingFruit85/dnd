@@ -98,7 +98,7 @@ namespace Character
                 "Thaumaturgy",
             };
 
-            Utils.Tools.ReturnXSpellsFromList(clericCantrips,3);
+            Cantrips = Utils.Tools.ReturnXSpellsFromList(clericCantrips,3);
 
             List<string> clericLevel1Spells = new List<string>()
             {
@@ -119,7 +119,7 @@ namespace Character
                 "Shield of Faith"
             };
 
-            Utils.Tools.ReturnXSpellsFromList(clericLevel1Spells,2);
+            Level1Spells = Utils.Tools.ReturnXSpellsFromList(clericLevel1Spells,2);
 
             // Add Cleric features
             Features.Add(new Feature("Spellcasting","",1));

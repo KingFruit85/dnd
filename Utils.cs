@@ -104,23 +104,38 @@ namespace Utils
 
         for (int i = 1; i <= count; i++)
         {   
+            var found = false;
+
             // Pick a random spell from the provided list
             var pickedSpell = ReturnRandomSpell(spellList);
             // Ignore and loop again if already picked
-            if (spells.Contains(pickedSpell))
+            if (spells.Count > 0)
             {
-                i--;
+                foreach (var spell in spells)
+                {
+                    if (spell.Name == pickedSpell.Name)
+                    {
+                        found = true;
+                        i--;
+                    }                    
+                }
+
+                if (!found)
+                {
+                    spells.Add(pickedSpell);
+                }
+
+
             }
             else
             {
                 spells.Add(pickedSpell);
             }
+
         }
             return spells;
     }
-
     }
-
     }
 
 
