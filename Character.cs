@@ -147,11 +147,43 @@ namespace Character
 
             // Check from barbarian/Unarmored Defense
             var isBarbarian = (this.ClassDetails.Name == "Barbarian") ? true : false ;
+            var isFighter = (this.ClassDetails.Name == "Fighter") ? true : false ;
+            var isMonk = (this.ClassDetails.Name == "Monk") ? true : false ;
+            var isHoldingShield = (this.ClassDetails.Shield != null);
 
             if (isBarbarian)
             {
-                ArmorClass = 10 + (int)AbilityScores.getAbilityScoreModifier("DEX") + (int)AbilityScores.getAbilityScoreModifier("CON");
+                ArmorClass = 10 
+                                + (int)AbilityScores.getAbilityScoreModifier("DEX") 
+                                + (int)AbilityScores.getAbilityScoreModifier("CON");
                 return;
+            }
+
+            if (isFighter)
+            {
+                // Checks to see if Fighter has Defence fighting style and has armor equipped
+                if (this.ClassDetails.FightingStyle == "Defense" && this.ClassDetails.Armor.Name != null)
+                {
+                    armorClassValue += 1;
+                }
+            }
+
+            if (isMonk)
+            {
+                // Double checks to make sure no armor is equipped
+                if (this.ClassDetails.Armor.Name == null)
+                {
+                    ArmorClass = 10 
+                                    + (int)AbilityScores.getAbilityScoreModifier("DEX") 
+                                    + (int)AbilityScores.getAbilityScoreModifier("WIS");
+                }
+
+                return;
+            }
+
+            if (isHoldingShield)
+            {
+                armorClassValue += 2;
             }
 
             if (ClassDetails.Armor.AdditionalModifier != null)
@@ -219,6 +251,8 @@ namespace Character
                 case "Bard": ClassDetails = new Bard();break;
                 case "Barbarian": ClassDetails = new Barbarian();break;
                 case "Cleric": ClassDetails = new Cleric();break;
+                case "Fighter": ClassDetails = new Fighter();break;
+                case "Monk": ClassDetails = new Monk();break;
             }
         }
 

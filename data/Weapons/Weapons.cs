@@ -19,4 +19,7 @@ public class Weapon
 
         [JsonProperty("weaponType")]
         public string WeaponType { get; set; }
+        
+        [JsonProperty("twohanded")]
+        public bool Twohanded { get; set; }
     }

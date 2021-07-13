@@ -8,10 +8,13 @@ namespace Character
         public Cleric()
         {
             SetName("Cleric");
-            SetProficiencyBonus(2);
             HitDie = "1d8";
 
-            // Populate Proficiencies
+            ///////////////////
+            // PROFICIENCIES //
+            ///////////////////
+            
+            SetProficiencyBonus(2);
             var Proficiencies = new Dictionary<string,List<string>>()
             {
                 {"Armor", new List<string>(){ "Light Armor", "Medium Armor", "Shields"}},
@@ -40,11 +43,14 @@ namespace Character
             Proficiencies["Armor"].Add("Heavy Armor");
 
             SetProficiencies(Proficiencies);
-            
-            // EQUIPMENT
+
+            ///////////////
+            // EQUIPMENT //
+            ///////////////
             // Clerics get a mace or a warhammer (if proficient)
             // Since Life domain clerics are not proficient in martial melee weapons we
             // just add a warhammer for now
+
             PrimaryWeapon = GetWeapons().Where(w => w.Name == "Warhammer").ToList()[0];
             
             // Life Clerics get either scale mail, leather armor, or chain mail (if proficient) at level 1
@@ -63,7 +69,9 @@ namespace Character
                     break;
                 case 1:
                     // Add a random simple weapon
-                    AdditionalWeapons.Add(Utils.Tools.ShuffleList(GetWeapons()).ToList()[0]);
+                    var simpleWeapons = GetWeapons().Where(w => w.WeaponType == "Simple Melee").ToList();
+                    var weapon = Utils.Tools.ShuffleList(simpleWeapons)[0];
+                    AdditionalWeapons.Add(weapon);
                     break;
             }
 

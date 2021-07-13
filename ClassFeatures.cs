@@ -24,7 +24,6 @@ namespace Character
             return packList;
         }
 
-
         public string Name {get;set;}
         public int ProficiencyBonus {get;set;}
         public string HitDie { set; get;}        
@@ -32,6 +31,8 @@ namespace Character
         public Armor Armor {get; set;} = new Armor();
         public Shield Shield {get; set;}
         public Weapon PrimaryWeapon {get; set;} = new Weapon();
+        public Weapon OffHandWeapon {get; set;} = new Weapon();
+
         public List<Weapon> AdditionalWeapons { get; set; } = new List<Weapon>();
         public List<Ammunition> Ammunition { get; set; } = new List<Ammunition>();
         public List<MusicalInstrument> MusicalInstruments { get; set; } = new List<MusicalInstrument>();
@@ -41,6 +42,7 @@ namespace Character
         public List<Spells> Level1Spells { get; set; } = new List<Spells>();
         public List<Feature> Features { get; set; } = new List<Feature>();
         public int SpellSlots = 0;
+        public string FightingStyle { get; set; }
 
         public List<string> Skills = new List<string>()
         {

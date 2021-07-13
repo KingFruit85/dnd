@@ -6,7 +6,8 @@
             "damage": "1d4 bludgeoning",
             "weight": "2lb",
             "properties": "Light",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -15,7 +16,8 @@
             "damage": "1d4 piercing",
             "weight": "1lb",
             "properties": "Finesse, light, thrown (range 20/60)",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -24,7 +26,8 @@
             "damage": "1d8 bludgeoning",
             "weight": "10 lb",
             "properties": "Two-handed",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": true
         },
     
         {
@@ -33,7 +36,8 @@
             "damage": "1d6 slashing",
             "weight": "2lb",
             "properties": "Light, thrown (range 20/60)",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -42,7 +46,8 @@
             "damage": "1d6 piercing",
             "weight": "2lb",
             "properties": "Thrown (range 30/120)",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -51,7 +56,8 @@
             "damage": "1d4 bludgeoning",
             "weight": "2lb",
             "properties": "Light, thrown (range 20/60)",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -60,7 +66,8 @@
             "damage": "1d6 bludgeoning",
             "weight": "4lb",
             "properties": "",
-            "weaponType":"Simple Melee" 
+            "weaponType":"Simple Melee" ,
+            "twohanded": false
         },
     
         {
@@ -69,7 +76,8 @@
             "damage": "1d6 bludgeoning",
             "weight": "4lb",
             "properties": "Versatile (1d8)",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -78,7 +86,8 @@
             "damage": "1d4 slashing",
             "weight": "2lb",
             "properties": "Light",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
     
         {
@@ -87,7 +96,8 @@
             "damage": "1d6 piercing",
             "weight": "3lb",
             "properties": "Thrown (range 20/60), versatile (1d8)",
-            "weaponType":"Simple Melee"
+            "weaponType":"Simple Melee",
+            "twohanded": false
         },
 
         {
@@ -96,7 +106,8 @@
             "damage": "1d8 slashing",
             "weight": "4 lb",
             "properties": "Versatile (1d10)",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -105,7 +116,8 @@
             "damage": "1d8 bludgeoning",
             "weight": "2 lb",
             "properties": "—",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -114,7 +126,8 @@
             "damage": "1d10 slashing",
             "weight": "6 lb",
             "properties": "Heavy, reach, two-handed",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": true
         },
 
         {
@@ -123,7 +136,8 @@
             "damage": "1d12 slashing",
             "weight": "7 lb",
             "properties": "Heavy, two-handed",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": true
         },
 
         {
@@ -132,7 +146,8 @@
             "damage": "2d6 slashing",
             "weight": "6 lb",
             "properties": "Heavy, two-handed",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": true
         },
 
         {
@@ -141,7 +156,8 @@
             "damage": "1d10 slashing",
             "weight": "6 lb",
             "properties": "Heavy, reach, two-handed",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": true
         },
         
         {
@@ -150,7 +166,8 @@
             "damage": "1d12 piercing",
             "weight": "6 lb",
             "properties": "Reach, special",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -159,7 +176,8 @@
             "damage": "1d8 slashing",
             "weight": "3 lb",
             "properties": "Versatile (1d10)",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -168,7 +186,8 @@
             "damage": "2d6 bludgeoning",
             "weight": "10 lb",
             "properties": "Heavy, two-handed",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": true
         },
 
         {
@@ -177,7 +196,8 @@
             "damage": "1d8 piercing",
             "weight": "4 lb",
             "properties": "-",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -186,7 +206,8 @@
             "damage": "1d10 piercing",
             "weight": "18 lb",
             "properties": "Heavy, reach, two-handed",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": true
         },
 
         {
@@ -195,7 +216,8 @@
             "damage": "1d8 piercing",
             "weight": "2 lb",
             "properties": "Finesse",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -204,7 +226,8 @@
             "damage": "1d6 slashing",
             "weight": "3 lb",
             "properties": "Finesse, light",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -213,7 +236,8 @@
             "damage": "1d6 piercing",
             "weight": "2 lb",
             "properties": "Finesse, light",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -222,7 +246,8 @@
             "damage": "1d6 piercing",
             "weight": "4 lb",
             "properties": "Thrown (range 20/60), versatile (1d8)",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -231,7 +256,8 @@
             "damage": "1d8 piercing",
             "weight": "2 lb",
             "properties": "—",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -240,7 +266,8 @@
             "damage": "1d8 bludgeoning",
             "weight": "2 lb",
             "properties": "Versatile (1d10)",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
 
         {
@@ -249,7 +276,8 @@
             "damage": "1d4 slashing",
             "weight": "3 lb",
             "properties": "Finesse, reach",
-            "weaponType":"Martial Melee"
+            "weaponType":"Martial Melee",
+            "twohanded": false
         },
         
         {
@@ -258,7 +286,8 @@
             "damage": "1 piercing",
             "weight": "1 lb",
             "properties": "Ammunition (range 25/100), loading",
-            "weaponType":"Martial Ranged"
+            "weaponType":"Martial Ranged",
+            "twohanded": false
         },
 
         {
@@ -267,7 +296,8 @@
             "damage": "1d6 piercing",
             "weight": "3 lb",
             "properties": "Ammunition (range 30/120), light, loading",
-            "weaponType":"Martial Ranged"
+            "weaponType":"Martial Ranged",
+            "twohanded": false
         },
 
         {
@@ -276,7 +306,8 @@
             "damage": "1d10 piercing",
             "weight": "18 lb",
             "properties": "Ammunition (range 100/400), heavy, loading two-handed",
-            "weaponType":"Martial Ranged"
+            "weaponType":"Martial Ranged",
+            "twohanded": true
         },
 
         {
@@ -285,7 +316,8 @@
             "damage": "1d8 piercing",
             "weight" :"2 lb",
             "properties": "Ammunition (range 150/600), heavy, two-handed",
-            "weaponType":"Martial Ranged"
+            "weaponType":"Martial Ranged",
+            "twohanded": true
         },
 
         {
@@ -294,7 +326,8 @@
             "damage": "—",
             "weight": "3 lb",
             "properties": "Special, thrown (range 5/15)",
-            "weaponType":"Martial Ranged"
+            "weaponType":"Martial Ranged",
+            "twohanded": false
         },
 
         {
@@ -303,7 +336,8 @@
             "damage": "1d8 piercing",
             "weight": "5 lb",
             "properties": "Ammunition (range 80/320), loading, two-handed",
-            "weaponType":"Simple Ranged"
+            "weaponType":"Simple Ranged",
+            "twohanded": true
         },
 
         {
@@ -312,7 +346,8 @@
             "damage": "1d4 piercing",
             "weight": "1/4 lb",
             "properties": "Finesse, thrown (range 20/60)",
-            "weaponType":"Simple Ranged"
+            "weaponType":"Simple Ranged",
+            "twohanded": false
         },
 
         {
@@ -321,7 +356,8 @@
             "damage": "1d6 piercing",
             "weight": "2 lb",
             "properties": "Ammunition (range 80/320), two-handed",
-            "weaponType":"Simple Ranged"
+            "weaponType":"Simple Ranged",
+            "twohanded": true
         },
 
         {
@@ -330,7 +366,8 @@
             "damage": "1d4 bludgeoning",
             "weight": "-",
             "properties": "Ammunition (range 30/120)",
-            "weaponType":"Simple Ranged"
+            "weaponType":"Simple Ranged",
+            "twohanded": false
           }
     ]
     }

@@ -10,10 +10,14 @@ namespace Character
         public Bard()
         {
             SetName("Bard");
-            SetProficiencyBonus(2);
             HitDie = "1d8";
 
-            // Populate Proficiencies
+            ///////////////////
+            // PROFICIENCIES //
+            ///////////////////
+            
+            SetProficiencyBonus(2);
+
             var Proficiencies = new Dictionary<string,List<string>>()
             {
                 {"Armor", new List<string>(){"Light Armor"}},
@@ -21,15 +25,14 @@ namespace Character
                 {"Tools", new List<string>()},
                 {"Saving Throws", new List<string>(){"Dexterity", "Charisma"}},
                 {"Skills", new List<string>(){}}
-            
             };
+
             // Get 3 random instrument profs
             var instrumentList = new Equipment().MusicalInstrument().MusicalInstruments;
-            Random r = new Random();
-            var randomizedInstrumentList = instrumentList.OrderBy(i => r.Next()).ToArray();
-            Proficiencies["Tools"].Add(randomizedInstrumentList[0].Name);
-            Proficiencies["Tools"].Add(randomizedInstrumentList[1].Name);
-            Proficiencies["Tools"].Add(randomizedInstrumentList[2].Name);
+            instrumentList = Utils.Tools.ShuffleList(instrumentList);
+            Proficiencies["Tools"].Add(instrumentList[0].Name);
+            Proficiencies["Tools"].Add(instrumentList[1].Name);
+            Proficiencies["Tools"].Add(instrumentList[2].Name);
 
             // Get 3 ransom skill profs
             var randomizedSkillList = Utils.Tools.ShuffleList(Skills);
@@ -38,6 +41,10 @@ namespace Character
             Proficiencies["Skills"].Add(randomizedSkillList[2]);
  
             SetProficiencies(Proficiencies);
+
+            ///////////////
+            // EQUIPMENT //
+            ///////////////
 
             // Bards get either a Lute or a random musical instrument
             // My implimentation only adds a lute if we're proficient
@@ -64,35 +71,37 @@ namespace Character
             Armor = GetArmor().Where(a => a.Name == "Leather Armor").ToList()[0];
 
             // They also get either a Diplomat's pack or and entertainer's pack
-            switch (r.Next(1,2))
+            switch (Utils.Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new Exception("Option no valid");
-                case 1:
+                case 0:
                     EquipmentPack = GetPacks().Where(p => p.Name == "Diplomat's Pack").ToList()[0];
                     break;
-                case 2:
+                case 1:
                     EquipmentPack= GetPacks().Where(p => p.Name == "Entertainer's Pack").ToList()[0];
                     break;
             }
 
             // They also get either a Rapier, Longsword or a any simple weapon
-            switch (r.Next(1,3))
+            switch (Utils.Tools.GetRandomNumberInRange(0,2))
             {
                 default: throw new Exception("Option no valid");
-                case 1:
+                case 0:
                     PrimaryWeapon = GetWeapons().Where(w => w.Name == "Rapier").ToList()[0];
                     break;
-                case 2:
+                case 1:
                     PrimaryWeapon = GetWeapons().Where(w => w.Name == "Longsword").ToList()[0];
                     break;
-                case 3:
+                case 2:
                     var randomSimpleWeapon = GetWeapons().Where(w => w.Properties == "Simple Melee").ToList();
                     randomSimpleWeapon = Utils.Tools.ShuffleList(randomSimpleWeapon);
                     PrimaryWeapon = randomSimpleWeapon[0];
                     break;
             }
 
-            // Spells
+            //////////////
+            //  SPELLS  //
+            //////////////
 
             // At level 1 bards get 
             // 2 cantrips
@@ -136,6 +145,10 @@ namespace Character
             };
 
             Level1Spells = Utils.Tools.ReturnXSpellsFromList(bardLevel1Spells,2);
+
+            //////////////
+            // FEATURES //
+            //////////////
 
             // Add Bard Features
             Features.Add(new Feature("Spellcasting", "", 1));

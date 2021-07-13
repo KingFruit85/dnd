@@ -80,6 +80,22 @@ namespace Utils
         return list.OrderBy(i => r.Next()).ToList();
     }
 
+    /// <summary>Shuffles the provided list in a random order and returns it</summary>
+    /// <param name="list">the list of type <ArtisansTools> to be shuffled</param>
+    public static List<ArtisansTools> ShuffleList(List<ArtisansTools> list)
+    {
+        Random r = new Random();
+        return list.OrderBy(i => r.Next()).ToList();
+    }
+
+    /// <summary>Shuffles the provided list in a random order and returns it</summary>
+    /// <param name="list">the list of type <MusicalInstrument> to be shuffled</param>
+    public static List<MusicalInstrument> ShuffleList(List<MusicalInstrument> list)
+    {
+        Random r = new Random();
+        return list.OrderBy(i => r.Next()).ToList();
+    }
+
     /// <summary>return a random spell from a list<string> provided as a param</summary>
     /// <param name="spellList">the list of strings that represent spells</param>
     public static Spells ReturnRandomSpell(List<string> spellList)

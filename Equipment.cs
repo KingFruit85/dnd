@@ -18,6 +18,14 @@ namespace Character
         public List<Weapon> weapon { get; set; }
     }
 
+    public class ArtisansToolList
+    {
+        [JsonProperty("ArtisansTools")]
+        public List<ArtisansTools> artisansTools { get; set; }
+    }
+
+
+
     public class Root
     {
 
@@ -30,7 +38,6 @@ namespace Character
 
     public class Equipment
     {
-
         public ArmorList ReturnArmorList()
         {
             var armor = File.ReadAllText(@".\data\Armor\armor.json");
@@ -43,19 +50,23 @@ namespace Character
             return JsonConvert.DeserializeObject<WeaponList>(weapons);
         }
 
-
+        public ArtisansToolList ReturnArtisansToolList()
+        {
+            var tools = File.ReadAllText(@".\data\Equipment\Misc\ArtisansTools.json");
+            return JsonConvert.DeserializeObject<ArtisansToolList>(tools);
+        }
         public Root MusicalInstrument()
         {
             var instruments = File.ReadAllText(@".\data\Equipment\MusicalInstruments\MusicalInstruments.json");
             return JsonConvert.DeserializeObject<Root>(instruments);
         }
 
-
         public Root EquipmentPacks()
         {
             var packs = File.ReadAllText(@".\data\Equipment\Packs\Packs.json");
             return JsonConvert.DeserializeObject<Root>(packs);
         }
+
 
     }    
 }
