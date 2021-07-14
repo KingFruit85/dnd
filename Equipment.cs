@@ -24,14 +24,14 @@ namespace Character
         public List<ArtisansTools> artisansTools { get; set; }
     }
 
-
-
-    public class Root
+    public class MusicalInstrumentList
     {
-
         [JsonProperty("MusicalInstruments")]
         public List<MusicalInstrument> MusicalInstruments { get; set; }
+    }
 
+    public class EquipmentPackList
+    {
         [JsonProperty("Equipment Packs")]
         public List<EquipmentPack> EquipmentPacks { get; set; }
     }
@@ -55,16 +55,16 @@ namespace Character
             var tools = File.ReadAllText(@".\data\Equipment\Misc\ArtisansTools.json");
             return JsonConvert.DeserializeObject<ArtisansToolList>(tools);
         }
-        public Root MusicalInstrument()
+        public MusicalInstrumentList MusicalInstrument()
         {
             var instruments = File.ReadAllText(@".\data\Equipment\MusicalInstruments\MusicalInstruments.json");
-            return JsonConvert.DeserializeObject<Root>(instruments);
+            return JsonConvert.DeserializeObject<MusicalInstrumentList>(instruments);
         }
 
-        public Root EquipmentPacks()
+        public EquipmentPackList EquipmentPacks()
         {
             var packs = File.ReadAllText(@".\data\Equipment\Packs\Packs.json");
-            return JsonConvert.DeserializeObject<Root>(packs);
+            return JsonConvert.DeserializeObject<EquipmentPackList>(packs);
         }
 
 

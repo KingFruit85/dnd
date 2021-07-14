@@ -122,7 +122,7 @@ namespace Character
         public void SetLevel1HitPoints()
         {
             var constitutionModifier = (int)AbilityScores.getAbilityScoreModifier(AbilityScores.GetConstitutionScore());
-
+            
             switch (ClassDetails.Name)
             {
                 default: throw new Exception("invalid characterClass provided");
@@ -138,6 +138,12 @@ namespace Character
                 case "Sorcerer":HitPoints = 6 + constitutionModifier;break;
                 case "Warlock":HitPoints = 8 + constitutionModifier;break;
                 case "Wizard":HitPoints = 6 + constitutionModifier;break;
+            }
+
+            // The Hill Dwarf subrace hit point maximum increases by 1
+            if (this.RaceDetails.SubRace == "Hill Dwarf")
+            {
+                HitPoints += 1;    
             }
         }
 
@@ -205,9 +211,7 @@ namespace Character
     }
 
     
-
-    // -- Returns a character object where all character customisation steps have been randomised
-    [Serializable]
+    /// <summary>Returns a character object where all character customisation steps have been randomised</summary>
     public class RandomCharacter : CharacterTemplate
     {
         public RandomCharacter()
@@ -238,6 +242,7 @@ namespace Character
             SetLastName(FullName[1]);
         }
 
+        /// <summary>sets the CharacterClass variable value as a string representing a random character class<string></summary>
         public void SetRandomClass()
         {
             SetCharacterClass(new CharacterClassList().GetRandomClass());

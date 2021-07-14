@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Character;
 using Utils;
 
 namespace Races
@@ -16,6 +18,15 @@ namespace Races
         public List<string> Languages {get;set;} = new List<string>();
         public string SubRace { get; set; }
         public Dictionary<string, string> RacePerks {get;set;} = new Dictionary<string, string>();
+
+        public List<string> RaceSkillProficienciesToAdd { get; set;} = new List<string>();
+        public List<string> RaceWeaponProficienciesToAdd { get; set;} = new List<string>();
+        public List<string> RaceArmorProficienciesToAdd { get; set;} = new List<string>();
+        public List<string> RaceToolProficienciesToAdd { get; set;} = new List<string>();
+
+        public List<string> SpellsToAdd { get; set;} = new List<string>();
+
+        public List<Feature> FeaturesToAdd { get; set; } = new List<Feature>();
                               
         public struct DraconicAncestryDetails
         {
@@ -24,6 +35,63 @@ namespace Races
             public string BreathWeapon;
         } 
         private DraconicAncestryDetails DraconicAncestry {get;set;}
+
+        /// <summary>Adds a proficiency represented as a string into the collection identified by the second param</summary>
+        /// <param name="proficiency">a string representing a racial proficiency</param>
+        /// <param name="type">a string representing the type of proficiency the first param is</param>
+        public void AddRaceProficiency(string proficiency, string type)
+        {
+            switch (type)
+            {
+                default: throw new Exception("provided proficiency type is unknown");
+                case "skill":
+                    RaceSkillProficienciesToAdd.Add(proficiency);
+                    break;
+                case "weapon":
+                    RaceWeaponProficienciesToAdd.Add(proficiency);
+                    break;
+                case "armor":
+                    RaceArmorProficienciesToAdd.Add(proficiency);
+                    break;
+                case "tool":
+                    RaceToolProficienciesToAdd.Add(proficiency);
+                    break; 
+            }
+        }
+        /// <summary>Adds proficiencies represented as a List<string> into the collection identified by the second param</summary>
+        /// <param name="proficiency">a List <string> containing one or more <string>'s representing a racial proficiency</param>
+        /// <param name="type">a string representing the type of proficiency the first param is</param>
+        public void AddRaceProficiency(List<string> proficiencies, string type)
+        {
+            switch (type)
+            {
+                default: throw new Exception("provided proficiency type is unknown");
+                case "skill":
+                    foreach (var prof in proficiencies)
+                    {
+                        RaceSkillProficienciesToAdd.Add(prof);
+                    }
+                    break;
+                case "weapon":
+                    foreach (var prof in proficiencies)
+                    {
+                        RaceWeaponProficienciesToAdd.Add(prof);
+                    }
+                    break;
+                case "armor":
+                    foreach (var prof in proficiencies)
+                    {
+                        RaceArmorProficienciesToAdd.Add(prof);
+                    }
+                    break;
+                case "tool":
+                    foreach (var prof in proficiencies)
+                    {
+                        RaceToolProficienciesToAdd.Add(prof);
+                    }
+                    break; 
+            }
+        }
 
         public void SetName(string name)
         {
@@ -191,7 +259,7 @@ namespace Races
             DraconicAncestry = x;
         }
     }
-    [Serializable]
+
     public class Human : GenericRace
     {
         public Human()
@@ -220,7 +288,6 @@ namespace Races
         AddLangugage(1);
         }
     }
-    [Serializable]
     public class Dragonborn : GenericRace
     {
         public Dragonborn()
@@ -276,40 +343,20 @@ namespace Races
             SetDraconicAncestryDetails(Tools.GetRandomListElement(DraconicAncestry));
 
             SetRacePerk("Breath Weapon","You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can’t use it again until you complete a short or long rest.");
-            
-            var breathWeaponSpell = new Spells();
-
-            // switch (switch_on)
-            // {
-                
-            //     default:
-            // }
-
-            // Dragon	Damage Type	Breath Weapon
-            // Black	Acid	5 by 30 ft. line (Dex. save)
-            // Blue	Lightning	5 by 30 ft. line (Dex. save)
-            // Brass	Fire	5 by 30 ft. line (Dex. save)
-            // Bronze	Lightning	5 by 30 ft. line (Dex. save)
-            // Copper	Acid	5 by 30 ft. line (Dex. save)
-            // Gold	Fire	15 ft. cone (Dex. save)
-            // Green	Poison	15 ft. cone (Con. save)
-            // Red	Fire	15 ft. cone (Dex. save)
-            // Silver	Cold	15 ft. cone (Con. save)
-            // White	Cold	15 ft. cone (Con. save)
-            
+                        
             SetRacePerk("Damage Resistance","You have resistance to the damage type associated with your draconic ancestry.");
+            var DraconicAncestryDamageType = "Damage Resistance (" + GetDraconicAncestry().DamageType +")";
+            FeaturesToAdd.Add(new Feature(DraconicAncestryDamageType,"You have resistance to the damage type",1));
             
             SetRacePerk("Languages","You can speak, read, and write Common and Draconic. Draconic is thought to be one of the oldest languages and is often used in the study of magic. The language sounds harsh to most other creatures and includes numerous hard consonants and sibilants.");
             AddLangugage("Common");
             AddLangugage("Draconic");
         }
     }
-    [Serializable]
     public class Dwarf : GenericRace
     {
         public Dwarf()
         {
-
             SetName("Dwarf");
 
             SetRacePerk("Ability Score Increase", "Your Constitution score increases by 2.");
@@ -342,10 +389,24 @@ namespace Races
             SetSpeed(25);
 
             SetRacePerk("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            FeaturesToAdd.Add(new Feature("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",1));
+            
             SetRacePerk("Dwarven Resilience","You have advantage on saving throws against poison, and you have resistance against poison damage.");
+            FeaturesToAdd.Add(new Feature("Dwarven Resilience","You have advantage on saving throws against poison, and you have resistance against poison damage.",1));
+
             SetRacePerk("Dwarven Combat Training","You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.");
+            AddRaceProficiency(new List<string>(){"Battleaxe","Light Hammer", "Warhammer"},"weapon");
+
             SetRacePerk("Tool Proficiency", "You gain proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.");
+            var ArtisansToolList = new List<ArtisansTools>();
+            ArtisansToolList.Add(new Equipment().ReturnArtisansToolList().artisansTools.Where(t => t.Name == "Smith’s Tools").ToList()[0]);
+            ArtisansToolList.Add(new Equipment().ReturnArtisansToolList().artisansTools.Where(t => t.Name == "Brewer’s Supplies").ToList()[0]);
+            ArtisansToolList.Add(new Equipment().ReturnArtisansToolList().artisansTools.Where(t => t.Name == "Mason’s Tools").ToList()[0]);
+            ArtisansToolList = Utils.Tools.ShuffleList(ArtisansToolList);
+            AddRaceProficiency(ArtisansToolList[0].Name,"tool");
+
             SetRacePerk("Stonecunning","Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.");
+            FeaturesToAdd.Add(new Feature("Stonecunning","Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.",1));
             
             SetRacePerk("Languages","You can speak, read, and write Common and Dwarvish. Dwarvish is full of hard consonants and guttural sounds, and those characteristics spill over into whatever other language a dwarf might speak.");
             AddLangugage("Common");
@@ -354,10 +415,11 @@ namespace Races
             SetSubRace("Hill Dwarf");
             SetRacePerk("Ability Score Increase (Hill Dwarf)", "Your Wisdom score increases by 1.");
             SetAbilityScoreIncrease("WIS", 1);
+            // This gets added in SetLevel1HitPoints()
             SetRacePerk("Dwarven Toughness", "Your hit point maximum increases by 1, and it increases by 1 every time you gain a level.");
+            
         }
     }
-    [Serializable]
     public class Elf : GenericRace
     {
         public Elf()
@@ -394,12 +456,15 @@ namespace Races
             SetRacePerk("Speed","Your base walking speed is 30 feet.");
             SetSpeed(30);
 
-            SetRacePerk("Darkvision"," Accustomed to twilit forests and the night sky, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            FeaturesToAdd.Add(new Feature("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",1));
 
             //TODO Add logic to include additional proficiency
-            SetRacePerk("Keen Senses","You have proficiency in the Perception skill.");
-            SetRacePerk("Fey Ancestry","You have advantage on saving throws against being charmed, and magic can’t put you to sleep.");
-            SetRacePerk("Trance","Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.");
+            FeaturesToAdd.Add(new Feature("Keen Senses","You have proficiency in the Perception skill.",1));
+            AddRaceProficiency("Perception","skill");
+
+            FeaturesToAdd.Add(new Feature("Fey Ancestry","You have advantage on saving throws against being charmed, and magic can’t put you to sleep.",1));
+            FeaturesToAdd.Add(new Feature("Trance","Elves don’t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is \"trance.\") While meditating, you can dream after a fashion; such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.",1));
+            
             SetRacePerk("Languages","You can speak, read, and write Common and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poems are famous among other races. Many bards learn their language so they can add Elvish ballads to their repertoires.");
             AddLangugage("Common");
             AddLangugage("Elvish");
@@ -407,14 +472,39 @@ namespace Races
             SetSubRace("High Elf");
             SetRacePerk("Ability Score Increase (High Elf)","Your Intelligence score increases by 1.");
             SetAbilityScoreIncrease("INT", 1);
+
             //TODO Add logic to include additional proficiency
             SetRacePerk("Elf Weapon Training","You have proficiency with the longsword, shortsword, shortbow, and longbow.");
+            AddRaceProficiency(new List<string>(){"Longsword","Shortsword", "Shortbow", "Longbow"},"weapon");
+
             SetRacePerk("Cantrip","You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.");
+
+            List<string> wizardCantrips = new List<string>()
+            {
+                "Acid Splash",
+                "Chill Touch",
+                "Dancing Lights",
+                "Fire Bolt",
+                "Light",
+                "Mage Hand",
+                "Mending",
+                "Message",
+                "Minor Illusion",
+                "Poison Spray",
+                "Prestidigitation",
+                "Ray of Frost",
+                "Shocking Grasp",
+                "True Strike"
+            };
+
+            // Grabs a random element from the wizard cantrip list above
+            SpellsToAdd.Add(wizardCantrips[new Random().Next(0, wizardCantrips.Count)]);
+
             SetRacePerk("Extra Language","You can speak, read, and write one extra language of your choice.");
             AddLangugage();
 ;        }
     }
-    [Serializable]
+
     public class Gnome : GenericRace
     {
         public Gnome()
@@ -451,8 +541,10 @@ namespace Races
             SetSpeed(25);
 
             SetRacePerk("Darkvision","Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            FeaturesToAdd.Add(new Feature("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",1));
+
             SetRacePerk("Gnome Cunning","You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.");
-            
+
             SetRacePerk("Languages","You can speak, read, and write Common and Gnomish. The Gnomish language, which uses the Dwarvish script, is renowned for its technical treatises and its catalogs of knowledge about the natural world.");
             AddLangugage("Common");
             AddLangugage("Gnomish");
@@ -462,9 +554,9 @@ namespace Races
             SetAbilityScoreIncrease("CON", 1);
             SetRacePerk("Artificer’s Lore","Whenever you make an Intelligence (History) check related to magic items, alchemical objects, or technological devices, you can add twice your proficiency bonus, instead of any proficiency bonus you normally apply.");
             SetRacePerk("Tinker","You have proficiency with artisan’s tools (tinker’s tools). Using those tools, you can spend 1 hour and 10 gp worth of materials to construct a Tiny clockwork device (AC 5, 1 hp). The device ceases to function after 24 hours (unless you spend 1 hour repairing it to keep the device functioning), or when you use your action to dismantle it; at that time, you can reclaim the materials used to create it. You can have up to three such devices active at a time. When you create a device, choose one of the following options:");
+            AddRaceProficiency("Tinker’s Tools","tool");
         }
     }
-    [Serializable]
     public class HalfElf : GenericRace
     {
         public HalfElf()
@@ -517,10 +609,37 @@ namespace Races
             SetSpeed(30);
 
             SetRacePerk("Darkvision","Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            FeaturesToAdd.Add(new Feature("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",1));
 
             SetRacePerk("Fey Ancestry","You have advantage on saving throws against being charmed, and magic can’t put you to sleep.");
             //TODO Add logic to include additional proficiencies
             SetRacePerk("Skill Versatility","You gain proficiency in two skills of your choice.");
+
+            List<string> skills = new List<string>()
+            {
+                "athletics",
+                "acrobatics",
+                "sleightOfHand",
+                "arcana",
+                "stealth",
+                "history",
+                "nature",
+                "religion",
+                "animalHandling",
+                "insight",
+                "medicine",
+                "perception",
+                "survival",
+                "deception",
+                "intimidation",
+                "investigation",
+                "performance",
+                "persuasion"
+            };
+
+            skills = Utils.Tools.ShuffleList(skills);
+            AddRaceProficiency(skills[0],"skill");
+            AddRaceProficiency(skills[1],"skill");
 
             SetRacePerk("Languages","You can speak, read, and write Common, Elvish, and one extra language of your choice.");
             AddLangugage("Common");
@@ -530,7 +649,6 @@ namespace Races
         
 
     }
-    [Serializable]
     public class HalfOrc : GenericRace
     {
         public HalfOrc()
@@ -568,8 +686,10 @@ namespace Races
             SetSpeed(30);
 
             SetRacePerk("Darkvision", "Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            FeaturesToAdd.Add(new Feature("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",1));
 
             SetRacePerk("Menacing", "You gain proficiency in the Intimidation skill.");
+            AddRaceProficiency("Intimidation", "skill");
 
             SetRacePerk("Relentless Endurance","When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.");
 
@@ -582,7 +702,6 @@ namespace Races
         
 
     }
-    [Serializable]
     public class Halfling : GenericRace
     {
         public Halfling()
@@ -635,7 +754,6 @@ namespace Races
             SetRacePerk("Naturally Stealthy", "You can attempt to hide even when you are obscured only by a creature that is at least one size larger than you.");
         }
     }
-    [Serializable]
     public class Tiefling : GenericRace
     {
         public Tiefling()
@@ -673,22 +791,22 @@ namespace Races
             SetSpeed(30);
 
             SetRacePerk("Darkvision", "Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.");
+            FeaturesToAdd.Add(new Feature("Darkvision", "Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.",1));
 
             SetRacePerk("Hellish Resistance", "You have resistance to fire damage.");
+            FeaturesToAdd.Add(new Feature("Hellish Resistance", "You have resistance to fire damage.",1));
 
             SetRacePerk("Infernal Legacy", "You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.");
+            SpellsToAdd.Add("Thaumaturgy");
 
             SetRacePerk("Languages", "You can speak, read, and write Common and Infernal.");
             AddLangugage("Common");
             AddLangugage("Infernal");
         }
-        
-
     }
 
     public class RaceLists 
     {
-
         public GenericRace GetRandomRace()
         {
             Random r = new Random();
@@ -711,6 +829,5 @@ namespace Races
 
             }
         }
-
     }
 }
