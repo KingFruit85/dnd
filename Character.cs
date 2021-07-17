@@ -1,11 +1,9 @@
 using System;
 using Names;
 using System.Collections.Generic;
-using Races;
 
 namespace Character
 {
-    [Serializable]
     public abstract class CharacterTemplate
     {
         public string FirstName {get;set;}
@@ -22,8 +20,8 @@ namespace Character
         public Dictionary<string, int> SavingThrows {get; set;}
 
         // Getters & Setters
-        public GenericRace GetRace(){return RaceDetails;}
         public void SetRace(GenericRace race){RaceDetails = race;}
+        public GenericRace GetRace(){return RaceDetails;}
         public string GetFirstName(){return FirstName;}
         public void SetFirstName(string name){FirstName = name;}
         public string GetLastName(){return LastName;}
@@ -47,6 +45,7 @@ namespace Character
         {
             AbilityScores = abilityScore;
         }
+
 
         public void SetSkillsAndSavingThrows()
         {
@@ -117,6 +116,64 @@ namespace Character
 
             SavingThrows = savingThrows;
 
+        }
+
+        public void AddRacialProficiencies()
+        {
+            var skills = RaceDetails.RaceSkillProficienciesToAdd;
+            var weapons = RaceDetails.RaceWeaponProficienciesToAdd;
+            var armors = RaceDetails.RaceArmorProficienciesToAdd;
+            var tools = RaceDetails.RaceToolProficienciesToAdd;
+
+            if (skills.Count > 0)
+            {
+                foreach (var skill in skills)
+                {
+                    if (!ClassDetails.Proficiencies["Skills"].Contains(skill))
+                    {
+                        ClassDetails.Proficiencies["Skills"].Add(skill);      
+                    }
+                }
+            }
+
+            if (weapons.Count > 0)
+            {
+                foreach (var weapon in weapons)
+                {
+                    if (!ClassDetails.Proficiencies["Weapons"].Contains(weapon))
+                    {
+                        Console.WriteLine("Added "+ weapon);
+                        ClassDetails.Proficiencies["Weapons"].Add(weapon);
+                    }
+                    else
+                    {
+                        Console.WriteLine(weapon + " already found, didn't add");
+                        
+                    }
+                }
+            }
+            
+            if (armors.Count > 0)
+            {
+                foreach (var armor in armors)
+                {
+                    if (!ClassDetails.Proficiencies["Armor"].Contains(armor))
+                    {
+                        ClassDetails.Proficiencies["Weapons"].Add(armor);
+                    }
+                }
+            }
+
+            if (tools.Count > 0)
+            {
+                foreach (var armor in armors)
+                {
+                    if (!ClassDetails.Proficiencies["Armor"].Contains(armor))
+                    {
+                        ClassDetails.Proficiencies["Weapons"].Add(armor);
+                    }
+                }
+            }
         }
 
         public void SetLevel1HitPoints()
@@ -223,6 +280,7 @@ namespace Character
             SetRandomGender();
             SetRandomName(GetGender(), GetRace().GetName());
             GetSpecificCharacterClass(CharacterClass);
+            AddRacialProficiencies();
             SetSkillsAndSavingThrows();
             SetLevel1HitPoints();
             CalculateArmorClass();

@@ -38,7 +38,7 @@ namespace Character
             };
 
             // Shuffle list and add the top two
-            fighterSkillProfs = Utils.Tools.ShuffleList(fighterSkillProfs);
+            fighterSkillProfs = Tools.ShuffleList(fighterSkillProfs);
             Proficiencies["Skills"].Add(fighterSkillProfs[0]);
             Proficiencies["Skills"].Add(fighterSkillProfs[1]);
 
@@ -50,7 +50,7 @@ namespace Character
 
             // Fighters get either chain mail or leather armor, a longbow, and 20 arrows
 
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
@@ -69,23 +69,23 @@ namespace Character
             var martialWeapons = GetWeapons().Where(w => w.WeaponType == "Martial Melee").ToList();
             Weapon weaponToAdd;
         
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
-                    weaponToAdd = Utils.Tools.ShuffleList(martialWeapons)[0];
+                    weaponToAdd = Tools.ShuffleList(martialWeapons)[0];
                     PrimaryWeapon = weaponToAdd;
                     Shield = new Shield("Shield");
                     break;
                 case 1:
                     // Get 1-h martial weapons and add to mainhand and offhand
                     var OHMartialWeapons = martialWeapons.Where(w => w.Twohanded == false).ToList();
-                    OHMartialWeapons = Utils.Tools.ShuffleList(OHMartialWeapons);
+                    OHMartialWeapons = Tools.ShuffleList(OHMartialWeapons);
 
-                    var index = Utils.Tools.GetRandomNumberInRange(0,OHMartialWeapons.Count);
+                    var index = Tools.GetRandomNumberInRange(0,OHMartialWeapons.Count);
                     PrimaryWeapon = OHMartialWeapons[index];
 
-                    index = Utils.Tools.GetRandomNumberInRange(0,OHMartialWeapons.Count);
+                    index = Tools.GetRandomNumberInRange(0,OHMartialWeapons.Count);
                     OffHandWeapon = OHMartialWeapons[index];
                     
                     break;
@@ -95,7 +95,7 @@ namespace Character
 
             var handAxe = GetWeapons().Where(w => w.Name == "Handaxe").ToList()[0];
 
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0: 
@@ -110,7 +110,7 @@ namespace Character
 
             // And finally a dungeoneer’s pack or an explorer’s pack
 
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
@@ -138,7 +138,7 @@ namespace Character
                 "Two-Weapon Fighting"
             };
 
-            FightingStyle = Utils.Tools.ShuffleList(fightingstyles)[0];
+            FightingStyle = Tools.ShuffleList(fightingstyles)[0];
 
         }
     }

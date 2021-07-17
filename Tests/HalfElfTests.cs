@@ -1,4 +1,5 @@
-using Races;
+using Character;
+
 using Xunit;
 
 namespace HalfElfTests

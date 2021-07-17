@@ -33,7 +33,7 @@ namespace Character
                 "Survival"
             };
             // Shuffle list and add the top two
-            barbSkillProfs = Utils.Tools.ShuffleList(barbSkillProfs);
+            barbSkillProfs = Tools.ShuffleList(barbSkillProfs);
             Proficiencies["Skills"].Add(barbSkillProfs[0]);
             Proficiencies["Skills"].Add(barbSkillProfs[1]);
 
@@ -48,19 +48,19 @@ namespace Character
                     break;
                 case 1:
                     var MartialMeleeWeapons = GetWeapons().Where(w => w.WeaponType == "Martial Melee").ToList();
-                    MartialMeleeWeapons = Utils.Tools.ShuffleList(MartialMeleeWeapons);
+                    MartialMeleeWeapons = Tools.ShuffleList(MartialMeleeWeapons);
                     PrimaryWeapon = MartialMeleeWeapons[0];
                     break;
             }
 
             // Barbarians start also start with either 2 x handaxes or any simple weapon
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default:throw new Exception("number not in range");
                 case 0:
                     // Add Simple Weapon
                     var simpleWeaponList = GetWeapons().Where(w => w.WeaponType == "Simple Melee").ToList();
-                    Utils.Tools.ShuffleList(simpleWeaponList);
+                    Tools.ShuffleList(simpleWeaponList);
                     var randomWeapon = simpleWeaponList[0];
                     AdditionalWeapons.Add(randomWeapon);
                     break;

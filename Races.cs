@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Character;
-using Utils;
 
-namespace Races
+namespace Character
 {
-    [Serializable]
     public class GenericRace
     {
         public string Name {get;set;}
@@ -18,7 +15,6 @@ namespace Races
         public List<string> Languages {get;set;} = new List<string>();
         public string SubRace { get; set; }
         public Dictionary<string, string> RacePerks {get;set;} = new Dictionary<string, string>();
-
         public List<string> RaceSkillProficienciesToAdd { get; set;} = new List<string>();
         public List<string> RaceWeaponProficienciesToAdd { get; set;} = new List<string>();
         public List<string> RaceArmorProficienciesToAdd { get; set;} = new List<string>();
@@ -92,6 +88,55 @@ namespace Races
                     break; 
             }
         }
+
+        /// <summary>Returns a dictionary containing any racial proficiency bonuses<string></summary>
+        public Dictionary<string,List<string>> ReturnRacialProficiencies()
+        {
+            var Proficiencies = new Dictionary<string,List<string>>()
+            {
+                {"Armor", new List<string>(){}},
+                {"Weapons",new List<string>(){}},
+                {"Tools", new List<string>()},
+                {"Saving Throws", new List<string>(){}},
+                {"Skills", new List<string>(){}}
+            };
+            
+            if (RaceSkillProficienciesToAdd != null)
+            {
+                foreach (var skill in RaceSkillProficienciesToAdd)
+                {
+                    Proficiencies["Skills"].Add(skill);
+                }
+            }
+
+            if (RaceWeaponProficienciesToAdd != null)
+            {
+                foreach (var skill in RaceWeaponProficienciesToAdd)
+                {
+                    Proficiencies["Weapons"].Add(skill);
+                }
+            }
+
+            if (RaceArmorProficienciesToAdd != null)
+            {
+                foreach (var skill in RaceArmorProficienciesToAdd)
+                {
+                    Proficiencies["Armor"].Add(skill);
+                }
+            }
+
+            if (RaceToolProficienciesToAdd != null)
+            {
+                foreach (var skill in RaceToolProficienciesToAdd)
+                {
+                    Proficiencies["Tools"].Add(skill);
+                }
+            }
+
+            return Proficiencies;
+        }
+        
+        
 
         public void SetName(string name)
         {
@@ -402,7 +447,7 @@ namespace Races
             ArtisansToolList.Add(new Equipment().ReturnArtisansToolList().artisansTools.Where(t => t.Name == "Smith’s Tools").ToList()[0]);
             ArtisansToolList.Add(new Equipment().ReturnArtisansToolList().artisansTools.Where(t => t.Name == "Brewer’s Supplies").ToList()[0]);
             ArtisansToolList.Add(new Equipment().ReturnArtisansToolList().artisansTools.Where(t => t.Name == "Mason’s Tools").ToList()[0]);
-            ArtisansToolList = Utils.Tools.ShuffleList(ArtisansToolList);
+            ArtisansToolList = Tools.ShuffleList(ArtisansToolList);
             AddRaceProficiency(ArtisansToolList[0].Name,"tool");
 
             SetRacePerk("Stonecunning","Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.");
@@ -474,8 +519,8 @@ namespace Races
             SetAbilityScoreIncrease("INT", 1);
 
             //TODO Add logic to include additional proficiency
-            SetRacePerk("Elf Weapon Training","You have proficiency with the longsword, shortsword, shortbow, and longbow.");
-            AddRaceProficiency(new List<string>(){"Longsword","Shortsword", "Shortbow", "Longbow"},"weapon");
+            SetRacePerk("Elf Weapon Training","You have proficiency with the longswords, shortsword2, shortbow, and longbow.");
+            AddRaceProficiency(new List<string>(){"Longswords","Shortsword2", "Shortbow", "Longbow"},"weapon");
 
             SetRacePerk("Cantrip","You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.");
 
@@ -637,7 +682,7 @@ namespace Races
                 "persuasion"
             };
 
-            skills = Utils.Tools.ShuffleList(skills);
+            skills = Tools.ShuffleList(skills);
             AddRaceProficiency(skills[0],"skill");
             AddRaceProficiency(skills[1],"skill");
 

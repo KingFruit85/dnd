@@ -35,7 +35,7 @@ namespace Character
             };
 
             // Shuffle list and add the top two
-            clericSkillProfs = Utils.Tools.ShuffleList(clericSkillProfs);
+            clericSkillProfs = Tools.ShuffleList(clericSkillProfs);
             Proficiencies["Skills"].Add(clericSkillProfs[0]);
             Proficiencies["Skills"].Add(clericSkillProfs[1]);
 
@@ -59,7 +59,7 @@ namespace Character
 
             // Clerics get either a light crossbow and 20 bolts or any simple weapon
             
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
@@ -70,13 +70,13 @@ namespace Character
                 case 1:
                     // Add a random simple weapon
                     var simpleWeapons = GetWeapons().Where(w => w.WeaponType == "Simple Melee").ToList();
-                    var weapon = Utils.Tools.ShuffleList(simpleWeapons)[0];
+                    var weapon = Tools.ShuffleList(simpleWeapons)[0];
                     AdditionalWeapons.Add(weapon);
                     break;
             }
 
             // Clerics also get either a priest’s pack or an explorer’s pack
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
@@ -106,7 +106,7 @@ namespace Character
                 "Thaumaturgy",
             };
 
-            Cantrips = Utils.Tools.ReturnXSpellsFromList(clericCantrips,3);
+            Cantrips = Tools.ReturnXSpellsFromList(clericCantrips,3);
 
             List<string> clericLevel1Spells = new List<string>()
             {
@@ -127,7 +127,7 @@ namespace Character
                 "Shield of Faith"
             };
 
-            Level1Spells = Utils.Tools.ReturnXSpellsFromList(clericLevel1Spells,2);
+            Level1Spells = Tools.ReturnXSpellsFromList(clericLevel1Spells,2);
 
             // Add Cleric features
             Features.Add(new Feature("Spellcasting","",1));

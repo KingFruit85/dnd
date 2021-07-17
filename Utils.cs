@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using Character;
 using Newtonsoft.Json.Linq;
-using Races;
-using static Races.GenericRace;
+using static Character.GenericRace;
 
-namespace Utils
-
+namespace Character
 {
     public class Tools
     {
@@ -112,7 +109,9 @@ namespace Utils
         
         return pickedSpell;
 
-        }
+    }
+
+    
 
     public static List<Spells> ReturnXSpellsFromList(List<string> spellList,int count)
     {

@@ -26,17 +26,17 @@ namespace Character
             };
 
             // Monks can select either one musical instrument or one artisan tool to be proficient in
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
                     var toolList = new Equipment().ReturnArtisansToolList().artisansTools;
-                    toolList = Utils.Tools.ShuffleList(toolList);
+                    toolList = Tools.ShuffleList(toolList);
                     Proficiencies["Tools"].Add(toolList[0].Name);
                     break;
                 case 1:
                     var instrumentList = new Equipment().MusicalInstrument().MusicalInstruments;
-                    instrumentList = Utils.Tools.ShuffleList(instrumentList);
+                    instrumentList = Tools.ShuffleList(instrumentList);
                     Proficiencies["Tools"].Add(instrumentList[0].Name);
                     break;
             }
@@ -53,7 +53,7 @@ namespace Character
             };
 
             // Shuffle list and add the top two
-            fighterSkillProfs = Utils.Tools.ShuffleList(fighterSkillProfs);
+            fighterSkillProfs = Tools.ShuffleList(fighterSkillProfs);
             Proficiencies["Skills"].Add(fighterSkillProfs[0]);
             Proficiencies["Skills"].Add(fighterSkillProfs[1]);
 
@@ -65,7 +65,7 @@ namespace Character
 
             // Monks get either a shortsword or any simple weapon
             
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
@@ -73,12 +73,12 @@ namespace Character
                     break;
                 case 1:
                     var simpleWeapons = GetWeapons().Where(w => w.WeaponType == "Simple Melee").ToList();
-                    PrimaryWeapon = Utils.Tools.ShuffleList(simpleWeapons).ToList()[0];
+                    PrimaryWeapon = Tools.ShuffleList(simpleWeapons).ToList()[0];
                     break;
             }
 
             // They also get a dungeoneer’s pack or an explorer’s pack
-            switch (Utils.Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,1))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
