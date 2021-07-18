@@ -56,7 +56,7 @@ namespace Character
             // Barbarians start also start with either 2 x handaxes or any simple weapon
             switch (Tools.GetRandomNumberInRange(0,1))
             {
-                default:throw new Exception("number not in range");
+                default: throw new Exception("number not in range");
                 case 0:
                     // Add Simple Weapon
                     var simpleWeaponList = GetWeapons().Where(w => w.WeaponType == "Simple Melee").ToList();
@@ -76,7 +76,7 @@ namespace Character
             // barbarians also start with an explorers pack and 4 x javelin
             EquipmentPack = GetPacks().Where(p => p.Name == "Explorer's Pack").ToList()[0];
 
-            for (int i = 0; i <= 1; i++)
+            for (int i = 0; i <= 3; i++)
             {
                 AdditionalWeapons.Add(GetWeapons().Where(w => w.Name == "Javelin").ToList()[0]);
             }

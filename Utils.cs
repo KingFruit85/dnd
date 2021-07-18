@@ -18,7 +18,7 @@ namespace Character
         // Set the path to save the file
         var exportFolderPath = "c:/temp/characterExports/JSON/";
         // Set the file name
-        var filename = characterToSave.FirstName + " " + characterToSave.LastName + ".json";
+        var filename = characterToSave.FirstName + " " + characterToSave.LastName + " The " + characterToSave.RaceDetails.Name + " " + characterToSave.ClassDetails.Name + ".json";
 
         // Create the JSON string
         var json = JsonSerializer.Serialize(characterToSave, new JsonSerializerOptions {MaxDepth = 64});
@@ -121,6 +121,7 @@ namespace Character
         {
             throw new ArgumentNullException("spell not recognised");
         }
+
     }
 
     public static List<Spells> ReturnXSpellsFromList(List<string> spellList,int count)
@@ -149,6 +150,7 @@ namespace Character
                 {
                     spells.Add(pickedSpell);
                 }
+
 
             }
             else
