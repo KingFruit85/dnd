@@ -100,6 +100,13 @@ namespace Character
             Armor = GetArmor().Where(a => a.Name == "Chain Mail").ToList()[0];
             HolySymbol = new HolySymbol("Holy Symbol");
 
+            //////////////
+            // FEATURES //
+            //////////////
+
+            Features.Add(new Feature("Divine Sense","",1));
+            Features.Add(new Feature("Lay on Hands","",1));
+
         }
     }
 }

@@ -43,6 +43,8 @@ namespace Character
         public List<Feature> Features { get; set; } = new List<Feature>();
         public int SpellSlots = 0;
         public string FightingStyle { get; set; }
+        public List<string> FavoredEnemy { get; set; } = new List<string>();
+        public string FavoredTerrain { get; set; }
 
         public List<string> Skills = new List<string>()
         {
