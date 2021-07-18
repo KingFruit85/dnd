@@ -111,7 +111,17 @@ namespace Character
 
     }
 
-    
+    public static Spells ReturnSpecificSpell(string spellToReturn)
+    {
+        try
+        {
+            return new Spells().ReturnSpellList().Spells.Where(s => s.Name == spellToReturn).ToList()[0];
+        }
+        catch (ArgumentNullException)
+        {
+            throw new ArgumentNullException("spell not recognised");
+        }
+    }
 
     public static List<Spells> ReturnXSpellsFromList(List<string> spellList,int count)
     {
@@ -139,7 +149,6 @@ namespace Character
                 {
                     spells.Add(pickedSpell);
                 }
-
 
             }
             else

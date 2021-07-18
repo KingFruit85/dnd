@@ -15,14 +15,14 @@ namespace Character
         public List<string> Languages {get;set;} = new List<string>();
         public string SubRace { get; set; }
         public Dictionary<string, string> RacePerks {get;set;} = new Dictionary<string, string>();
-        public List<string> RaceSkillProficienciesToAdd { get; set;} = new List<string>();
-        public List<string> RaceWeaponProficienciesToAdd { get; set;} = new List<string>();
-        public List<string> RaceArmorProficienciesToAdd { get; set;} = new List<string>();
-        public List<string> RaceToolProficienciesToAdd { get; set;} = new List<string>();
+        public List<string> RaceSkillProficienciesToAdd = new List<string>();
+        public List<string> RaceWeaponProficienciesToAdd = new List<string>();
+        public List<string> RaceArmorProficienciesToAdd = new List<string>();
+        public List<string> RaceToolProficienciesToAdd = new List<string>();
 
-        public List<string> SpellsToAdd { get; set;} = new List<string>();
+        public List<string> SpellsToAdd = new List<string>();
 
-        public List<Feature> FeaturesToAdd { get; set; } = new List<Feature>();
+        public List<Feature> FeaturesToAdd = new List<Feature>();
                               
         public struct DraconicAncestryDetails
         {
@@ -519,8 +519,8 @@ namespace Character
             SetAbilityScoreIncrease("INT", 1);
 
             //TODO Add logic to include additional proficiency
-            SetRacePerk("Elf Weapon Training","You have proficiency with the longswords, shortsword2, shortbow, and longbow.");
-            AddRaceProficiency(new List<string>(){"Longswords","Shortsword2", "Shortbow", "Longbow"},"weapon");
+            SetRacePerk("Elf Weapon Training","You have proficiency with the longswords, shortsword, shortbow, and longbow.");
+            AddRaceProficiency(new List<string>(){"Longswords","Shortsword", "Shortbow", "Longbow"},"weapon");
 
             SetRacePerk("Cantrip","You know one cantrip of your choice from the wizard spell list. Intelligence is your spellcasting ability for it.");
 
@@ -854,6 +854,9 @@ namespace Character
     {
         public GenericRace GetRandomRace()
         {
+
+            return new Elf();
+
             Random r = new Random();
             int RandomRace = r.Next(1, 9);
 

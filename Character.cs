@@ -142,13 +142,7 @@ namespace Character
                 {
                     if (!ClassDetails.Proficiencies["Weapons"].Contains(weapon))
                     {
-                        Console.WriteLine("Added "+ weapon);
                         ClassDetails.Proficiencies["Weapons"].Add(weapon);
-                    }
-                    else
-                    {
-                        Console.WriteLine(weapon + " already found, didn't add");
-                        
                     }
                 }
             }
@@ -173,6 +167,38 @@ namespace Character
                         ClassDetails.Proficiencies["Weapons"].Add(armor);
                     }
                 }
+            }
+        }
+
+    
+        public void AddRacialSpells()
+        {
+            var spells = RaceDetails.SpellsToAdd;
+            List<Spells> actualSpells = new List<Spells>();
+
+            if (spells.Count > 0)
+            {
+                foreach (var spell in spells)
+                {
+                    actualSpells.Add(Tools.ReturnSpecificSpell(spell));
+                }
+            }
+
+            foreach (var spell in actualSpells)
+            {
+
+                if (spell.level == 0 && !ClassDetails.Cantrips.Contains(spell))
+                {
+                    ClassDetails.Cantrips.Add(spell);
+                }
+
+                if (spell.level == 1 && !ClassDetails.Level1Spells.Contains(spell))
+                {
+                    ClassDetails.Level1Spells.Add(spell);
+                }
+
+
+                
             }
         }
 
@@ -281,6 +307,7 @@ namespace Character
             SetRandomName(GetGender(), GetRace().GetName());
             GetSpecificCharacterClass(CharacterClass);
             AddRacialProficiencies();
+            AddRacialSpells();
             SetSkillsAndSavingThrows();
             SetLevel1HitPoints();
             CalculateArmorClass();

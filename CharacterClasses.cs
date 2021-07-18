@@ -10,8 +10,8 @@ namespace Character
 
         // DONE List :- Bard | Barbarian | Cleric | Fighter
 
-        // private List<string> CharacterClasses = new List<string>(){"Bard", "Barbarian", "Cleric", "Fighter", "Monk"};
-        private List<string> CharacterClasses = new List<string>(){"Bard"};
+        private List<string> CharacterClasses = new List<string>(){"Bard", "Barbarian", "Cleric", "Fighter", "Monk"};
+        // private List<string> CharacterClasses = new List<string>(){"Bard"};
 
 
         public string GetRandomClass()
