@@ -345,6 +345,8 @@ namespace Character
                 case "Monk": ClassDetails = new Monk();break;
                 case "Paladin": ClassDetails = new Paladin();break;
                 case "Ranger": ClassDetails = new Ranger();break;
+                case "Rogue": ClassDetails = new Rogue();break;
+
 
 
             }
