@@ -11,7 +11,7 @@ namespace Character
             SetName("Warlock");
             HitDie = "1d8";
 
-            ///////////////////z
+            ///////////////////
             // PROFICIENCIES //
             ///////////////////
             
@@ -47,7 +47,7 @@ namespace Character
             // EQUIPMENT //
             ///////////////
 
-            // Wizards get a light crossbow and 20 bolts or any simple weapon
+            // Warlocks get a light crossbow and 20 bolts or any simple weapon
             var simpleWeapons = GetWeapons().Where(w => w.WeaponType == "Simple Melee").ToList();
 
             switch (Tools.GetRandomNumberInRange(0,1))
@@ -76,6 +76,17 @@ namespace Character
                         }
 
             // A scholar’s pack or a dungeoneer’s pack
+            switch (Tools.GetRandomNumberInRange(0,1))
+            {
+                default: throw new System.Exception("number not in range");
+                case 0:
+                    EquipmentPack = GetPacks().Where(p => p.Name == "Dungeoneer's Pack").ToList()[0];
+                    break;
+                case 1:
+                    EquipmentPack = GetPacks().Where(p => p.Name == "Scholar's Pack").ToList()[0];
+                    break;
+            }
+
 
             // Leather armor, any simple weapon, and two daggers
             Armor = GetArmor().Where(a => a.Name == "Leather Armor").ToList()[0];
@@ -92,7 +103,7 @@ namespace Character
 
             // At level 1 warlocks get
             // 2 x Cantrips
-            // 2 x 2 First level spells 
+            // 2 x First level spells 
 
             List<string> warlockCantrips = new List<string>()
             {

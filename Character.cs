@@ -245,6 +245,8 @@ namespace Character
             var isFighter = (this.ClassDetails.Name == "Fighter") ? true : false ;
             var isMonk = (this.ClassDetails.Name == "Monk") ? true : false ;
             var isSorcerer = (this.ClassDetails.Name == "Sorcerer") ? true : false ;
+            var isWizard = (this.ClassDetails.Name == "Wizard") ? true : false ;
+
 
             var isHoldingShield = (this.ClassDetails.Shield != null);
 
@@ -283,14 +285,23 @@ namespace Character
             {
                 // Checks SorcerousOrigin for Draconic
                 // Draconic Sorcerous Origin Unarmored AC = 13 + Dex mod
-
                 if (this.ClassDetails.Armor.Name == null)
                 {
-                    ArmorClass = 10 
+                    ArmorClass = 13 
                                     + (int)AbilityScores.getAbilityScoreModifier("DEX");
                     return;
                 }
+            }
 
+            if (isWizard)
+            {
+                // Wizards shouldn't start with any armor
+                if (this.ClassDetails.Armor.Name == null)
+                {
+                    ArmorClass = 10
+                                    + (int)AbilityScores.getAbilityScoreModifier("DEX");
+                    return;
+                }
             }
 
             if (isHoldingShield)
@@ -371,7 +382,7 @@ namespace Character
                 case "Rogue": ClassDetails = new Rogue();break;
                 case "Sorcerer": ClassDetails = new Sorcerer();break;
                 case "Warlock": ClassDetails = new Warlock();break;
-
+                case "Wizard": ClassDetails = new Wizard();break;
             }
         }
 
