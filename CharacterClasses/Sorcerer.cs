@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace Character
             var Proficiencies = new Dictionary<string,List<string>>()
             {
                 {"Armor", new List<string>(){}},
-                {"Weapons",new List<string>(){"Daggers", "Darts", "Slings", "Quarterstaffs", "Light crossbows"}},
+                {"Weapons",new List<string>(){"Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"}},
                 {"Tools", new List<string>(){}},
                 {"Saving Throws", new List<string>(){"Constitution", "Charisma"}},
                 {"Skills", new List<string>(){}}
@@ -167,7 +168,7 @@ namespace Character
                 {"White","Cold"}
             };
             
-            int index = Tools.GetRandomNumberInRange(0,DA.Count);
+            int index = Tools.GetRandomNumberInRange(0,DA.Count -1);
             KeyValuePair<string, string> pair = DA.ElementAt(index);
             DraconicAncestry = pair;
 

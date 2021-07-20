@@ -48,6 +48,7 @@ namespace Character
         public string FavoredTerrain { get; set; }
         public string SorcerousOrigin { get; set; }
         public KeyValuePair<string, string> DraconicAncestry { get; set; }
+        public string WarlockPatron { get; set; }
 
         public List<string> Skills = new List<string>()
         {

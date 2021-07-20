@@ -662,24 +662,24 @@ namespace Character
 
             List<string> skills = new List<string>()
             {
-                "athletics",
-                "acrobatics",
-                "sleightOfHand",
-                "arcana",
-                "stealth",
-                "history",
-                "nature",
-                "religion",
-                "animalHandling",
-                "insight",
-                "medicine",
-                "perception",
-                "survival",
-                "deception",
-                "intimidation",
-                "investigation",
-                "performance",
-                "persuasion"
+                "Athletics",
+                "Acrobatics",
+                "SleightOfHand",
+                "Arcana",
+                "Stealth",
+                "History",
+                "Nature",
+                "Religion",
+                "AnimalHandling",
+                "Insight",
+                "Medicine",
+                "Perception",
+                "Survival",
+                "Deception",
+                "Intimidation",
+                "Investigation",
+                "Performance",
+                "Persuasion"
             };
 
             skills = Tools.ShuffleList(skills);
@@ -854,7 +854,7 @@ namespace Character
     {
         public GenericRace GetRandomRace()
         {
-            switch (Tools.GetRandomNumberInRange(0,8))
+            switch (Tools.GetRandomNumberInRange(1,9))
             {
                 default: throw new Exception("Race not found");
                 case 1: return new Dwarf(); 

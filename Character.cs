@@ -370,6 +370,8 @@ namespace Character
                 case "Ranger": ClassDetails = new Ranger();break;
                 case "Rogue": ClassDetails = new Rogue();break;
                 case "Sorcerer": ClassDetails = new Sorcerer();break;
+                case "Warlock": ClassDetails = new Warlock();break;
+
             }
         }
 

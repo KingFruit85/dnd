@@ -40,9 +40,6 @@ namespace Character
             Proficiencies["Skills"].Add(randomizedSkillList[1]);
             Proficiencies["Skills"].Add(randomizedSkillList[2]);
 
-            // Get any racial profs
-
-            
             SetProficiencies(Proficiencies);
 
             ///////////////
