@@ -854,16 +854,9 @@ namespace Character
     {
         public GenericRace GetRandomRace()
         {
-
-            return new Elf();
-
-            Random r = new Random();
-            int RandomRace = r.Next(1, 9);
-
-            switch (RandomRace)
+            switch (Tools.GetRandomNumberInRange(0,8))
             {
                 default: throw new Exception("Race not found");
-
                 case 1: return new Dwarf(); 
                 case 2: return new Dragonborn(); 
                 case 3: return new Elf(); 
@@ -873,8 +866,6 @@ namespace Character
                 case 7: return new Halfling(); 
                 case 8: return new Human(); 
                 case 9: return new Tiefling(); 
-
-
             }
         }
     }

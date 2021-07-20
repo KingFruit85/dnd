@@ -86,7 +86,7 @@ namespace Character
                         }
 
             // a burglar’s pack, a dungeoneer’s pack, or an explorer’s pack
-            switch (Tools.GetRandomNumberInRange(0,1))
+            switch (Tools.GetRandomNumberInRange(0,2))
             {
                 default: throw new System.Exception("number not in range");
                 case 0:
@@ -95,12 +95,16 @@ namespace Character
                 case 1:
                     EquipmentPack = GetPacks().Where(p => p.Name == "Explorer's Pack").ToList()[0];
                     break;
+                case 2:
+                    EquipmentPack = GetPacks().Where(p => p.Name == "Burglar's Pack").ToList()[0];
+                    break;
             }
 
             // Leather armor, two daggers, and thieves’ tools
             Armor = GetArmor().Where(a => a.Name == "Leather Armor").ToList()[0];
             AdditionalWeapons.Add(GetWeapons().Where(w => w.Name == "Dagger").ToList()[0]);
             AdditionalWeapons.Add(GetWeapons().Where(w => w.Name == "Dagger").ToList()[0]);
+            OtherEquipment.Add("Thieves’ Tools");
 
             //////////////
             // FEATURES //

@@ -38,6 +38,7 @@ namespace Character
         public List<MusicalInstrument> MusicalInstruments { get; set; } = new List<MusicalInstrument>();
         public EquipmentPack EquipmentPack { get; set; }
         public HolySymbol HolySymbol { get; set; }
+        public List<string> OtherEquipment { get; set; } = new List<string>();
         public List<Spells> Cantrips { get; set; } = new List<Spells>();
         public List<Spells> Level1Spells { get; set; } = new List<Spells>();
         public List<Feature> Features { get; set; } = new List<Feature>();
@@ -45,6 +46,8 @@ namespace Character
         public string FightingStyle { get; set; }
         public List<string> FavoredEnemy { get; set; } = new List<string>();
         public string FavoredTerrain { get; set; }
+        public string SorcerousOrigin { get; set; }
+        public KeyValuePair<string, string> DraconicAncestry { get; set; }
 
         public List<string> Skills = new List<string>()
         {

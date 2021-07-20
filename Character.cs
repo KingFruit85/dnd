@@ -40,13 +40,12 @@ namespace Character
         {
             return AbilityScores;
         }
-
         public void SetAbilityScore(AbilityScore abilityScore)
         {
             AbilityScores = abilityScore;
         }
 
-
+         
         public void SetSkillsAndSavingThrows()
         {
             // SKILLS
@@ -228,6 +227,13 @@ namespace Character
             {
                 HitPoints += 1;    
             }
+
+            // Sorcerer Draconic Ancestry
+            if (this.ClassDetails.SorcerousOrigin == "Draconic")
+            {
+                HitPoints += 1;
+            }
+
         }
 
         public void CalculateArmorClass()
@@ -238,10 +244,13 @@ namespace Character
             var isBarbarian = (this.ClassDetails.Name == "Barbarian") ? true : false ;
             var isFighter = (this.ClassDetails.Name == "Fighter") ? true : false ;
             var isMonk = (this.ClassDetails.Name == "Monk") ? true : false ;
+            var isSorcerer = (this.ClassDetails.Name == "Sorcerer") ? true : false ;
+
             var isHoldingShield = (this.ClassDetails.Shield != null);
 
             if (isBarbarian)
             {
+                // This should check for armor
                 ArmorClass = 10 
                                 + (int)AbilityScores.getAbilityScoreModifier("DEX") 
                                 + (int)AbilityScores.getAbilityScoreModifier("CON");
@@ -265,9 +274,23 @@ namespace Character
                     ArmorClass = 10 
                                     + (int)AbilityScores.getAbilityScoreModifier("DEX") 
                                     + (int)AbilityScores.getAbilityScoreModifier("WIS");
+                return;
+
+                }
+            }
+
+            if (isSorcerer)
+            {
+                // Checks SorcerousOrigin for Draconic
+                // Draconic Sorcerous Origin Unarmored AC = 13 + Dex mod
+
+                if (this.ClassDetails.Armor.Name == null)
+                {
+                    ArmorClass = 10 
+                                    + (int)AbilityScores.getAbilityScoreModifier("DEX");
+                    return;
                 }
 
-                return;
             }
 
             if (isHoldingShield)
@@ -346,9 +369,7 @@ namespace Character
                 case "Paladin": ClassDetails = new Paladin();break;
                 case "Ranger": ClassDetails = new Ranger();break;
                 case "Rogue": ClassDetails = new Rogue();break;
-
-
-
+                case "Sorcerer": ClassDetails = new Sorcerer();break;
             }
         }
 

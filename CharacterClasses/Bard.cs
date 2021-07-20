@@ -107,8 +107,8 @@ namespace Character
             //////////////
 
             // At level 1 bards get 
-            // 2 cantrips
-            // 2 1st level spells
+            // 2 x Cantrips
+            // 2 x 1st level spells
 
             List<string> bardCantrips = new List<string>()
             {
