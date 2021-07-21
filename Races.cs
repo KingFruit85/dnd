@@ -12,7 +12,7 @@ namespace Character
         public string Alignment { get; set; }
         public string Size { get; set; }
         public int Speed { get; set; }
-        public List<string> Languages {get;set;} = new List<string>();
+        public List<string> Languages { get; set; } = new List<string>();
         public string SubRace { get; set; }
         public Dictionary<string, string> RacePerks {get;set;} = new Dictionary<string, string>();
         public List<string> RaceSkillProficienciesToAdd = new List<string>();

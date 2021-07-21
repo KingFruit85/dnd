@@ -38,6 +38,7 @@ namespace Character
         public List<MusicalInstrument> MusicalInstruments { get; set; } = new List<MusicalInstrument>();
         public EquipmentPack EquipmentPack { get; set; }
         public HolySymbol HolySymbol { get; set; }
+        public DruidicFocus DruidicFocus { get; set; }
         public List<string> OtherEquipment { get; set; } = new List<string>();
         public List<Spells> Cantrips { get; set; } = new List<Spells>();
         public List<Spells> Level1Spells { get; set; } = new List<Spells>();

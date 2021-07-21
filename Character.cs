@@ -247,7 +247,7 @@ namespace Character
             var isSorcerer = (this.ClassDetails.Name == "Sorcerer") ? true : false ;
             var isWizard = (this.ClassDetails.Name == "Wizard") ? true : false ;
 
-
+            // This will need to be expanded to take into account the type of shield held at a future date
             var isHoldingShield = (this.ClassDetails.Shield != null);
 
             if (isBarbarian)
@@ -383,6 +383,7 @@ namespace Character
                 case "Sorcerer": ClassDetails = new Sorcerer();break;
                 case "Warlock": ClassDetails = new Warlock();break;
                 case "Wizard": ClassDetails = new Wizard();break;
+                case "Druid": ClassDetails = new Druid();break;
             }
         }
 

@@ -91,7 +91,9 @@ namespace Character
             Shield = new Shield("Shield");
             HolySymbol = new HolySymbol("Holy Symbol");
 
-            // SPELLS
+            ///////////////
+            //  Spells   //
+            ///////////////
             // Clerics know 
             // 3 cantrips
             // 2 level 1 spells

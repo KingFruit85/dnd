@@ -8,7 +8,7 @@ namespace Character
         // private string[] CharacterClasses = {"Bard", "Barbarian", "Cleric", "Fighter", "Monk", "Paladin", "Ranger",
         //                                      "Rogue", "Sorcerer", "Warlock", "Wizard", "Druid"};
 
-        private List<string> CharacterClasses = new List<string>(){"Wizard"};
+        private List<string> CharacterClasses = new List<string>(){"Druid"};
 
 
         public string GetRandomClass()
