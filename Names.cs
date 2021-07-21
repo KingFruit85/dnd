@@ -48,9 +48,9 @@ namespace Names
     }
 
     // -- Human
-    private string[] MaleHumanNames = {"Christopher", "Aaron", "Noah", "David"};
+    private string[] MaleHumanNames = {"Christopher", "Aaron", "Noah", "David", "Jeremiah"};
     private string[] FemaleHumanNames = {"Kelly", "Magda", "Sophia", "Persephone"};
-    private string[] HumanSurnames = {"Long", "Araniseli", "Smith", "Jones", "Peters"};
+    private string[] HumanSurnames = {"Long", "Araniseli", "Smith", "Jones", "Peters", "Shipp"};
 
     public string GetRandomHumanFirstName(string gender)
     {
