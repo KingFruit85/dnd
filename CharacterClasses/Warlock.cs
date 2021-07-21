@@ -105,6 +105,8 @@ namespace Character
             // 2 x Cantrips
             // 2 x First level spells 
 
+            SpellSlots = 1;
+            
             List<string> warlockCantrips = new List<string>()
             {
                 "Chill Touch",
@@ -115,7 +117,6 @@ namespace Character
             };
 
             Cantrips = Tools.ReturnXSpellsFromList(warlockCantrips,2);
-            SpellSlots = 1;
 
             List<string> warlockLevel1Spells = new List<string>()
             {

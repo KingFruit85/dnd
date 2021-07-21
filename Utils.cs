@@ -55,8 +55,8 @@ namespace Character
     }
 
     /// <summary>Returns a random number between the two provided numbers</summary>
-    /// <param name="start">an int represnting the small number</param>
-    /// <param name="end">an int represnting the large number</param>
+    /// <param name="start">an int representing the small number</param>
+    /// <param name="end">an int representing the large number</param>
     public static int GetRandomNumberInRange(int start, int end)
     {
         return new Random().Next(start,end + 1);

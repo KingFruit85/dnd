@@ -98,6 +98,8 @@ namespace Character
             // 3 cantrips
             // 2 level 1 spells
 
+            SpellSlots = 2;
+
             List<string> clericCantrips = new List<string>()
             {
                 "Guidance",
@@ -129,7 +131,7 @@ namespace Character
                 "Shield of Faith"
             };
 
-            Level1Spells = Tools.ReturnXSpellsFromList(clericLevel1Spells,2);
+            Level1Spells = Tools.ReturnXSpellsFromList(clericLevel1Spells,SpellSlots);
 
             // Add Cleric features
             Features.Add(new Feature("Spellcasting","",1));

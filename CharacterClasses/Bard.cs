@@ -17,7 +17,6 @@ namespace Character
             
             SetProficiencyBonus(2);
 
-
             var Proficiencies = new Dictionary<string,List<string>>()
             {
                 {"Armor", new List<string>(){"Light Armor"}},
@@ -34,11 +33,33 @@ namespace Character
             Proficiencies["Tools"].Add(instrumentList[1].Name);
             Proficiencies["Tools"].Add(instrumentList[2].Name);
 
+            var bardSkillProfs = new List<string>()
+            {
+                "athletics",
+                "acrobatics",
+                "sleightOfHand",
+                "arcana",
+                "stealth",
+                "history",
+                "nature",
+                "religion",
+                "animalHandling",
+                "insight",
+                "medicine",
+                "perception",
+                "survival",
+                "deception",
+                "intimidation",
+                "investigation",
+                "performance",
+                "persuasion"
+            };
+
             // Get 3 ransom skill profs
-            var randomizedSkillList = Tools.ShuffleList(Skills);
-            Proficiencies["Skills"].Add(randomizedSkillList[0]);
-            Proficiencies["Skills"].Add(randomizedSkillList[1]);
-            Proficiencies["Skills"].Add(randomizedSkillList[2]);
+            bardSkillProfs = Tools.ShuffleList(bardSkillProfs);
+            Proficiencies["Skills"].Add(bardSkillProfs[0]);
+            Proficiencies["Skills"].Add(bardSkillProfs[1]);
+            Proficiencies["Skills"].Add(bardSkillProfs[2]);
 
             SetProficiencies(Proficiencies);
 
@@ -48,7 +69,7 @@ namespace Character
 
             // Bards get either a Lute or a random musical instrument
             // My implimentation only adds a lute if we're proficient
-            // If not, then add a random instrument we are proficent in
+            // If not, then add a random instrument we are proficient in
 
             if (Proficiencies["Tools"].Contains("Lute"))
             {
@@ -57,11 +78,11 @@ namespace Character
             }
             else
             {
-                // Get a random instrument we are proficent in as a string
+                // Get a random instrument we are proficient in as a string
                 var proficientInstrument = Tools.ShuffleList(Proficiencies["Tools"]).ToList()[0];
                 // Reterive the instrument object
-                var instument = new Equipment().MusicalInstrument().MusicalInstruments.Where(i => i.Name == proficientInstrument).ToList()[0];
-                MusicalInstruments.Add(instument);
+                var instrument = new Equipment().MusicalInstrument().MusicalInstruments.Where(i => i.Name == proficientInstrument).ToList()[0];
+                MusicalInstruments.Add(instrument);
             }
 
             // All bards get a dagger and leather armor
@@ -107,6 +128,8 @@ namespace Character
             // 2 x Cantrips
             // 2 x 1st level spells
 
+            SpellSlots = 2;
+
             List<string> bardCantrips = new List<string>()
             {
                 "Dancing Lights",
@@ -144,7 +167,7 @@ namespace Character
                 "Unseen Servant"
             };
 
-            Level1Spells = Tools.ReturnXSpellsFromList(bardLevel1Spells,2);
+            Level1Spells = Tools.ReturnXSpellsFromList(bardLevel1Spells,SpellSlots);
 
             //////////////
             // FEATURES //

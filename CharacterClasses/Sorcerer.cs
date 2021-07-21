@@ -100,6 +100,8 @@ namespace Character
             // 4 x Cantrips
             // 2 x 2 First level spells 
 
+            SpellSlots = 2;
+
             List<string> sorcererCantrips = new List<string>()
             {
                 "Acid Splash",
@@ -140,7 +142,7 @@ namespace Character
                 "Thunderwave"
             };
 
-            Level1Spells = Tools.ReturnXSpellsFromList(sorcererLevel1Spells,2);
+            Level1Spells = Tools.ReturnXSpellsFromList(sorcererLevel1Spells,SpellSlots);
 
             //////////////
             // FEATURES //

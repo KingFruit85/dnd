@@ -51,28 +51,6 @@ namespace Character
         public KeyValuePair<string, string> DraconicAncestry { get; set; }
         public string WarlockPatron { get; set; }
 
-        public List<string> Skills = new List<string>()
-        {
-            "athletics",
-            "acrobatics",
-            "sleightOfHand",
-            "arcana",
-            "stealth",
-            "history",
-            "nature",
-            "religion",
-            "animalHandling",
-            "insight",
-            "medicine",
-            "perception",
-            "survival",
-            "deception",
-            "intimidation",
-            "investigation",
-            "performance",
-            "persuasion"
-        };
-
         public void SetName(string name){Name = name;} 
         public void SetProficiencyBonus(int pb){ProficiencyBonus = pb;}
         public int GetProficiencyBonus(){return ProficiencyBonus;}
